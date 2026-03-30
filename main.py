@@ -33,7 +33,7 @@ app = FastAPI(title="CrypSim Crypto Trading Simulator", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],          # or specify domains like ["http://localhost:3000"]
+    allow_origins=["*"],          
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -42,10 +42,10 @@ app.add_middleware(
 app.include_router(login.Router, tags=["login"])
 app.include_router(apis.router, tags=["otp"])
 app.include_router(rest.router)
-app.include_router(webs.router)  # <-- expose websocket routes (/ws/market, /ws/user/trades)
+app.include_router(webs.router)  
 @app.get("/ping")
 async def ping():
     return {"status": "ok"}
 
-# # if __name__ == "__main__":
-#     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
