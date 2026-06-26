@@ -1,2 +1,3 @@
-path/to/frontend/static/* linguist-vendored
-path/to/client-side/js/files/* linguist-vendored
+*.js linguist-vendored
+*.css linguist-vendored
+*.html linguist-vendored
