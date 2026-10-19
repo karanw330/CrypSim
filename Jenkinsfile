@@ -3,9 +3,9 @@ pipeline {
 
     environment {
         AWS_REGION = 'ap-south-1'
-        AWS_ACCOUNT_ID = 'YOUR_AWS_ACCOUNT_ID'
-        ECR_REPOSITORY = 'image-regi'
-        IMAGE_NAME = 'cloud-image'
+        AWS_ACCOUNT_ID = '448842988820'
+        ECR_REPOSITORY = 'crypsim'
+        IMAGE_NAME = 'crypsim-image'
         ECR_REGISTRY = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
         ECR_IMAGE_LATEST = "${ECR_REGISTRY}/${ECR_REPOSITORY}:latest"
         ECR_IMAGE_BUILD = "${ECR_REGISTRY}/${ECR_REPOSITORY}:${BUILD_NUMBER}"
