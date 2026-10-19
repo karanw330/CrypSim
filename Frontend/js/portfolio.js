@@ -202,7 +202,7 @@ async function syncPortfolio() {
             window.portfolioData.locked_usd = userData.locked_usd || 0;
             document.getElementById('dashboard_cash_balance').textContent = `$${userData.balance_usd.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
             if (document.getElementById('stockUserMenu')) {
-                document.getElementById('stockUserMenu').textContent = (userData.username || "JD").substring(0, 2).toUpperCase();
+                document.getElementById('stockUserMenu').textContent = (userData.username || "--").substring(0, 2).toUpperCase();
             }
         }
 
@@ -366,15 +366,39 @@ function updateStats() {
         todayProfitEl.className = `stats-change ${todayPnL >= 0 ? 'positive' : 'negative'}`;
     }
 
-    // Update Performance Section (Today)
-    const perfItems = document.querySelectorAll('.performance-item');
-    if (perfItems.length > 0) {
-        const todayValue = perfItems[0].querySelector('.performance-value');
-        if (todayValue) {
-            todayValue.textContent = `${todayPerc >= 0 ? '+' : ''}${todayPerc.toFixed(2)}%`;
-            todayValue.className = `performance-value ${todayPerc >= 0 ? 'positive' : 'negative'}`;
-        }
+    // Update Performance Section & Movers
+    updatePerformance(todayPerc, totalProfitPerc);
+    updateMovers();
+}
+
+function updatePerformance(todayPerc, totalProfitPerc) {
+    const setVal = (id, val) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.textContent = `${val >= 0 ? '+' : ''}${val.toFixed(2)}%`;
+        el.className = `performance-value ${val >= 0 ? 'positive' : 'negative'}`;
+    };
+
+    setVal('perf_today', todayPerc);
+
+    const trades = window.portfolioData.trades || [];
+    const now = Date.now();
+
+    function getPeriodReturn(days) {
+        if (!trades.length) return 0;
+        const cutoff = now - (days * 24 * 60 * 60 * 1000);
+        const hasTradesInPeriod = trades.some(t => {
+            const raw = t.timestamp ? t.timestamp.replace(' ', 'T') + 'Z' : '';
+            const tTime = new Date(raw).getTime();
+            return !isNaN(tTime) && tTime >= cutoff;
+        });
+        return hasTradesInPeriod ? totalProfitPerc : 0;
     }
+
+    setVal('perf_week', getPeriodReturn(7));
+    setVal('perf_month', getPeriodReturn(30));
+    setVal('perf_3month', getPeriodReturn(90));
+    setVal('perf_alltime', totalProfitPerc);
 }
 
 // --- WebSocket Connection ---
@@ -426,7 +450,7 @@ function switchTab(tabName) {
 // Initialization
 document.addEventListener('DOMContentLoaded', () => {
     initChart();
-    // syncPortfolio(); // Deferred until price load
+    syncPortfolio(); // Sync user data and holdings immediately
     initWebSockets();
     initUserMenu();
 

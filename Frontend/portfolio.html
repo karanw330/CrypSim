@@ -27,7 +27,7 @@
                             onclick="window.location.href='./home.html'">🏠</button>
                         <div class="user-menu-container">
                             <div class="stock-header__user-avatar" role="button" tabindex="0" aria-label="User menu"
-                                id="stockUserMenu">JD</div>
+                                id="stockUserMenu">--</div>
                             <div class="user-dropdown" id="userDropdown">
                                 <button class="user-dropdown__item user-dropdown__item--danger" id="logoutBtn">
                                     Logout
@@ -70,23 +70,23 @@
                 <h3 class="section-title">Performance</h3>
                 <div class="performance-item">
                     <span class="performance-label">Today</span>
-                    <span class="performance-value positive">+2.3%</span>
+                    <span class="performance-value" id="perf_today">+0.00%</span>
                 </div>
                 <div class="performance-item">
                     <span class="performance-label">This Week</span>
-                    <span class="performance-value" id="perf_week">---</span>
+                    <span class="performance-value" id="perf_week">+0.00%</span>
                 </div>
                 <div class="performance-item">
                     <span class="performance-label">This Month</span>
-                    <span class="performance-value" id="perf_month">---</span>
+                    <span class="performance-value" id="perf_month">+0.00%</span>
                 </div>
                 <div class="performance-item">
                     <span class="performance-label">3 Months</span>
-                    <span class="performance-value" id="perf_3month">---</span>
+                    <span class="performance-value" id="perf_3month">+0.00%</span>
                 </div>
                 <div class="performance-item">
-                    <span class="performance-label">1 Year</span>
-                    <span class="performance-value" id="perf_1year">---</span>
+                    <span class="performance-label">All Time</span>
+                    <span class="performance-value" id="perf_alltime">+0.00%</span>
                 </div>
             </div>
         </div>
@@ -99,7 +99,7 @@
                     <!-- Dynamic holdings will be inserted here -->
                     <div class="stock-item">
                         <div class="stock-info">
-                            <p>Loading holdings...</p>
+                            <p style="color: #888; padding: 12px;">Loading holdings...</p>
                         </div>
                     </div>
                 </div>
@@ -115,74 +115,7 @@
                 <div id="winners" class="tab-content active">
                     <div class="stock-item">
                         <div class="stock-info">
-                            <div class="stock-icon" style="background: #10b981;">NVDA</div>
-                            <div class="stock-details">
-                                <h4>NVIDIA Corp.</h4>
-                                <p>$892.45</p>
-                            </div>
-                        </div>
-                        <div class="stock-price">
-                            <div class="change positive">+8.7%</div>
-                        </div>
-                    </div>
-                    <div class="stock-item">
-                        <div class="stock-info">
-                            <div class="stock-icon" style="background: #4ade80;">AMD</div>
-                            <div class="stock-details">
-                                <h4>Advanced Micro</h4>
-                                <p>$156.78</p>
-                            </div>
-                        </div>
-                        <div class="stock-price">
-                            <div class="change positive">+6.4%</div>
-                        </div>
-                    </div>
-                    <div class="stock-item">
-                        <div class="stock-info">
-                            <div class="stock-icon" style="background: #06b6d4;">SHOP</div>
-                            <div class="stock-details">
-                                <h4>Shopify Inc.</h4>
-                                <p>$67.89</p>
-                            </div>
-                        </div>
-                        <div class="stock-price">
-                            <div class="change positive">+5.9%</div>
-                        </div>
-                    </div>
-                    <div class="stock-item">
-                        <div class="stock-info">
-                            <div class="stock-icon" style="background: #8b5cf6;">ROKU</div>
-                            <div class="stock-details">
-                                <h4>Roku Inc.</h4>
-                                <p>$48.23</p>
-                            </div>
-                        </div>
-                        <div class="stock-price">
-                            <div class="change positive">+5.3%</div>
-                        </div>
-                    </div>
-                    <div class="stock-item">
-                        <div class="stock-info">
-                            <div class="stock-icon" style="background: #f59e0b;">SQ</div>
-                            <div class="stock-details">
-                                <h4>Block Inc.</h4>
-                                <p>$78.45</p>
-                            </div>
-                        </div>
-                        <div class="stock-price">
-                            <div class="change positive">+4.8%</div>
-                        </div>
-                    </div>
-                    <div class="stock-item">
-                        <div class="stock-info">
-                            <div class="stock-icon" style="background: #3b82f6;">PYPL</div>
-                            <div class="stock-details">
-                                <h4>PayPal Holdings</h4>
-                                <p>$89.67</p>
-                            </div>
-                        </div>
-                        <div class="stock-price">
-                            <div class="change positive">+4.2%</div>
+                            <p style="color: #888; padding: 12px;">Loading live movers...</p>
                         </div>
                     </div>
                 </div>
@@ -190,74 +123,7 @@
                 <div id="losers" class="tab-content">
                     <div class="stock-item">
                         <div class="stock-info">
-                            <div class="stock-icon" style="background: #ef4444;">SNAP</div>
-                            <div class="stock-details">
-                                <h4>Snap Inc.</h4>
-                                <p>$12.34</p>
-                            </div>
-                        </div>
-                        <div class="stock-price">
-                            <div class="change negative">-12.8%</div>
-                        </div>
-                    </div>
-                    <div class="stock-item">
-                        <div class="stock-info">
-                            <div class="stock-icon" style="background: #dc2626;">UBER</div>
-                            <div class="stock-details">
-                                <h4>Uber Technologies</h4>
-                                <p>$45.67</p>
-                            </div>
-                        </div>
-                        <div class="stock-price">
-                            <div class="change negative">-8.9%</div>
-                        </div>
-                    </div>
-                    <div class="stock-item">
-                        <div class="stock-info">
-                            <div class="stock-icon" style="background: #b91c1c;">RIVN</div>
-                            <div class="stock-details">
-                                <h4>Rivian Automotive</h4>
-                                <p>$23.12</p>
-                            </div>
-                        </div>
-                        <div class="stock-price">
-                            <div class="change negative">-7.3%</div>
-                        </div>
-                    </div>
-                    <div class="stock-item">
-                        <div class="stock-info">
-                            <div class="stock-icon" style="background: #991b1b;">ABNB</div>
-                            <div class="stock-details">
-                                <h4>Airbnb Inc.</h4>
-                                <p>$134.56</p>
-                            </div>
-                        </div>
-                        <div class="stock-price">
-                            <div class="change negative">-6.7%</div>
-                        </div>
-                    </div>
-                    <div class="stock-item">
-                        <div class="stock-info">
-                            <div class="stock-icon" style="background: #7f1d1d;">DOCU</div>
-                            <div class="stock-details">
-                                <h4>DocuSign Inc.</h4>
-                                <p>$56.78</p>
-                            </div>
-                        </div>
-                        <div class="stock-price">
-                            <div class="change negative">-5.4%</div>
-                        </div>
-                    </div>
-                    <div class="stock-item">
-                        <div class="stock-info">
-                            <div class="stock-icon" style="background: #7c2d12;">ZOOM</div>
-                            <div class="stock-details">
-                                <h4>Zoom Video</h4>
-                                <p>$89.23</p>
-                            </div>
-                        </div>
-                        <div class="stock-price">
-                            <div class="change negative">-4.9%</div>
+                            <p style="color: #888; padding: 12px;">Loading live movers...</p>
                         </div>
                     </div>
                 </div>

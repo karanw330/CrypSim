@@ -52,13 +52,35 @@ test_main.http
 .pytest_cache/
 
 
+# ========================
+# Database & Lock files
+# ========================
 *.db
+*.db-journal
+*.db-wal
+*.db-shm
 *.sqlite3
 
 # ========================
-# OTP Verification
+# Editor & IDE files
 # ========================
+.idea/
+.vscode/
+*.iml
+*.sublime-project
+*.sublime-workspace
 
-#========================
-# Frontend
-#========================
+# ========================
+# Docker overrides
+# ========================
+docker-compose.override.yml
+
+# ========================
+# Packaging / Distribution
+# ========================
+build/
+dist/
+*.egg-info/
+wheels/
+
+docker-compose.yml

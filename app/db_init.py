@@ -3,7 +3,7 @@ import os
 import subprocess
 import sys
 
-DB_NAME = "cryptosim.db"
+DB_NAME = os.getenv("DB_PATH", "cryptosim.db")
 
 def get_db_connection():
     conn = sqlite3.connect(DB_NAME)

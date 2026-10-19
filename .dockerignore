@@ -1,0 +1,33 @@
+# Git
+.git
+.gitignore
+
+# Python virtual environments & bytecode
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Environment & secrets (never bake secrets into docker image)
+.env
+.env.*
+*.env
+
+# IDE & Editor files
+.idea/
+.vscode/
+*.iml
+
+# CI / CD & Docker metadata
+Jenkinsfile
+.dockerignore
+
+# OS files & logs
+.DS_Store
+Thumbs.db
+*.log
+test_main.http

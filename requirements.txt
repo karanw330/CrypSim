@@ -1,12 +1,11 @@
 fastapi
+uvicorn[standard]
 gunicorn
-uvicorn
 python-dotenv
 pyjwt
 requests
 websocket-client
 pwdlib[argon2]
-gunicorn
 pytz
 websockets
 httpx
