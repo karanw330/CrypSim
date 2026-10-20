@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: crypsim-deployment
+  name: crypsim-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: crypsim-deployment
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: crypsim-deployment
+    spec:
+      imagePullSecrets:
+      - name: ecr-secret
+      containers:
+      - image: 448842988820.dkr.ecr.ap-south-1.amazonaws.com/crypsim:latest
+        name: crypsim
+        envFrom:
+          - secretRef:
+              name: crypsim-env
+        resources: {}
+status: {}
