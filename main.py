@@ -17,7 +17,7 @@ db_init.init_db()
 
 from app.order_book import recover_active_orders
 recover_active_orders()
-
+#test
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup: Start market websocket background task
