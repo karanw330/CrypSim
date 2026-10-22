@@ -22,7 +22,7 @@ pipeline {
         stage('Syntax Check') {
             steps {
                 echo 'Checking Python syntax before Docker build...'
-                sh 'docker run --rm -v "$WORKSPACE:/src:ro" -w /src python:3.11-slim python -m compileall -q .'
+                sh '''docker run --rm -v "$WORKSPACE:/src:ro" -w /src python:3.11-slim python -c 'import ast, pathlib; files = [p for p in pathlib.Path(".").rglob("*.py") if ".git" not in p.parts]; [ast.parse(p.read_bytes(), filename=str(p)) for p in files]; print(f"Syntax OK: {len(files)} Python files")' '''
             }
         }
 
