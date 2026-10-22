@@ -27,8 +27,30 @@ pipeline {
 
         stage('Container Test') {
             steps {
-                echo 'Testing import integrity inside the built container...'
-                sh 'docker run --rm ${IMAGE_NAME}:latest python3 -m py_compile main.py'
+                echo 'Checking Python syntax and application health...'
+                sh '''
+                    docker run --rm ${IMAGE_NAME}:latest python3 -m py_compile main.py
+                    container_id=$(docker run -d ${IMAGE_NAME}:latest)
+                    trap 'docker rm -f "$container_id" >/dev/null 2>&1 || true' EXIT
+
+                    healthy=0
+                    for attempt in $(seq 1 30); do
+                        if docker exec "$container_id" curl --fail --silent http://localhost:8000/ping | grep -q '"status":"ok"'; then
+                            healthy=1
+                            break
+                        fi
+                        if ! docker inspect -f '{{.State.Running}}' "$container_id" | grep -q true; then
+                            docker logs "$container_id"
+                            break
+                        fi
+                        sleep 2
+                    done
+                    if [ "$healthy" -ne 1 ]; then
+                        docker logs "$container_id"
+                        exit 1
+                    fi
+                    echo 'Application /ping health check passed.'
+                '''
             }
         }
 
