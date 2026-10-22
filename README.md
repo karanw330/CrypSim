@@ -1,40 +1,34 @@
-# CrypSim — CCA-2 CI/CD Deployment
+# CrypSim — CI/CD Deployment
 
-CrypSim is a **FastAPI and WebSocket-based cryptocurrency trading simulator** deployed on **AWS EC2** using Jenkins, Docker, Amazon ECR, and Kubernetes (Minikube).
+CrypSim is a cryptocurrency trading simulator built with **FastAPI and WebSockets**, deployed on AWS EC2 using **Jenkins, Docker, Amazon ECR, and Kubernetes (Minikube)**.
 
-## Setup
-- **GitHub webhook** triggers Jenkins on pushes to the `EC2` branch.
-- **EC2** hosts Jenkins, Docker, and a single-node Minikube cluster; an **Elastic IP** provides a stable public address.
-- **Amazon ECR** (`ap-south-1`) stores versioned Docker images.
-- Kubernetes uses `crypsim-env` for application environment variables and `ecr-secret` for image pulls.
+## Dockerfile
 
-## CI/CD Pipeline
-The [Jenkinsfile](Jenkinsfile) automates:
+The [Dockerfile](Dockerfile) uses `python:3.11-slim`, installs system packages and dependencies from `requirements.txt`, and copies the application into `/app`. It exposes port **8000**, includes a health check using the `/ping` endpoint, and runs the FastAPI application with **Uvicorn**.
 
-1. **Checkout** — fetch source code from GitHub.
-2. **Syntax Check** — validate Python files.
-3. **Docker Build** — build the application image.
-4. **Push to ECR** — push an image tagged with the Jenkins build number.
-5. **Deploy to Kubernetes** — refresh ECR credentials, apply manifests, and update the image.
-6. **Verify and Expose** — wait for rollout, check Pods and Services, forward port 8000, and test `/ping`.
+## Jenkins CI/CD Pipeline
 
-## Kubernetes Verification
+A GitHub webhook triggers the [Jenkinsfile](Jenkinsfile) pipeline for the `EC2` branch. Jenkins runs on an AWS EC2 instance with Docker and Minikube installed.
 
-The [Deployment](deployment.yaml) specifies **2 replicas**; the [Service](service.yaml) uses **NodePort 30007**.
+1. **Checkout:** Retrieves the application source code from GitHub.
+2. **Syntax Check:** Validates Python files using Python's AST parser in a temporary Docker container.
+3. **Docker Build:** Builds the CrypSim application image from the Dockerfile.
+4. **Push to ECR:** Authenticates with Amazon ECR in `ap-south-1`, tags the image with the Jenkins build number, and pushes it.
+5. **Deploy to Kubernetes:** Refreshes the ECR pull Secret, applies Kubernetes manifests, and updates the Deployment to the new image version.
+6. **Verify and Expose:** Waits for the rollout to complete, checks Pods and Services, starts port forwarding on port **8000**, and verifies the `/ping` endpoint.
+
+## Kubernetes Configuration
+
+**[deployment.yaml](deployment.yaml):** Configures the CrypSim Deployment with **2 replicas**, a readiness probe, and Kubernetes Secrets for application environment variables and ECR image pulls.
+
+**[service.yaml](service.yaml):** Exposes the Pods through a **NodePort Service**, mapping service port **8000** to container port **8000** with NodePort **30007**.
+
+## Verification
 
 ```bash
-minikube status
-kubectl get nodes
 kubectl get pods,deploy,svc
 kubectl rollout status deployment/crypsim-deployment
 curl http://localhost:8000/ping
 ```
 
-Health response: `{"status":"ok"}`. Application: `http://EC2_PUBLIC_IP:8000/login` (with port 8000 permitted by the EC2 security group).
-
-## CCA-2 Demonstration
-
-1. Push a change to the `EC2` branch and show the successful Jenkins pipeline and running Kubernetes Pods.
-2. Make a second small code change, push again, and show the **new Jenkins build, updated image, and successful redeployment**.
-
-> **Note:** CrypSim currently uses SQLite without a Kubernetes persistent volume. Pod replacement can lose local database data; the two replicas do not share a database.
+The health endpoint responds with `{"status":"ok"}`.
