@@ -6,6 +6,7 @@ pipeline {
         AWS_ACCOUNT_ID = '448842988820'
         ECR_REPOSITORY = 'crypsim'
         IMAGE_NAME = 'crypsim-image'
+        KUBECONFIG = '/var/lib/jenkins/.kube/config'
         ECR_REGISTRY = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
         ECR_IMAGE_LATEST = "${ECR_REGISTRY}/${ECR_REPOSITORY}:latest"
         ECR_IMAGE_BUILD = "${ECR_REGISTRY}/${ECR_REPOSITORY}:${BUILD_NUMBER}"
@@ -78,6 +79,47 @@ pipeline {
                 sh 'docker push ${ECR_IMAGE_LATEST}'
             }
         }
+
+        stage('Refresh ECR Pull Secret') {
+            steps {
+                echo 'Refreshing Kubernetes ECR image-pull credentials...'
+                sh '''
+                    set +x
+                    ECR_PASSWORD=$(aws ecr get-login-password --region "$AWS_REGION")
+                    test -n "$ECR_PASSWORD"
+                    kubectl create secret docker-registry ecr-secret \
+                        --docker-server="$ECR_REGISTRY" \
+                        --docker-username=AWS \
+                        --docker-password="$ECR_PASSWORD" \
+                        --dry-run=client -o yaml | kubectl apply -f -
+                    unset ECR_PASSWORD
+                '''
+            }
+        }
+
+        stage('Deploy to Minikube') {
+            steps {
+                echo 'Applying Kubernetes manifests and deploying this build...'
+                sh '''
+                    kubectl get secret crypsim-env >/dev/null
+                    kubectl apply -f deployment.yaml
+                    kubectl apply -f service.yaml
+                    kubectl set image deployment/crypsim-deployment crypsim="$ECR_IMAGE_BUILD"
+                '''
+            }
+        }
+
+        stage('Verify Deployment') {
+            steps {
+                echo 'Waiting for Kubernetes rollout...'
+                sh '''
+                    kubectl rollout status deployment/crypsim-deployment --timeout=180s
+                    kubectl get pods
+                    kubectl get deployments
+                    kubectl get services
+                '''
+            }
+        }
     }
 
     post {
@@ -85,7 +127,7 @@ pipeline {
             sh 'docker image prune -f || true'
         }
         success {
-            echo "Successfully built and pushed ${ECR_IMAGE_LATEST} and build tag #${BUILD_NUMBER} to ECR!"
+            echo "Successfully built, tested, pushed and deployed build #${BUILD_NUMBER} to Minikube!"
         }
         failure {
             echo 'Pipeline failed!'
