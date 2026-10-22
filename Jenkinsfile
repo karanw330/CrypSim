@@ -19,6 +19,13 @@ pipeline {
             }
         }
 
+        stage('Syntax Check') {
+            steps {
+                echo 'Checking Python syntax before Docker build...'
+                sh 'docker run --rm -v "$WORKSPACE:/src:ro" -w /src python:3.11-slim python -m compileall -q .'
+            }
+        }
+
         stage('Docker Build') {
             steps {
                 echo 'Building Docker container...'
@@ -28,9 +35,8 @@ pipeline {
 
         stage('Container Test') {
             steps {
-                echo 'Checking Python syntax and application health...'
+                echo 'Testing container /ping...'
                 sh '''
-                    docker run --rm ${IMAGE_NAME}:latest python3 -m py_compile main.py
                     container_id=$(docker run -d ${IMAGE_NAME}:latest)
                     trap 'docker rm -f "$container_id" >/dev/null 2>&1 || true' EXIT
 
@@ -117,6 +123,29 @@ pipeline {
                     kubectl get pods
                     kubectl get deployments
                     kubectl get services
+                '''
+            }
+        }
+        stage('Post-Deployment Health Test') {
+            steps {
+                echo 'Testing /ping through Kubernetes Service...'
+                sh '''
+                    kubectl port-forward service/crypsim-service 18080:8000 > port-forward.log 2>&1 &
+                    forward_pid=$!
+                    trap 'kill "$forward_pid" 2>/dev/null || true' EXIT
+                    healthy=0
+                    for attempt in $(seq 1 30); do
+                        if curl --fail --silent --max-time 3 http://127.0.0.1:18080/ping | grep -q '"status":"ok"'; then
+                            healthy=1
+                            break
+                        fi
+                        sleep 2
+                    done
+                    if [ "$healthy" -ne 1 ]; then
+                        cat port-forward.log
+                        exit 1
+                    fi
+                    echo 'Deployed /ping test passed.'
                 '''
             }
         }
