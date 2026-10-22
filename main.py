@@ -16,6 +16,7 @@ from app import db_init
 db_init.init_db()
 
 #testing for jenkins
+#testing for pipeline 2
 
 from app.order_book import recover_active_orders
 recover_active_orders()
