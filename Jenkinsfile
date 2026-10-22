@@ -40,7 +40,6 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 sh '''
-                    # ECR image-pull credentials expire, so refresh them each build.
                     set +x
                     ECR_PASSWORD=$(aws ecr get-login-password --region "$AWS_REGION")
                     test -n "$ECR_PASSWORD"
@@ -66,7 +65,6 @@ pipeline {
                     kubectl get pods
                     kubectl get services
 
-                    # Keep a single port-forward running after Jenkins finishes.
                     # The port-forward reaches one selected Pod, not Service load balancing.
                     if [ -f /var/lib/jenkins/crypsim-port-forward.pid ]; then
                         old_pid=$(cat /var/lib/jenkins/crypsim-port-forward.pid)
