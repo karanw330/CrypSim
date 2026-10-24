@@ -546,6 +546,101 @@
     }
     .orb::before,.orb::after {content:none}
     .orb img {display:block;width:100%;height:100%;object-fit:contain}
+
+    /* Scroll-driven cinematic orb journey: the hero remains pinned while
+       the original About content enters over the expanding liquid SVG.
+       Without JS or with reduced motion, the regular page layout is unchanged. */
+    .hero-journey {position:relative;height:auto}
+    .js-orb-journey .hero-journey {height:245svh;min-height:1050px}
+    .js-orb-journey .hero-journey > .scene {
+      position:sticky;
+      top:0;
+      width:100%;
+      height:100svh;
+      min-height:0;
+      max-height:none;
+      overflow:hidden;
+      isolation:isolate;
+    }
+    .js-orb-journey .hero-journey .scene::before {
+      content:"";
+      position:absolute;
+      z-index:6;
+      inset:0;
+      background:#151b27;
+      opacity:var(--orb-veil,0);
+      pointer-events:none;
+    }
+    .js-orb-journey .hero-journey .orb,
+    .js-orb-journey .hero-journey .orb-light {
+      transform:translateX(-50%) scale(var(--orb-zoom,1));
+      transform-origin:center center;
+      opacity:var(--orb-opacity,1);
+      will-change:transform,opacity;
+    }
+    .js-orb-journey .hero-journey .orb-light {opacity:calc(var(--orb-opacity,1) * .8)}
+    .js-orb-journey .hero-journey .headline,
+    .js-orb-journey .hero-journey .float-card,
+    .js-orb-journey .hero-journey .hero-scroll-hint {
+      opacity:var(--hero-content-opacity,1);
+      transform:translateY(var(--hero-content-shift,0px));
+      pointer-events:auto;
+    }
+    .js-orb-journey .hero-journey .float-card,
+    .js-orb-journey .hero-journey .headline,
+    .js-orb-journey .hero-journey .hero-scroll-hint {will-change:opacity,transform}
+    .js-orb-journey .hero-journey .hero-scroll-hint {
+      position:absolute;
+      z-index:7;
+      bottom:22px;
+      left:clamp(26px,5.7vw,84px);
+    }
+    .js-orb-journey .hero-journey .journey-info {
+      position:absolute;
+      z-index:8;
+      top:50%;
+      left:50%;
+      width:min(1180px,calc(100% - 11vw));
+      min-height:0;
+      height:auto;
+      margin:0;
+      padding:0;
+      display:block;
+      background:none;
+      opacity:var(--about-content-opacity,0);
+      transform:translate(-50%,calc(-50% + var(--about-content-shift,28px)));
+      pointer-events:none;
+      visibility:visible;
+      will-change:transform,opacity;
+    }
+    .js-orb-journey .journey-info .story-container {max-width:100%}
+    .js-orb-journey .journey-info h2 {font-size:clamp(39px,4.8vw,67px);text-shadow:0 2px 30px rgba(0,0,0,.35)}
+    .js-orb-journey .journey-info .intro-right > p {font-size:clamp(13px,1.12vw,16px);color:#d1dbea}
+    .js-orb-journey .journey-info .capital-highlight strong {font-size:clamp(49px,6vw,86px)}
+    .js-orb-journey .journey-info .capital-caption {color:#c2cede}
+    .js-orb-journey .journey-info .soft-type {color:#a7b9d0}
+    .js-orb-journey .scene .topbar {position:relative;z-index:11}
+    @media(max-width:700px){
+      .js-orb-journey .hero-journey {height:230svh;min-height:0}
+      .js-orb-journey .hero-journey .journey-info {width:calc(100% - 44px);top:54%}
+      .js-orb-journey .journey-info .intro-grid {gap:22px}
+      .js-orb-journey .journey-info h2 {font-size:clamp(35px,8.6vw,47px)}
+      .js-orb-journey .journey-info .intro-right {padding-top:0}
+      .js-orb-journey .journey-info .intro-right > p {font-size:13px;line-height:1.62;margin-bottom:22px}
+      .js-orb-journey .journey-info .capital-highlight {padding-top:17px}
+      .js-orb-journey .journey-info .capital-highlight strong {font-size:clamp(46px,12vw,64px)}
+    }
+    @media(max-width:400px) {
+      .js-orb-journey .hero-journey .journey-info {top:52%;width:calc(100% - 35px)}
+      .js-orb-journey .journey-info h2 {font-size:34px}
+      .js-orb-journey .journey-info .intro-grid {gap:15px}
+      .js-orb-journey .journey-info .intro-right > p {font-size:12px}
+    }
+    @media(prefers-reduced-motion:reduce){
+      .hero-journey {height:auto!important;min-height:0!important}
+      .hero-journey .scene {position:relative!important}
+      .orb,.orb-light {will-change:auto!important}
+    }
   </style>
 </head>
 <body>
@@ -555,6 +650,7 @@
     <div class="star-drift distant"></div>
   </div>
   <main class="universe" id="top">
+    <div class="hero-journey" id="heroJourney">
     <section class="scene" aria-label="CrypSim cryptocurrency trading simulator">
       <div class="scene-stars" aria-hidden="true"></div>
       <header class="topbar">
@@ -592,6 +688,7 @@
       </div>
 
     </section>
+    </div>
 
     <div class="hero-scroll-hint" aria-hidden="true"><span class="hint-line"></span>SCROLL TO EXPLORE</div>
     <section class="story-section intro-section" id="about" aria-labelledby="about-title">
@@ -747,6 +844,83 @@
         }
       });
 
+
+
+      // Progressive enhancement: expand the SVG orb into a seamless visual
+      // bridge to About. The original About section stays in normal flow if
+      // reduced motion is requested or JavaScript is unavailable.
+      (function () {
+        var reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+        if (reducedMotion.matches) return;
+        var journey=document.getElementById('heroJourney');
+        var scene=journey && journey.querySelector('.scene');
+        var about=document.querySelector('.intro-section');
+        var orb=scene && scene.querySelector('.orb');
+        var hint=document.querySelector('.hero-scroll-hint');
+        if (!journey || !scene || !about || !orb || !hint) return;
+        scene.appendChild(hint);
+        scene.appendChild(about);
+        about.classList.add('journey-info');
+        about.querySelectorAll('.reveal').forEach(function (el) {
+          el.classList.remove('reveal');
+        });
+        document.documentElement.classList.add('js-orb-journey');
+        var frame=0;
+        var scrolledToAbout=false;
+        var clamp=function (n) {return Math.max(0,Math.min(1,n));};
+        var smooth=function (a,b,p) {
+          var t=clamp((p-a)/(b-a));
+          return t*t*(3-2*t);
+        };
+        var update=function () {
+          frame=0;
+          var distance=Math.max(1,journey.offsetHeight-window.innerHeight);
+          var p=clamp((window.scrollY+0-journey.getBoundingClientRect().top-window.scrollY)/distance);
+          // getBoundingClientRect().top is viewport-relative. Negating gives
+          // the amount of this journey already scrolled past.
+          p=clamp(-journey.getBoundingClientRect().top/distance);
+          var w=orb.offsetWidth||600;
+          var cy=orb.offsetTop+orb.offsetHeight*.5;
+          var viewport=window.innerHeight;
+          var maxScale=Math.max(2.8,(cy+viewport*.34)/(w*.5),window.innerWidth*1.58/w);
+          var zoom=smooth(.12,.72,p);
+          var heroFade=smooth(.10,.36,p);
+          var reveal=smooth(.53,.78,p);
+          var veil=smooth(.37,.75,p)*.74+smooth(.85,1,p)*.21;
+          var orbFade=smooth(.81,1,p);
+          scene.style.setProperty('--orb-zoom',(1+(maxScale-1)*zoom).toFixed(3));
+          scene.style.setProperty('--orb-opacity',(1-orbFade*.84).toFixed(3));
+          scene.style.setProperty('--orb-veil',veil.toFixed(3));
+          scene.style.setProperty('--hero-content-opacity',(1-heroFade).toFixed(3));
+          scene.style.setProperty('--hero-content-shift',(-18*heroFade).toFixed(1)+'px');
+          scene.style.setProperty('--about-content-opacity',reveal.toFixed(3));
+          scene.style.setProperty('--about-content-shift',((1-reveal)*28).toFixed(1)+'px');
+        };
+        var request=function () {
+          if (!frame) frame=window.requestAnimationFrame(update);
+        };
+        window.addEventListener('scroll',request,{passive:true});
+        window.addEventListener('resize',request,{passive:true});
+        document.addEventListener('visibilitychange',function () {
+          if (!document.hidden) request();
+        });
+        var aboutLink=document.querySelector('.links a[href="#about"]');
+        if (aboutLink) {
+          aboutLink.addEventListener('click',function (e) {
+            e.preventDefault();
+            var target=journey.offsetTop+(journey.offsetHeight-window.innerHeight)*.78;
+            window.scrollTo({top:target,behavior:'smooth'});
+            history.replaceState(null,'','#about');
+          });
+        }
+        request();
+        if (window.location.hash==='#about' && !scrolledToAbout) {
+          scrolledToAbout=true;
+          window.requestAnimationFrame(function () {
+            window.scrollTo({top:journey.offsetTop+(journey.offsetHeight-window.innerHeight)*.78});
+          });
+        }
+      })();
 
       // Reveal elements on scroll without hiding content when IntersectionObserver is unavailable.
       if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
