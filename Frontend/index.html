@@ -437,9 +437,113 @@
       .js-reveal .reveal {opacity:1;transform:none;transition:none}
       .feature-row {transition:none}
     }
+
+    /* Full-page drifting starfield — low contrast, independent of page scroll. */
+    .global-starfield {
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      overflow:hidden;
+      background:
+        radial-gradient(ellipse 70% 65% at 1% 0%, rgba(58,68,112,.22), transparent 80%),
+        radial-gradient(ellipse 65% 70% at 100% 100%, rgba(40,52,96,.17), transparent 84%);
+    }
+    .star-drift {
+      position:absolute;
+      inset:-20%;
+      pointer-events:none;
+      background-repeat:repeat;
+      transform:translate3d(0,0,0);
+      will-change:transform,opacity;
+    }
+    .star-drift.fine {
+      opacity:.66;
+      background-image:
+        radial-gradient(1px 1px at 36px 58px,rgba(240,247,255,.94) 96%,transparent),
+        radial-gradient(1px 1px at 179px 153px,rgba(170,208,248,.84) 96%,transparent),
+        radial-gradient(1px 1px at 305px 48px,rgba(245,250,255,.89) 96%,transparent),
+        radial-gradient(1px 1px at 455px 232px,rgba(191,218,254,.82) 96%,transparent),
+        radial-gradient(1px 1px at 99px 291px,rgba(234,242,255,.92) 96%,transparent),
+        radial-gradient(1px 1px at 365px 346px,rgba(195,220,255,.85) 96%,transparent),
+        radial-gradient(1px 1px at 254px 269px,rgba(236,250,255,.76) 96%,transparent);
+      background-size:510px 390px;
+      animation: star-drift-a 115s ease-in-out infinite alternate, star-twinkle-a 7s ease-in-out infinite alternate;
+    }
+    .star-drift.medium {
+      opacity:.48;
+      background-image:
+        radial-gradient(1.5px 1.5px at 83px 94px,rgba(237,246,255,.88) 96%,transparent),
+        radial-gradient(1.5px 1.5px at 262px 211px,rgba(176,211,255,.77) 96%,transparent),
+        radial-gradient(1.5px 1.5px at 510px 132px,rgba(229,247,255,.79) 96%,transparent),
+        radial-gradient(1.5px 1.5px at 408px 368px,rgba(183,207,255,.74) 96%,transparent),
+        radial-gradient(1.5px 1.5px at 163px 389px,rgba(231,246,255,.77) 96%,transparent);
+      background-size:630px 490px;
+      animation:star-drift-b 165s ease-in-out infinite alternate,star-twinkle-b 11s ease-in-out infinite alternate;
+    }
+    .star-drift.distant {
+      opacity:.30;
+      background-image:
+        radial-gradient(2px 2px at 153px 120px,rgba(229,247,255,.67) 96%,transparent),
+        radial-gradient(2px 2px at 572px 310px,rgba(179,209,254,.68) 96%,transparent),
+        radial-gradient(2px 2px at 316px 495px,rgba(243,246,255,.61) 96%,transparent);
+      background-size:790px 610px;
+      animation:star-drift-c 210s ease-in-out infinite alternate,star-twinkle-c 15s ease-in-out infinite alternate;
+    }
+    @keyframes star-drift-a {
+      from {transform:translate3d(-1.5%,-1%,0)}
+      to {transform:translate3d(2%,2.4%,0)}
+    }
+    @keyframes star-drift-b {
+      from {transform:translate3d(2%,-2%,0)}
+      to {transform:translate3d(-2%,1.8%,0)}
+    }
+    @keyframes star-drift-c {
+      from {transform:translate3d(-1%,1.5%,0)}
+      to {transform:translate3d(2%,-2%,0)}
+    }
+    @keyframes star-twinkle-a {from {opacity:.52}to {opacity:.72}}
+    @keyframes star-twinkle-b {from {opacity:.32}to {opacity:.53}}
+    @keyframes star-twinkle-c {from {opacity:.20}to {opacity:.34}}
+
+    /* Transparent dark tints let stars show through every page section
+       without changing the original type, components, or colour palette. */
+    body {background:#10141e}
+    .universe {position:relative;z-index:1;background:transparent}
+    .scene {
+      background:
+        radial-gradient(ellipse 60% 100% at 0% 0%,rgba(55,65,112,.44),transparent 76%),
+        radial-gradient(ellipse 42% 50% at 100% 98%,rgba(36,40,75,.26),transparent 82%),
+        rgba(13,17,26,.61);
+    }
+    .scene-stars {opacity:.10}
+    .intro-section {background:linear-gradient(180deg,rgba(16,21,30,.77),rgba(21,27,39,.73))}
+    .showcase-section {background:radial-gradient(ellipse at 57% 55%,rgba(25,83,111,.13),transparent 68%),rgba(21,27,39,.76)}
+    .features-section {background:rgba(17,23,34,.75)}
+    .portfolio-section {background:linear-gradient(145deg,rgba(23,31,44,.79),rgba(17,25,36,.75))}
+    .faq-section {background:rgba(17,23,33,.76)}
+    .closing-section {background:rgba(16,22,32,.72)}
+    .site-footer {background:rgba(16,22,32,.80)}
+
+    @media (max-width:700px) {
+      .star-drift.fine {opacity:.56}
+      .star-drift.medium {opacity:.41}
+      .star-drift.distant {opacity:.24}
+    }
+    @media (prefers-reduced-motion:reduce) {
+      .star-drift {animation:none!important;transform:none!important;will-change:auto}
+      .star-drift.fine {opacity:.59}
+      .star-drift.medium {opacity:.41}
+      .star-drift.distant {opacity:.23}
+    }
   </style>
 </head>
 <body>
+  <div class="global-starfield" aria-hidden="true">
+    <div class="star-drift fine"></div>
+    <div class="star-drift medium"></div>
+    <div class="star-drift distant"></div>
+  </div>
   <main class="universe" id="top">
     <section class="scene" aria-label="CrypSim cryptocurrency trading simulator">
       <div class="scene-stars" aria-hidden="true"></div>
