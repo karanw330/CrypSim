@@ -128,19 +128,126 @@
       html {scroll-behavior:auto}
       .pill,.start,.orb canvas {transition:none}
     }
+
+    /* Full-width, scrollable landing page: reference design is the hero, not a card. */
+    body {background:#101219;overflow-x:hidden}
+    .universe {display:block;min-height:0;width:100%;padding:0;overflow:visible;background:#101219}
+    .universe::before {display:none}
+    .scene {
+      width:100%;height:100svh;min-height:690px;max-height:none;
+      border-radius:0;box-shadow:none;overflow:hidden;
+      background:radial-gradient(ellipse 80% 105% at -7% 0%,rgba(61,72,117,.52),transparent 72%),radial-gradient(ellipse 75% 80% at 95% 110%,rgba(39,39,69,.26),transparent 72%),#111318
+    }
+    .scene::after {display:none}
+    .topbar {width:min(1370px,100%);margin:0 auto;height:95px;padding:0 clamp(24px,5.7vw,84px)}
+    .headline {padding:clamp(35px,6vh,77px) 16px 0}
+    .headline h1 {font-size:clamp(43px,4.25vw,62px)}
+    .headline p {font-size:13px;margin-top:28px}
+    .start {margin-top:29px}
+    .orb,.orb-light {width:min(770px,68%);top:54%}
+    .card-left {left:20%;top:65%}
+    .card-right {right:20%;top:74%}
+    .page-section {position:relative;padding:clamp(78px,9vw,135px) 6vw;scroll-margin-top:20px}
+    .page-container {max-width:1100px;margin:0 auto}
+    .eyebrow {font-size:11px;letter-spacing:.16em;font-weight:600;color:#83c5e3}
+    .page-section h2 {margin:19px 0 0;font-size:clamp(32px,4.3vw,56px);line-height:1.15;letter-spacing:-.055em;font-weight:600}
+    .section-muted {color:#8894ae}
+    .page-section p {font-size:15px;line-height:1.8;color:#aab4c5}
+    .about-section {background:linear-gradient(180deg,#111318,#171b27)}
+    .about-layout {display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:clamp(35px,7vw,125px)}
+    .about-description {padding-top:25px}
+    .about-description p {margin:0 0 31px}
+    .starting-balance {display:flex;align-items:baseline;flex-wrap:wrap;gap:13px;padding-top:26px;border-top:1px solid rgba(195,218,248,.15)}
+    .starting-balance strong {font-size:clamp(31px,3.5vw,45px);letter-spacing:-.05em;font-weight:600}
+    .starting-balance span {font-size:12px;color:#9babc1}
+    .features-section {background:#171b27}
+    .section-heading-row {display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:65px}
+    .section-heading-row p {max-width:245px;margin:0}
+    .feature-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:50px 65px}
+    .feature-item {padding:26px 12px 6px 0;border-top:1px solid rgba(195,218,248,.17)}
+    .feature-number {font-size:11px;color:#7fa8c5}
+    .feature-item h3 {margin:21px 0 11px;font-size:20px;letter-spacing:-.035em;font-weight:600}
+    .feature-item p {margin:0;max-width:430px;font-size:14px}
+    .faq-section {background:#121620}
+    .faq-layout {display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(35px,7vw,110px)}
+    .faq-list {border-top:1px solid rgba(190,210,241,.2)}
+    .faq-list details {border-bottom:1px solid rgba(190,210,241,.2)}
+    .faq-list summary {list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:23px 0;font-size:15px;font-weight:500}
+    .faq-list summary::-webkit-details-marker {display:none}
+    .faq-list summary span {font-size:22px;font-weight:400;color:#98b7d1;transition:transform .2s}
+    .faq-list details[open] summary span {transform:rotate(45deg)}
+    .faq-list details p {margin:0;padding:0 36px 23px 0;font-size:13px}
+    .faq-list a {color:#92d2f0;text-decoration:underline;text-underline-offset:3px}
+    .closing-section {text-align:center;background:radial-gradient(ellipse at 50% 105%,rgba(55,82,140,.28),transparent 72%),#11151e}
+    .closing-content {padding:20px 0}
+    .closing-content h2 {margin-top:18px}
+    .closing-content p {margin:22px 0 0}
+    .closing-button {margin-top:28px}
+    .site-footer {display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:35px max(24px,calc((100% - 1100px)/2));border-top:1px solid rgba(195,218,248,.11);background:#101219}
+    .site-footer .brand {font-size:15px}
+    .site-footer .brand img {width:25px;height:25px}
+    .footer-copy {color:#8491a4;font-size:12px}
+    .footer-links {display:flex;align-items:center;gap:25px;font-size:12px}
+    .footer-links a {color:#cfd4e0}
+    .footer-links a:hover {color:#90dafa}
+    @media(max-width:990px) {
+      .topbar {padding:0 36px}
+      .orb,.orb-light {width:83%;top:56%}
+      .card-left {left:10%;top:68%}
+      .card-right {right:10%;top:79%}
+    }
+    @media(max-width:700px) {
+      .universe {display:block;padding:0}
+      .scene {width:100%;height:100svh;min-height:700px;border-radius:0}
+      .topbar {width:100%;height:70px;padding:0 20px}
+      .headline {padding:69px 16px 0}
+      .headline h1 {font-size:clamp(35px,7.7vw,48px)}
+      .headline p {font-size:12px;margin-top:22px}
+      .start {margin-top:23px}
+      .orb,.orb-light {top:60%;width:118%}
+      .card-left {left:5%;top:70%}
+      .card-right {right:5%;top:83%}
+      .page-section {padding:78px 22px}
+      .about-layout,.faq-layout {grid-template-columns:1fr;gap:26px}
+      .section-heading-row {display:block;margin-bottom:45px}
+      .section-heading-row p {max-width:420px;margin-top:22px}
+      .feature-grid {gap:28px 24px}
+      .feature-item {padding-top:20px}
+      .site-footer {padding:30px 22px}
+    }
+    @media(max-width:480px) {
+      .scene {min-height:660px}
+      .topbar {padding:0 14px}
+      .headline {padding-top:58px}
+      .headline h1 {font-size:clamp(32px,8vw,39px)}
+      .orb,.orb-light {top:63%;width:136%}
+      .card-left {left:3%;top:75%}
+      .card-right {right:3%;top:86%}
+      .page-section h2 {font-size:clamp(30px,8vw,42px)}
+      .feature-grid {grid-template-columns:1fr;gap:24px}
+      .feature-item h3 {font-size:18px;margin-top:13px}
+      .feature-item p {font-size:13px}
+      .site-footer {align-items:flex-start;flex-direction:column;gap:17px}
+      .footer-links {flex-wrap:wrap;gap:15px}
+    }
+    @media(max-height:680px) and (min-width:701px) {
+      .scene {min-height:600px}
+      .headline {padding-top:16px}
+      .orb,.orb-light {top:54%}
+    }
   </style>
 </head>
 <body>
-  <main class="universe">
+  <main class="universe" id="top">
     <section class="scene" aria-label="CrypSim cryptocurrency trading simulator">
       <div class="scene-stars" aria-hidden="true"></div>
       <header class="topbar">
         <a class="brand" href="./index.html" aria-label="CrypSim home"><img src="./img/favicon.png" width="31" height="31" alt=""><span>CrypSim</span></a>
         <nav class="links" id="navLinks" aria-label="Main navigation">
-          <button type="button" data-modal="about">About</button>
-          <button type="button" data-modal="features">Features <span aria-hidden="true">⌄</span></button>
+          <a href="#about">About</a>
+          <a href="#features">Features <span aria-hidden="true">⌄</span></a>
           <a href="https://github.com/karanw330/CrypSim#readme" rel="noopener noreferrer" target="_blank">Docs</a>
-          <button type="button" data-modal="faq">FAQ</button>
+          <a href="#faq">FAQ</a>
         </nav>
         <div class="nav-actions">
           <a class="pill pill-muted" href="./login_page.html">Login</a>
@@ -167,52 +274,116 @@
         <div class="card-bottom"><span class="percent">100%</span><span class="card-sub">Virtual funds</span></div>
         <div class="mini-progress" aria-hidden="true"></div>
       </div>
+
     </section>
+    <section class="page-section about-section" id="about" aria-labelledby="about-heading">
+      <div class="page-container about-layout">
+        <div>
+          <span class="eyebrow">01 / ABOUT CRYPSIM</span>
+          <h2 id="about-heading">Learn the market.<br><span class="section-muted">Skip the risk.</span></h2>
+        </div>
+        <div class="about-description">
+          <p>CrypSim gives you a place to experience cryptocurrency trading without putting real money on the line. Follow live prices, try different order types and understand how your decisions affect a portfolio.</p>
+          <div class="starting-balance"><strong>$100,000</strong><span>in virtual funds when you create an account</span></div>
+        </div>
+      </div>
+    </section>
+    <section class="page-section features-section" id="features" aria-labelledby="features-heading">
+      <div class="page-container">
+        <span class="eyebrow">02 / THE EXPERIENCE</span>
+        <div class="section-heading-row">
+          <h2 id="features-heading">Everything you need<br>to practice trading.</h2>
+          <p>The core tools of a trading platform, built for learning.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-item">
+            <span class="feature-number">01</span>
+            <h3>Live market data</h3>
+            <p>Follow prices and charts for BTC, ETH, SOL, BNB, XRP and DOGE.</p>
+          </article>
+          <article class="feature-item">
+            <span class="feature-number">02</span>
+            <h3>Advanced orders</h3>
+            <p>Practice market, limit, stop-limit and stop-loss orders.</p>
+          </article>
+          <article class="feature-item">
+            <span class="feature-number">03</span>
+            <h3>Portfolio tracking</h3>
+            <p>Monitor balances, holdings, profit and loss, and asset allocation.</p>
+          </article>
+          <article class="feature-item">
+            <span class="feature-number">04</span>
+            <h3>Order management</h3>
+            <p>Review trade history and manage your pending orders.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="page-section faq-section" id="faq" aria-labelledby="faq-heading">
+      <div class="page-container faq-layout">
+        <div>
+          <span class="eyebrow">03 / COMMON QUESTIONS</span>
+          <h2 id="faq-heading">Good to know.</h2>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary>Is CrypSim real-money trading?<span aria-hidden="true">+</span></summary>
+            <p>No. CrypSim simulates trades using virtual funds. You aren't buying real cryptocurrency.</p>
+          </details>
+          <details>
+            <summary>What balance do I start with?<span aria-hidden="true">+</span></summary>
+            <p>New accounts start with $100,000 in virtual funds to practice with.</p>
+          </details>
+          <details>
+            <summary>What can I trade?<span aria-hidden="true">+</span></summary>
+            <p>The simulator currently supports Bitcoin, Ethereum, Solana, BNB, XRP and Dogecoin.</p>
+          </details>
+          <details>
+            <summary>Where can I find documentation?<span aria-hidden="true">+</span></summary>
+            <p>Find the project details and setup instructions in the <a href="https://github.com/karanw330/CrypSim#readme" target="_blank" rel="noopener noreferrer">CrypSim GitHub README ↗</a>.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+    <section class="page-section closing-section" aria-labelledby="closing-heading">
+      <div class="page-container closing-content">
+        <span class="eyebrow">READY TO GET STARTED?</span>
+        <h2 id="closing-heading">Your next trade starts here.</h2>
+        <p>Explore the crypto market using virtual money.</p>
+        <a class="start closing-button" href="./login_page.html">Start Trading ↗</a>
+      </div>
+    </section>
+    <footer class="site-footer">
+      <a class="brand" href="#top" aria-label="CrypSim home"><img src="./img/favicon.png" alt="" width="25" height="25"><span>CrypSim</span></a>
+      <span class="footer-copy">A cryptocurrency trading simulator.</span>
+      <div class="footer-links">
+        <a href="https://github.com/karanw330/CrypSim#readme" target="_blank" rel="noopener noreferrer">Docs ↗</a>
+        <span class="connection-note"><span class="connection-dot" id="connectionDot"></span><span id="connectionStatus">Checking backend…</span></span>
+      </div>
+    </footer>
   </main>
-  <dialog class="about-modal" id="aboutModal" aria-labelledby="dialogTitle">
-    <button class="modal-close" type="button" id="modalClose" aria-label="Close dialog">×</button>
-    <h2 id="dialogTitle"></h2>
-    <div id="dialogBody"></div>
-  </dialog>
   <script>
     (function () {
       'use strict';
       var menuButton = document.getElementById('menuButton');
       var links = document.getElementById('navLinks');
-      var dialog = document.getElementById('aboutModal');
-      var dialogTitle = document.getElementById('dialogTitle');
-      var dialogBody = document.getElementById('dialogBody');
-      var sections = {
-        about: {
-          title: 'About CrypSim',
-          html: '<p>CrypSim is a risk-free cryptocurrency trading simulator. Follow live market data, place simulated orders and manage your portfolio using virtual money.</p><p>New accounts start with <strong>$100,000 in virtual funds</strong>. No actual cryptocurrency purchases are made.</p><p class="connection-note"><span class="connection-dot" id="connectionDot"></span><span id="connectionStatus">Checking backend connection…</span></p>'
-        },
-        features: {
-          title: 'Trading, without real capital',
-          html: '<ul><li>Live market prices for BTC, ETH, SOL, BNB, XRP and DOGE</li><li>Market, limit, stop-limit and stop-loss orders</li><li>Pending order management and trade history</li><li>Portfolio holdings, allocation and profit/loss tracking</li></ul>'
-        },
-        faq: {
-          title: 'Frequently asked questions',
-          html: '<p><strong>Is this real-money trading?</strong><br>No. All orders are simulated using virtual balances.</p><p><strong>How much do I start with?</strong><br>New accounts receive $100,000 in virtual funds.</p><p><strong>Where can I read the documentation?</strong><br><a href="https://github.com/karanw330/CrypSim#readme" target="_blank" rel="noopener noreferrer">Open the CrypSim README on GitHub ↗</a></p>'
-        }
-      };
       menuButton.addEventListener('click', function () {
         var opened = links.classList.toggle('open');
         menuButton.setAttribute('aria-expanded', String(opened));
       });
-      document.querySelectorAll('[data-modal]').forEach(function (button) {
-        button.addEventListener('click', function () {
-          var topic = sections[button.getAttribute('data-modal')];
-          if (!topic) return;
-          dialogTitle.textContent = topic.title;
-          dialogBody.innerHTML = topic.html;
+      links.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
           links.classList.remove('open');
           menuButton.setAttribute('aria-expanded', 'false');
-          if (typeof dialog.showModal === 'function') dialog.showModal();
         });
       });
-      document.getElementById('modalClose').addEventListener('click', function () {dialog.close();});
-      dialog.addEventListener('click', function (event) {if (event.target === dialog) dialog.close();});
+      // Close the mobile menu after tapping outside the navigation.
+      document.addEventListener('click', function (event) {
+        if (!event.target.closest('.topbar') && links.classList.contains('open')) {
+          links.classList.remove('open');
+          menuButton.setAttribute('aria-expanded', 'false');
+        }
+      });
 
       // A gentle backend health check retains the original landing page's wake-up behaviour.
       var api = window.APP_CONFIG && window.APP_CONFIG.API_BASE_URL;
