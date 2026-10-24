@@ -96,35 +96,31 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(-
  .market-card svg{display:none}
  .login-right{padding:35px 30px}
 }
+/* On phones and tablets, the authentication form is the primary content.
+   The desktop marketing panel is intentionally hidden at these widths. */
 @media(max-width:800px){
  body{padding:12px;align-items:flex-start}
- .login-container{grid-template-columns:1fr;gap:8px;border-radius:27px;padding:8px;max-width:640px;min-height:auto}
- .login-left{min-height:0;border-radius:21px;padding:25px 28px 22px}
- .hero-copy{margin-top:21px}
- .hero-copy h1{font-size:clamp(29px,5vw,40px);margin:16px 0 9px}
- .hero-copy p{font-size:13px;max-width:440px}
- .visual-stage{display:none}
- .slideshow-container,.slide-indicators,.feature-points{display:none}
- .login-right{padding:33px 28px 38px;border-radius:21px}
- .auth-brand{display:none}
- .form-container{max-width:480px}
- .form-subtitle{margin-bottom:26px}
+ .login-container{width:min(100%,580px);grid-template-columns:minmax(0,1fr);gap:0;padding:8px;border-radius:27px;min-height:0;margin-inline:auto}
+ .login-left{display:none}
+ .login-right{min-width:0;padding:36px clamp(24px,6vw,42px) 40px;border-radius:21px}
+ .form-container{max-width:460px}
+ .auth-brand{display:inline-flex;align-items:center;gap:10px;margin-bottom:28px;font-size:24px}
+ .auth-brand img{width:32px;height:32px}
+ .form-title{font-size:clamp(27px,4.6vw,35px)}
+ .form-subtitle{margin:9px 0 26px}
+ .form-options{justify-content:flex-end}
 }
 @media(max-width:480px){
- body{padding:7px}
- .login-container{padding:6px;border-radius:22px;gap:5px;box-shadow:0 10px 45px rgba(55,42,92,.13)}
- .login-left{border-radius:17px;padding:20px 19px}
- .logo{font-size:21px}.logo img{height:27px;width:27px}
- .hero-eyebrow{font-size:8px;padding:6px 9px;margin-top:0}
- .hero-copy{margin-top:14px}
- .hero-copy h1{font-size:31px}
- .hero-copy p{font-size:12px;line-height:1.55}
- .login-right{border-radius:17px;padding:27px 17px 32px}
- .form-title{font-size:27px}
+ body{padding:8px}
+ .login-container{padding:6px;border-radius:23px;box-shadow:0 10px 45px rgba(55,42,92,.13)}
+ .login-right{padding:26px 19px 36px;border-radius:18px}
+ .auth-brand{margin-bottom:29px;font-size:23px}
+ .auth-brand img{width:30px;height:30px}
+ .form-title{font-size:29px}
  .form-subtitle{font-size:12px;margin:9px 0 25px}
  .form-group{margin-bottom:16px}
  .form-input{height:50px}
- .form-options{flex-wrap:wrap;gap:8px}
+ .form-options{margin-bottom:18px}
  .otp-inputs{gap:5px}
 }
 @media(max-height:720px) and (min-width:801px){
