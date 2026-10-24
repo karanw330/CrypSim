@@ -162,12 +162,7 @@ function showForm(formName) {
 // Slideshow functionality
 const slides = document.querySelectorAll('.slide');
 const indicators = document.querySelectorAll('.indicator');
-const backgrounds = [
-    'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
-    'linear-gradient(135deg, #0f3460 0%, #0d47a1 100%)',
-    'linear-gradient(135deg, #2e1065 0%, #6a1b9a 100%)',
-    'linear-gradient(135deg, #b71c1c 0%, #d32f2f 100%)'
-];
+// Keep the pastel visual panel consistent while rotating the feature copy.
 
 let currentSlide = 0;
 const leftPanel = document.getElementById('leftPanel');
@@ -184,7 +179,7 @@ function showSlide(index) {
     setTimeout(() => {
         slides[index].classList.add('active');
         indicators[index].classList.add('active');
-        leftPanel.style.background = backgrounds[index];
+        // Visual styling stays fixed; only the feature text changes.
     }, 100);
 
     currentSlide = index;
@@ -255,7 +250,7 @@ function hideError(inputId) {
         errorElement.style.display = 'none';
         const input = document.getElementById(inputId);
         if (input) {
-            input.style.borderColor = '#3a3a4a';
+            input.style.borderColor = '';
         }
     }
 }
