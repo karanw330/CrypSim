@@ -635,17 +635,68 @@
       .hero-corner-note h1 {font-size:clamp(23px,2.65vw,32px)}
       .hero-corner-note p {font-size:11px}
     }
+    /* Mobile hero composition: cards above, particle orb centered,
+       headline below. All desktop rules remain untouched. */
     @media(max-width:700px) {
-      .hero-corner-note {left:20px;bottom:25px;gap:7px;width:min(335px,calc(100% - 40px));max-width:none}
-      .hero-corner-note h1 {font-size:clamp(26px,7vw,34px);line-height:1.07}
-      .hero-corner-note p {font-size:11px;line-height:1.5;max-width:315px}
-      .hero-corner-note .corner-eyebrow {font-size:9px}
+      .hero-journey .scene .float-card {
+        top:clamp(94px,13svh,125px);
+        bottom:auto;
+        width:calc((100% - 52px)/2);
+        max-width:190px;
+        min-height:94px;
+        padding:12px;
+        gap:6px;
+        border-radius:12px;
+      }
+      .hero-journey .scene .card-left {left:18px;right:auto}
+      .hero-journey .scene .card-right {right:18px;left:auto}
+      .hero-journey .scene .float-card .card-text {
+        font-size:clamp(10px,2.8vw,12px);
+        line-height:1.3;
+      }
+      .hero-journey .scene .float-card .card-sub {font-size:clamp(8px,2.1vw,10px)}
+      .hero-journey .scene .float-card .percent {font-size:clamp(22px,5.4vw,26px)}
+      .hero-corner-note {
+        left:20px;
+        bottom:max(22px,env(safe-area-inset-bottom));
+        width:calc(100% - 40px);
+        max-width:390px;
+        gap:8px;
+      }
+      .hero-corner-note .corner-eyebrow {font-size:10px;letter-spacing:.16em}
+      .hero-corner-note h1 {
+        font-size:clamp(29px,8.1vw,40px);
+        line-height:1.1;
+        max-width:360px;
+        text-wrap:balance;
+      }
+      .hero-corner-note p {
+        font-size:clamp(12px,3.05vw,14px);
+        line-height:1.55;
+        max-width:355px;
+        text-wrap:pretty;
+      }
       .js-3d .scene .hero-scroll-hint {display:none}
     }
     @media(max-width:380px) {
-      .hero-corner-note {bottom:18px}
-      .hero-corner-note h1 {font-size:26px}
-      .hero-corner-note p {font-size:10.5px;line-height:1.4}
+      .hero-journey .scene .float-card {
+        top:88px;
+        min-height:84px;
+        padding:10px;
+        gap:5px;
+      }
+      .hero-journey .scene .float-card .card-head span:first-child {font-size:9px}
+      .hero-journey .scene .float-card .round-arrow {width:17px;height:17px;font-size:10px}
+      .hero-corner-note {left:17px;bottom:max(16px,env(safe-area-inset-bottom));width:calc(100% - 34px);gap:6px}
+      .hero-corner-note h1 {font-size:clamp(27px,8.1vw,31px)}
+      .hero-corner-note p {font-size:11.5px;line-height:1.45}
+    }
+    @media(max-width:700px) and (max-height:590px) {
+      .hero-journey .scene .float-card {top:78px;min-height:77px;padding:9px}
+      .hero-corner-note {bottom:max(12px,env(safe-area-inset-bottom));gap:4px}
+      .hero-corner-note h1 {font-size:clamp(25px,7vw,33px)}
+      .hero-corner-note p {font-size:11px;line-height:1.35}
+      .hero-corner-note .corner-eyebrow {font-size:9px}
     }
     @media(prefers-reduced-motion:reduce) {
       #crypsim-3d {display:none}.hero-journey {height:auto!important}
