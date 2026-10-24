@@ -552,7 +552,24 @@
     }
     .js-3d .scene .topbar {position:relative;z-index:16}
     .js-3d .scene .headline,.js-3d .scene .float-card {will-change:opacity,transform}
-    .js-3d .scene .hero-scroll-hint {position:absolute;bottom:24px;left:clamp(25px,5.7vw,84px);z-index:12}
+    .js-3d .scene .hero-scroll-hint {position:absolute;bottom:42px;left:auto;right:clamp(25px,5.7vw,84px);z-index:12}
+    /* Quiet editorial note, opposite the scroll cue. */
+    .hero-corner-note {
+      position:absolute;z-index:12;left:clamp(25px,5.7vw,84px);bottom:36px;
+      display:flex;flex-direction:column;gap:10px;max-width:300px;
+      pointer-events:none;will-change:opacity,transform
+    }
+    .hero-corner-note .corner-eyebrow {
+      display:flex;align-items:center;gap:11px;font-size:10px;font-weight:700;
+      letter-spacing:.18em;color:#8dcced
+    }
+    .hero-corner-note .corner-eyebrow::before {
+      content:"";display:block;width:27px;height:1px;background:#85c9ed
+    }
+    .hero-corner-note p {
+      margin:0;font-size:clamp(12px,1.05vw,14px);
+      line-height:1.55;letter-spacing:-.01em;color:#b3c6db
+    }
     .js-3d .scene .journey-info {
       position:absolute;inset:0;z-index:11;display:block;width:100%;
       height:100%;padding:0;margin:0;overflow:visible;background:transparent;
@@ -604,6 +621,13 @@
       .js-3d .journey-info .tagline-panel h2 {font-size:clamp(40px,9.5vw,64px)}
       .js-3d .journey-info .balance-panel .capital-highlight strong {font-size:clamp(56px,12vw,94px)}
     }
+    @media(max-width:700px) {
+      .hero-corner-note {left:20px;bottom:37px;gap:5px;max-width:190px}
+      .hero-corner-note p {font-size:11px;line-height:1.45}
+      .hero-corner-note .corner-eyebrow {font-size:9px}
+      .js-3d .scene .hero-scroll-hint {right:19px;left:auto;bottom:18px;font-size:8px}
+      .js-3d .scene .hero-scroll-hint .hint-line {width:20px}
+    }
     @media(prefers-reduced-motion:reduce) {
       #crypsim-3d {display:none}.hero-journey {height:auto!important}
     }
@@ -649,6 +673,10 @@
         <div class="card-head"><span>Market data</span><span class="round-arrow" aria-hidden="true">↗</span></div>
         <div class="card-text">Real-time crypto<br>market prices</div>
         <span class="card-sub">Six supported assets</span>
+      </div>
+      <div class="hero-corner-note" aria-label="About the simulation">
+        <span class="corner-eyebrow">LEARN BY DOING</span>
+        <p>Live market data.<br>Virtual trades. Real experience.</p>
       </div>
       <div class="float-card card-right">
         <div class="card-head"><span>Practice trading</span><span class="round-arrow" aria-hidden="true">↗</span></div>
@@ -807,8 +835,8 @@
         const scene=new THREE.Scene();
         scene.background=new THREE.Color(0x000000);
         const camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,.1,100);
-        const startZ=()=>Math.max(3.45,3.05/camera.aspect);
-        camera.position.set(0,innerWidth<700?.48:.40,startZ());
+        const startZ=()=>Math.max(4.2,3.05/camera.aspect); // Keep the approved orb; frame it fully within CrypSim's headline layout.
+        camera.position.set(0,innerWidth<700?.26:.17,startZ());
         renderer=new THREE.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});
         renderer.setPixelRatio(Math.min(devicePixelRatio||1,innerWidth<700?1.5:2));
         renderer.setSize(innerWidth,innerHeight);
@@ -974,7 +1002,7 @@
           uniforms.uTime.value=t;
           uniforms.uScatter.value=starState.amount;
           camera.position.z=THREE.MathUtils.lerp(startZ(),.12,flight.amount);
-          camera.position.y=THREE.MathUtils.lerp(innerWidth<700?.48:.40,0,flight.amount);
+          camera.position.y=THREE.MathUtils.lerp(innerWidth<700?.26:.17,0,flight.amount);
           const calm=1-starState.amount;
           orb.rotation.y+=((mouse.x*.12+Math.sin(t*.15)*.09)*calm-orb.rotation.y)*.018;
           orb.rotation.x+=((-mouse.y*.10+Math.sin(t*.1)*.05)*calm-orb.rotation.x)*.018;
@@ -993,7 +1021,7 @@
             }
           }
         });
-        timeline.to([hero.querySelector('.headline'),...hero.querySelectorAll('.float-card'),hint],
+        timeline.to([hero.querySelector('.headline'),...hero.querySelectorAll('.float-card'),hero.querySelector('.hero-corner-note'),hint],
                     {autoAlpha:0,y:-28,duration:.16},.06)
           .to(flight,{amount:.45,duration:.26},.10)
           .to(flight,{amount:.80,duration:.27},.38)
