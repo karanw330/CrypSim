@@ -536,6 +536,16 @@
       .star-drift.medium {opacity:.41}
       .star-drift.distant {opacity:.23}
     }
+
+    /* The liquid orb is an independent animated SVG now — no canvas or JS rendering. */
+    .orb {
+      background:none;
+      box-shadow:none;
+      overflow:visible;
+      border-radius:0;
+    }
+    .orb::before,.orb::after {content:none}
+    .orb img {display:block;width:100%;height:100%;object-fit:contain}
   </style>
 </head>
 <body>
@@ -569,7 +579,7 @@
         <a class="start" href="./login_page.html">Start Trading</a>
       </div>
       <div class="orb-light" aria-hidden="true"></div>
-      <div class="orb" id="orb" aria-hidden="true"><canvas id="orbCanvas"></canvas></div>
+      <div class="orb" id="orb" aria-hidden="true"><img src="./img/liquid-orb.svg" width="900" height="900" alt="" decoding="async"></div>
       <div class="float-card card-left">
         <div class="card-head"><span>Market data</span><span class="round-arrow" aria-hidden="true">↗</span></div>
         <div class="card-text">Real-time crypto<br>market prices</div>
@@ -779,89 +789,6 @@
         else ping();
       }
 
-      // Lightweight, self-contained WebGL animation; gradients above remain as fallback.
-      var canvas = document.getElementById('orbCanvas');
-      var orb = document.getElementById('orb');
-      var gl;
-      try { gl = canvas.getContext('webgl', {alpha:true,antialias:false,depth:false,preserveDrawingBuffer:false}); } catch (_) {}
-      if (!gl) return;
-      var vertex = 'attribute vec2 position; void main(){gl_Position=vec4(position,0.0,1.0);}';
-      var fragment = [
-        'precision mediump float;',
-        'uniform vec2 resolution;',
-        'uniform float time;',
-        'float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
-        'float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),f.x),f.y);}',
-        'float fbm(vec2 p){float f=0.,a=.5;for(int i=0;i<4;i++){f+=a*noise(p);p=p*2.02+vec2(7.2,3.1);a*=.5;}return f;}',
-        'void main(){',
-        'vec2 p=(gl_FragCoord.xy-.5*resolution)/min(resolution.x,resolution.y)*2.;',
-        'float r=length(p);if(r>1.)discard;',
-        'float z=sqrt(max(0.,1.-r*r));',
-        'float t=time*.23;',
-        'vec2 q=p*1.27;',
-        'float swirl=fbm(q*1.26+vec2(t*.25,-t*.17));',
-        'vec2 bend=q+vec2(.35*sin(q.y*2.9+t*.5),.33*cos(q.x*2.65-t*.38));',
-        'float wave=sin(bend.y*8.1+bend.x*3.5+2.9*sin(bend.x*2.7+t*.52)+swirl*5.4+t);',
-        'float band=smoothstep(.05,.75,wave);',
-        'float fine=smoothstep(.5,.95,sin(bend.y*14.+bend.x*5.2+swirl*4.5-t*.4));',
-        'vec3 navy=vec3(.008,.027,.051);',
-        'vec3 ink=vec3(.018,.09,.145);',
-        'vec3 teal=vec3(.025,.37,.48);',
-        'vec3 silver=vec3(.33,.83,.88);',
-        'vec3 color=mix(navy,ink,.35+.65*swirl);',
-        'color=mix(color,teal,band*.72);',
-        'color=mix(color,silver,fine*band*.46);',
-        'float darkPool=smoothstep(.38,.70,fbm(bend*1.05+vec2(5.,-2.)));',
-        'color=mix(color,navy,darkPool*.55);',
-        'vec3 n=normalize(vec3(p,z));',
-        'float light=clamp(dot(n,normalize(vec3(-.47,.75,.80))),0.,1.);',
-        'color*=.54+.5*light;',
-        'float rim=pow(1.-z,4.);',
-        'color+=vec3(.18,.61,.71)*rim*.68;',
-        'color+=vec3(.42,.88,.95)*smoothstep(.973,1.,r)*.8;',
-        'float spec=pow(max(dot(reflect(normalize(vec3(.35,-.8,-.9)),n),normalize(vec3(-.22,.47,1.))),0.),35.);',
-        'color+=vec3(.7,.96,1.)*spec*.42;',
-        'gl_FragColor=vec4(color,1.);',
-        '}'
-      ].join('\n');
-      function shader(type, source) {
-        var s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);
-        if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)) {gl.deleteShader(s);return null;}
-        return s;
-      }
-      var vs=shader(gl.VERTEX_SHADER,vertex),fs=shader(gl.FRAGMENT_SHADER,fragment);
-      if(!vs||!fs)return;
-      var program=gl.createProgram();
-      gl.attachShader(program,vs);gl.attachShader(program,fs);gl.linkProgram(program);
-      if(!gl.getProgramParameter(program,gl.LINK_STATUS))return;
-      gl.useProgram(program);
-      var buffer=gl.createBuffer();
-      gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
-      gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
-      var position=gl.getAttribLocation(program,'position');
-      gl.enableVertexAttribArray(position);gl.vertexAttribPointer(position,2,gl.FLOAT,false,0,0);
-      var resolution=gl.getUniformLocation(program,'resolution'),clock=gl.getUniformLocation(program,'time');
-      var motion=window.matchMedia('(prefers-reduced-motion: reduce)');
-      var visible=true,frame=0,last=0;
-      function render(ms) {
-        if (!visible) return;
-        if(ms-last>42 || motion.matches) {
-          last=ms;
-          var size=Math.min(560,Math.max(256,Math.round(orb.clientWidth*.7)));
-          if(canvas.width!==size||canvas.height!==size){canvas.width=canvas.height=size;gl.viewport(0,0,size,size);}
-          gl.uniform2f(resolution,size,size);
-          gl.uniform1f(clock,motion.matches?0:ms*.001);
-          gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
-          orb.classList.add('animated');
-        }
-        if(!motion.matches)frame=requestAnimationFrame(render);
-      }
-      if (document.visibilityState==='visible')frame=requestAnimationFrame(render);
-      document.addEventListener('visibilitychange',function(){
-        visible=document.visibilityState==='visible';
-        cancelAnimationFrame(frame);
-        if(visible)frame=requestAnimationFrame(render);
-      });
     })();
   </script>
 </body>

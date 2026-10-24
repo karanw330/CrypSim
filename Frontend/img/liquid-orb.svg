@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="900" height="900" viewBox="0 0 900 900" role="img"
+     aria-label="Animated teal liquid-glass sphere">
+  <defs>
+    <clipPath id="sphere-clip"><circle cx="450" cy="450" r="438"/></clipPath>
+    <radialGradient id="deep-ocean" cx="45%" cy="25%" r="77%">
+      <stop offset="0" stop-color="#153e55"/>
+      <stop offset=".26" stop-color="#062335"/>
+      <stop offset=".59" stop-color="#020b19"/>
+      <stop offset=".81" stop-color="#09283a"/>
+      <stop offset="1" stop-color="#56bfd2"/>
+    </radialGradient>
+    <radialGradient id="sea-refraction" cx="24%" cy="27%" r="80%">
+      <stop offset="0" stop-color="#affbff" stop-opacity=".67"/>
+      <stop offset=".24" stop-color="#57deed" stop-opacity=".39"/>
+      <stop offset=".58" stop-color="#155d7e" stop-opacity=".20"/>
+      <stop offset="1" stop-color="#010a16" stop-opacity=".84"/>
+    </radialGradient>
+    <linearGradient id="glass-blue" x1="0" y1="0" x2=".95" y2="1">
+      <stop offset="0" stop-color="#b5ffff"/>
+      <stop offset=".12" stop-color="#53d6ec"/>
+      <stop offset=".36" stop-color="#0e5a81"/>
+      <stop offset=".58" stop-color="#081e37"/>
+      <stop offset=".81" stop-color="#1c7f9c"/>
+      <stop offset="1" stop-color="#7ce8e7"/>
+    </linearGradient>
+    <linearGradient id="glass-cyan" x1="0" y1="0" x2=".78" y2="1">
+      <stop offset="0" stop-color="#c5ffff"/>
+      <stop offset=".13" stop-color="#58d7e8"/>
+      <stop offset=".33" stop-color="#226c94"/>
+      <stop offset=".53" stop-color="#041b34"/>
+      <stop offset=".77" stop-color="#0c3752"/>
+      <stop offset=".96" stop-color="#80dadd"/>
+    </linearGradient>
+    <linearGradient id="glass-shadow" x1="0" y1="0" x2="1" y2=".8">
+      <stop offset="0" stop-color="#00101c"/>
+      <stop offset=".22" stop-color="#021020"/>
+      <stop offset=".57" stop-color="#030713"/>
+      <stop offset=".83" stop-color="#071d31"/>
+      <stop offset="1" stop-color="#17536e"/>
+    </linearGradient>
+    <linearGradient id="surface-ribbon" x1=".07" y1="0" x2=".93" y2="1">
+      <stop offset="0" stop-color="#e7ffff" stop-opacity=".86"/>
+      <stop offset=".17" stop-color="#83e9f0" stop-opacity=".85"/>
+      <stop offset=".42" stop-color="#3490b3" stop-opacity=".35"/>
+      <stop offset=".67" stop-color="#050f24" stop-opacity=".03"/>
+      <stop offset="1" stop-color="#63d5e6" stop-opacity=".75"/>
+    </linearGradient>
+    <radialGradient id="glass-rim" cx="51%" cy="31%" r="69%">
+      <stop offset="0" stop-color="#9ceaf1" stop-opacity="0"/>
+      <stop offset=".72" stop-color="#83eaff" stop-opacity="0"/>
+      <stop offset=".9" stop-color="#83f1ff" stop-opacity=".16"/>
+      <stop offset=".98" stop-color="#a2f7ff" stop-opacity=".56"/>
+      <stop offset="1" stop-color="#c6ffff" stop-opacity=".79"/>
+    </radialGradient>
+    <radialGradient id="inner-darkness" cx="55%" cy="45%" r="61%">
+      <stop offset="0" stop-color="#000a15" stop-opacity=".20"/>
+      <stop offset=".56" stop-color="#000711" stop-opacity=".11"/>
+      <stop offset="1" stop-color="#010816" stop-opacity=".67"/>
+    </radialGradient>
+    <linearGradient id="lightning-stroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e3ffff" stop-opacity=".04"/>
+      <stop offset=".25" stop-color="#aafcff" stop-opacity=".95"/>
+      <stop offset=".6" stop-color="#43d3e6" stop-opacity=".30"/>
+      <stop offset="1" stop-color="#d4ffff" stop-opacity=".04"/>
+    </linearGradient>
+    <radialGradient id="top-shine" cx="46%" cy="10%" r="56%">
+      <stop offset="0" stop-color="#e4ffff" stop-opacity=".43"/>
+      <stop offset=".34" stop-color="#befcff" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#ccffff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="fluid-warp" x="-13%" y="-13%" width="126%" height="126%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency=".0065 .010" numOctaves="2" seed="7" result="flow"/>
+      <feDisplacementMap in="SourceGraphic" in2="flow" scale="22" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="gentle-blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="9"/></filter>
+    <filter id="large-glow" x="-65%" y="-65%" width="230%" height="230%"><feGaussianBlur stdDeviation="23"/></filter>
+    <style>
+      .liquid-one {transform-origin:450px 450px;animation:float-one 21s ease-in-out infinite alternate;}
+      .liquid-two {transform-origin:450px 450px;animation:float-two 27s ease-in-out infinite alternate;}
+      .liquid-three {transform-origin:450px 450px;animation:float-three 35s ease-in-out infinite alternate;}
+      .glint {transform-origin:450px 450px;animation:glint-move 19s ease-in-out infinite alternate;}
+      @keyframes float-one {from {transform:translate(-17px,7px) rotate(-5deg)}to {transform:translate(24px,-12px) rotate(8deg)}}
+      @keyframes float-two {from {transform:translate(22px,-16px) rotate(7deg)}to {transform:translate(-23px,18px) rotate(-9deg)}}
+      @keyframes float-three {from {transform:translate(-10px,-8px) rotate(5deg)}to {transform:translate(15px,17px) rotate(-6deg)}}
+      @keyframes glint-move {from {transform:translate(-12px,-4px) rotate(-2deg);opacity:.66}to {transform:translate(14px,8px) rotate(3deg);opacity:.92}}
+      @media (prefers-reduced-motion:reduce) {
+        .liquid-one,.liquid-two,.liquid-three,.glint {animation:none!important}
+      }
+    </style>
+  </defs>
+  <g clip-path="url(#sphere-clip)">
+    <circle cx="450" cy="450" r="438" fill="url(#deep-ocean)"/>
+    <ellipse cx="278" cy="190" rx="393" ry="365" fill="url(#sea-refraction)" opacity=".93"/>
+    <g filter="url(#fluid-warp)">
+      <g class="liquid-one">
+        <path d="M-145 193C-29 104 93-15 235 50C346 102 290 216 394 216C511 216 558 47 710 89C811 117 875 209 1044 161L1025 388C902 500 784 424 679 360C572 296 517 375 453 421C319 515 276 343 162 359C44 375-48 511-138 461Z" fill="url(#glass-blue)"/>
+        <path d="M-158 175C-2 69 117-10 249 52C346 98 305 211 391 221C515 238 574 66 711 99C789 119 865 207 1010 180" fill="none" stroke="url(#surface-ribbon)" stroke-width="32" opacity=".75"/>
+        <path d="M-80 218C61 128 138 57 259 106C326 134 321 253 416 250C538 245 584 109 727 136" fill="none" stroke="#a0f8ff" stroke-width="8" opacity=".48" filter="url(#gentle-blur)"/>
+      </g>
+      <g class="liquid-two">
+        <path d="M-110 502C11 320 106 313 222 385C311 443 319 581 442 556C582 524 575 399 702 387C839 375 870 463 1027 418L1014 736C869 756 801 597 652 649C516 697 487 800 369 746C257 695 251 562 133 588C33 611-16 682-106 740Z" fill="url(#glass-shadow)" opacity=".96"/>
+        <path d="M-130 543C18 363 114 332 242 420C354 497 359 597 459 559C580 512 612 419 726 410C855 398 934 487 1015 433" fill="none" stroke="#63d9e9" stroke-width="29" opacity=".56" filter="url(#gentle-blur)"/>
+        <path d="M-124 527C34 343 102 343 229 419C318 473 362 603 467 549C595 487 615 420 729 407" fill="none" stroke="url(#lightning-stroke)" stroke-width="11" opacity=".75"/>
+      </g>
+      <g class="liquid-three">
+        <path d="M-100 726C35 632 143 665 265 728C379 788 446 706 532 676C665 629 719 704 849 666C959 634 1035 731 1072 797L972 1030H-85Z" fill="url(#glass-cyan)" opacity=".88"/>
+        <path d="M-93 757C20 664 148 687 263 745C381 805 442 733 531 698C668 644 726 727 855 680" fill="none" stroke="#a8f9ff" stroke-width="16" opacity=".57" filter="url(#gentle-blur)"/>
+      </g>
+    </g>
+    <ellipse cx="523" cy="464" rx="350" ry="343" fill="url(#inner-darkness)" opacity=".44"/>
+    <g class="glint">
+      <path d="M109 248C153 150 253 72 375 56C482 43 588 83 640 126" fill="none" stroke="#b8ffff" stroke-width="27" stroke-linecap="round" opacity=".18" filter="url(#large-glow)"/>
+      <path d="M117 229C159 136 250 77 347 60C435 44 525 59 594 93" fill="none" stroke="url(#lightning-stroke)" stroke-width="8" stroke-linecap="round" opacity=".72"/>
+      <path d="M159 244C191 173 277 116 341 107" fill="none" stroke="#d4ffff" stroke-width="4" stroke-linecap="round" opacity=".35"/>
+    </g>
+    <circle cx="450" cy="450" r="438" fill="url(#top-shine)" opacity=".55"/>
+    <circle cx="450" cy="450" r="438" fill="url(#glass-rim)"/>
+    <circle cx="450" cy="450" r="429" fill="none" stroke="#a7f4ff" stroke-width="5" opacity=".20"/>
+    <path d="M83 214C164 80 304 20 448 18C625 15 737 114 785 202" fill="none" stroke="#e5ffff" stroke-width="8" stroke-linecap="round" opacity=".36" filter="url(#gentle-blur)"/>
+    <path d="M105 224C177 91 319 28 449 27C584 26 722 98 774 204" fill="none" stroke="#b5f8ff" stroke-width="3.2" stroke-linecap="round" opacity=".7"/>
+    <path d="M98 639C150 776 299 866 450 871C632 881 739 789 805 675" fill="none" stroke="#8feeff" stroke-width="5" opacity=".27" filter="url(#gentle-blur)"/>
+    <ellipse cx="348" cy="111" rx="173" ry="38" transform="rotate(-16 348 111)" fill="#e8ffff" opacity=".08" filter="url(#gentle-blur)"/>
+  </g>
+</svg>
