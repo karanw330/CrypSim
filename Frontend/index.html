@@ -1,393 +1,327 @@
 <!DOCTYPE html>
-<html class="dark" lang="en">
-
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>CrypSim | Master the Crypto Market Risk-Free</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet" />
-    <script src="js/config.js"></script>
-    <script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#256af4",
-                        "accent-purple": "#a855f7",
-                        "background-light": "#f5f6f8",
-                        "background-dark": "#0a0c10",
-                        "glass-border": "rgba(255, 255, 255, 0.1)",
-                    },
-                    fontFamily: {
-                        "display": ["Space Grotesk", "sans-serif"]
-                    },
-                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
-                },
-            },
-        }
-    </script>
-    <style>
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .glow-blue {
-            box-shadow: 0 0 40px -10px rgba(37, 106, 244, 0.3);
-        }
-
-        .text-gradient {
-            background: linear-gradient(to right, #ffffff, #256af4, #a855f7);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-gradient {
-            background: radial-gradient(circle at 50% 50%, rgba(37, 106, 244, 0.15) 0%, rgba(10, 12, 16, 0) 70%);
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #0a0c10;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-    </style>
-</head>
-
-<body
-    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 selection:bg-primary/30">
-    <div class="relative min-h-screen overflow-x-hidden">
-        <!-- Decorative Background Glows -->
-        <div
-            class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 rounded-full blur-[120px] pointer-events-none">
-        </div>
-        <div
-            class="absolute bottom-[20%] right-[-5%] w-[30%] h-[30%] bg-accent-purple/10 rounded-full blur-[100px] pointer-events-none">
-        </div>
-
-        <!-- Navigation Bar -->
-        <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4">
-            <div
-                class="max-w-7xl mx-auto flex items-center justify-between glass-panel rounded-2xl px-8 py-3 border-white/5">
-                <div class="flex items-center gap-2 cursor-pointer"
-                    onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-                    <img src="img/favicon.png" alt="CrypSim Logo" class="size-8" />
-                    <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">CrypSim</span>
-                </div>
-                <div class="hidden md:flex items-center gap-10">
-                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#features">Features</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors" target="_blank"
-                        href="https://github.com/karanw330/CrypSim">Documentation</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Marketplace</a>
-                </div>
-                <div class="flex items-center gap-4">
-                    <!-- Backend Status Indicator -->
-                    <div class="hidden lg:flex items-center gap-2 mr-4 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
-                        <div id="backend-status" class="size-2 rounded-full bg-red-500 animate-pulse transition-all duration-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]"></div>
-                        <span id="backend-text" class="text-[9px] font-bold uppercase tracking-widest text-slate-400">Waking up Render...</span>
-                    </div>
-                    <a href="login_page.html"
-                        class="hidden sm:block text-sm font-medium px-4 py-2 hover:text-primary transition-colors">Log
-                        In</a>
-                    <a href="login_page.html"
-                        class="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-xl text-sm font-bold glow-blue transition-all">
-                        Sign In
-                    </a>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Hero Section -->
-        <main class="relative pt-32 pb-20 px-6">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <!-- Left Content -->
-                <div class="flex flex-col gap-8">
-                    <div
-                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 w-fit">
-                        <span class="flex size-2 rounded-full bg-primary animate-pulse"></span>
-                        <span class="text-xs font-bold uppercase tracking-widest text-primary">V1.0 Live Preview</span>
-                    </div>
-                    <h1 class="text-5xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-gradient">
-                        Master the Market <br /> Without the Risk
-                    </h1>
-                    <p class="text-lg text-slate-600 dark:text-slate-400 max-w-xl leading-relaxed">
-                        Experience ultra-realistic crypto trading with real-time market data. Build your strategies,
-                        track performance, and compete with traders globally using zero real capital.
-                    </p>
-                    <div class="flex flex-wrap gap-4 mt-4">
-                        <a href="login_page.html"
-                            class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl font-bold text-lg glow-blue transition-all flex items-center gap-2 inline-flex">
-                            Start Trading Free
-                            <span class="material-symbols-outlined">trending_up</span>
-                        </a>
-                        <a href="#features"
-                            class="glass-panel px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/5 transition-all inline-flex items-center justify-center">
-                            View Demo
-                        </a>
-                    </div>
-
-                </div>
-
-                <!-- Right Content (Visual) -->
-                <div class="relative">
-                    <div
-                        class="relative z-10 glass-panel rounded-3xl p-6 border-white/10 glow-blue overflow-hidden hover:scale-[1.02] transition-transform duration-500 cursor-default">
-                        <!-- Dashboard Mockup Header -->
-                        <div class="flex items-center justify-between mb-8">
-                            <div class="flex gap-2">
-                                <div class="size-3 rounded-full bg-red-500/50"></div>
-                                <div class="size-3 rounded-full bg-yellow-500/50"></div>
-                                <div class="size-3 rounded-full bg-green-500/50"></div>
-                            </div>
-                            <div class="text-xs text-slate-500 font-mono">CRYSIM-DASHBOARD-V1</div>
-                        </div>
-                        <div class="grid grid-cols-3 gap-4 mb-6">
-                            <div class="col-span-2 glass-panel rounded-xl p-4 bg-white/5">
-                                <p class="text-[10px] uppercase text-slate-500 mb-1">Portfolio Balance</p>
-                                <p class="text-2xl font-bold">$124,592.40</p>
-                                <div class="h-24 mt-4 flex items-end gap-1">
-                                    <div class="w-full bg-primary/20 rounded-t-sm hover:bg-primary/40 transition-colors cursor-pointer"
-                                        style="height: 40%"></div>
-                                    <div class="w-full bg-primary/30 rounded-t-sm hover:bg-primary/50 transition-colors cursor-pointer"
-                                        style="height: 60%"></div>
-                                    <div class="w-full bg-primary/40 rounded-t-sm hover:bg-primary/60 transition-colors cursor-pointer"
-                                        style="height: 45%"></div>
-                                    <div class="w-full bg-primary/50 rounded-t-sm hover:bg-primary/70 transition-colors cursor-pointer"
-                                        style="height: 75%"></div>
-                                    <div class="w-full bg-primary/60 rounded-t-sm hover:bg-primary/80 transition-colors cursor-pointer"
-                                        style="height: 90%"></div>
-                                    <div class="w-full bg-primary/80 rounded-t-sm hover:bg-primary transition-colors cursor-pointer"
-                                        style="height: 100%"></div>
-                                </div>
-                            </div>
-                            <div
-                                class="glass-panel rounded-xl p-4 bg-white/5 flex flex-col justify-center items-center text-center">
-                                <div class="size-16 rounded-full border-4 border-primary border-t-accent-purple animate-spin"
-                                    style="animation-duration: 3s;"></div>
-                                <p class="text-[10px] mt-2 uppercase text-slate-500">Allocation</p>
-                            </div>
-                        </div>
-                        <div class="space-y-3">
-                            <div
-                                class="flex items-center justify-between p-3 rounded-lg bg-white/5 border border-white/5 hover:bg-white/10 transition-colors cursor-pointer">
-                                <div class="flex items-center gap-3">
-                                    <div
-                                        class="size-8 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-500 font-bold text-xs">
-                                        BTC</div>
-                                    <span class="text-sm font-medium">Bitcoin</span>
-                                </div>
-                                <div class="text-right">
-                                    <p class="text-sm font-bold">$64,231.00</p>
-                                    <p class="text-[10px] text-green-500 font-bold">+2.4%</p>
-                                </div>
-                            </div>
-                            <div
-                                class="flex items-center justify-between p-3 rounded-lg bg-white/5 border border-white/5 hover:bg-white/10 transition-colors cursor-pointer">
-                                <div class="flex items-center gap-3">
-                                    <div
-                                        class="size-8 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-500 font-bold text-xs">
-                                        ETH</div>
-                                    <span class="text-sm font-medium">Ethereum</span>
-                                </div>
-                                <div class="text-right">
-                                    <p class="text-sm font-bold">$3,412.12</p>
-                                    <p class="text-[10px] text-red-500 font-bold">-0.8%</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Decorative floating elements -->
-                    <div class="absolute -top-6 -right-6 size-24 glass-panel rounded-2xl flex flex-col items-center justify-center border-primary/30 z-20 animate-bounce"
-                        style="animation-duration: 4s;">
-                        <span class="material-symbols-outlined text-primary">auto_graph</span>
-                        <span class="text-[10px] font-bold mt-1">ROI +12%</span>
-                    </div>
-                    <div
-                        class="absolute -bottom-4 -left-8 size-20 glass-panel rounded-full flex items-center justify-center border-accent-purple/30 z-20 animate-pulse">
-                        <span class="material-symbols-outlined text-accent-purple">shield</span>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <!-- Features Section -->
-        <section id="features" class="py-24 px-6 relative">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl lg:text-5xl font-bold mb-4">Advanced Trading Features</h2>
-                    <p class="text-slate-400 max-w-2xl mx-auto">Everything you need to master crypto trading in a
-                        risk-free environment with professional-grade tools.</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Feature Card 1 -->
-                    <div
-                        class="group relative p-8 glass-panel rounded-3xl border-white/5 hover:border-primary/50 transition-all overflow-hidden">
-                        <div
-                            class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity">
-                        </div>
-                        <div class="relative z-10">
-                            <div
-                                class="size-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary/20 transition-all">
-                                <span class="material-symbols-outlined text-primary text-3xl">bolt</span>
-                            </div>
-                            <h3 class="text-xl font-bold mb-3">Real-time Execution</h3>
-                            <p class="text-slate-400 leading-relaxed">Execute orders with zero latency. Our engine
-                                mirrors live exchange order books for authentic simulation.</p>
-                        </div>
-                        <div
-                            class="absolute bottom-4 right-8 opacity-0 group-hover:opacity-100 transition-opacity translate-y-4 group-hover:translate-y-0 duration-300">
-                            <span class="material-symbols-outlined text-primary/30 text-4xl">speed</span>
-                        </div>
-                    </div>
-                    <!-- Feature Card 2 -->
-                    <div
-                        class="group relative p-8 glass-panel rounded-3xl border-white/5 hover:border-accent-purple/50 transition-all overflow-hidden">
-                        <div
-                            class="absolute inset-0 bg-accent-purple/5 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity">
-                        </div>
-                        <div class="relative z-10">
-                            <div
-                                class="size-14 rounded-2xl bg-accent-purple/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-accent-purple/20 transition-all">
-                                <span class="material-symbols-outlined text-accent-purple text-3xl">bar_chart</span>
-                            </div>
-                            <h3 class="text-xl font-bold mb-3">Portfolio Analytics</h3>
-                            <p class="text-slate-400 leading-relaxed">Visualize performance with advanced charts.
-                                Deep-dive into your win rates, drawdowns, and Sharpe ratios.</p>
-                        </div>
-                        <div
-                            class="absolute bottom-4 right-8 opacity-0 group-hover:opacity-100 transition-opacity translate-y-4 group-hover:translate-y-0 duration-300">
-                            <span class="material-symbols-outlined text-accent-purple/30 text-4xl">query_stats</span>
-                        </div>
-                    </div>
-                    <!-- Feature Card 3 -->
-                    <div
-                        class="group relative p-8 glass-panel rounded-3xl border-white/5 hover:border-primary/50 transition-all overflow-hidden">
-                        <div
-                            class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity">
-                        </div>
-                        <div class="relative z-10">
-                            <div
-                                class="size-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary/20 transition-all">
-                                <span class="material-symbols-outlined text-primary text-3xl">shield</span>
-                            </div>
-                            <h3 class="text-xl font-bold mb-3">Risk-Free Sim</h3>
-                            <p class="text-slate-400 leading-relaxed">Start with $100k virtual capital. Test aggressive
-                                leverage or long-term hodling without losing a cent.</p>
-                        </div>
-                        <div
-                            class="absolute bottom-4 right-8 opacity-0 group-hover:opacity-100 transition-opacity translate-y-4 group-hover:translate-y-0 duration-300">
-                            <span
-                                class="material-symbols-outlined text-primary/30 text-4xl">account_balance_wallet</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="py-24 px-6 relative z-10">
-            <div
-                class="max-w-5xl mx-auto glass-panel rounded-3xl p-12 overflow-hidden relative border-white/10 glow-blue text-center">
-                <div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/20 rounded-full blur-[80px]"></div>
-                <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-accent-purple/20 rounded-full blur-[80px]"></div>
-
-                <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-white relative z-10">Ready to level up your trading?
-                </h2>
-                <p class="text-xl text-slate-300 mb-8 max-w-2xl mx-auto relative z-10">Join thousands of traders
-                    backtesting their strategies with zero risk today.</p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-                    <a href="login_page.html"
-                        class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl font-bold text-lg glow-blue transition-all flex items-center justify-center gap-2">
-                        Create Free Account
-                        <span class="material-symbols-outlined">arrow_forward</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer Section -->
-        <footer class="border-t border-white/5 mt-12 py-12 px-6">
-            <div class="max-w-7xl mx-auto flex flex-col items-center">
-                <div class="flex items-center gap-2 mb-8">
-                    <img src="img/favicon.png" alt="CrypSim Logo" class="size-6" />
-                    <span class="text-lg font-bold text-white">CrypSim</span>
-                </div>
-                <p class="text-sm text-slate-600">2026 CrypSim Technologies. Built for the future of trading.</p>
-            </div>
-        </footer>
-    </div>
-</body>
-
-<script>
-    const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-    const API_URL = window.APP_CONFIG ? APP_CONFIG.API_BASE_URL : 'http://127.0.0.1:8000';
-
-    async function checkBackend(maxRetries = 20) {
-        let attempts = 0;
-        const statusIndicator = document.getElementById('backend-status');
-        const statusText = document.getElementById('backend-text');
-
-        while (attempts < maxRetries) {
-            try {
-                const response = await fetch(`${API_URL}/ping`, {
-                    method: 'GET',
-                    headers: { 'Content-Type': 'application/json' },
-                });
-
-                if (response.ok) {
-                    console.log("Backend Connected!");
-                    statusIndicator.classList.remove('bg-red-500', 'animate-pulse');
-                    statusIndicator.classList.add('bg-green-500');
-                    statusIndicator.style.boxShadow = '0 0 10px rgba(34, 197, 94, 0.5)';
-                    statusText.textContent = 'Backend connected!';
-                    statusText.classList.remove('text-slate-400');
-                    statusText.classList.add('text-green-500');
-                    return true;
-                }
-            } catch (error) {
-                console.log('Connection failed, retrying...');
-                // Already red/pulsing by default in HTML
-            }
-
-            attempts++;
-            console.log(`Backend not ready. Attempt ${attempts}/${maxRetries}. Retrying in 5s...`);
-            await wait(5000);
-        }
-
-        if (statusText) {
-            statusText.textContent = 'Backend offline';
-            statusText.classList.add('text-red-500');
-        }
-        console.error('Max retries reached. System offline.');
-        return false;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#30334f">
+  <meta name="description" content="Practice cryptocurrency trading with virtual funds, real-time market data, advanced orders and portfolio tracking on CrypSim.">
+  <title>CrypSim | Trade Crypto Without Risk</title>
+  <link rel="icon" type="image/png" href="./img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="./js/config.js" defer></script>
+  <style>
+    :root {color-scheme:dark;--light:#f8f9ff;--muted:#b4b9c7}
+    * {box-sizing:border-box}
+    html {scroll-behavior:smooth}
+    body {margin:0;min-height:100vh;min-height:100svh;font-family:Inter,Arial,sans-serif;color:var(--light);background:radial-gradient(ellipse at 9% 0%,#474967 0%,transparent 54%),radial-gradient(ellipse at 91% 98%,#2d2942 0%,transparent 57%),linear-gradient(120deg,#373a56,#222237 66%,#282439)}
+    a {color:inherit;text-decoration:none}
+    button {font:inherit}
+    :focus-visible {outline:2px solid #a6caff;outline-offset:4px}
+    .universe {min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:35px 25px;position:relative;isolation:isolate;overflow:hidden}
+    .universe::before {content:"";position:absolute;inset:0;z-index:-1;opacity:.72;pointer-events:none;background-image:radial-gradient(1px 1px at 11% 14%,#ccd9ff 90%,transparent),radial-gradient(1px 1px at 23% 52%,#fff 90%,transparent),radial-gradient(1px 1px at 56% 22%,#d1e3ff 90%,transparent),radial-gradient(1.5px 1.5px at 88% 64%,#fff 90%,transparent);background-size:430px 390px,570px 610px,660px 490px,870px 700px}
+    .scene {width:min(1268px,100%);height:min(688px,calc(100svh - 70px));min-height:560px;position:relative;isolation:isolate;overflow:hidden;border-radius:26px;background:radial-gradient(ellipse 80% 130% at -6% -18%,rgba(65,80,138,.59),transparent 72%),radial-gradient(ellipse 50% 60% at 80% 115%,rgba(25,35,66,.21),transparent 80%),#111318;box-shadow:0 30px 85px rgba(6,8,26,.24)}
+    .scene::after {content:"";position:absolute;inset:0;z-index:10;border-radius:inherit;border:1px solid rgba(207,227,255,.06);pointer-events:none}
+    .scene-stars {position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(1px 1px at 12% 38%,#e4f0ff 90%,transparent),radial-gradient(1px 1px at 24% 23%,#fff 90%,transparent),radial-gradient(1px 1px at 31% 63%,#b6d2ff 90%,transparent),radial-gradient(1px 1px at 67% 58%,#e4f0ff 90%,transparent),radial-gradient(1px 1px at 82% 28%,#e4f0ff 90%,transparent),radial-gradient(1px 1px at 92% 71%,#e4f0ff 90%,transparent);background-size:440px 330px,610px 360px,520px 470px,630px 420px,440px 420px,560px 540px;opacity:.54}
+    .topbar {height:77px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:22px;padding:0 clamp(27px,10.9%,139px);position:relative;z-index:7}
+    .brand {display:inline-flex;align-items:center;gap:10px;white-space:nowrap;font-size:17px;font-weight:600;letter-spacing:-.035em;width:max-content}
+    .brand img {display:block;width:31px;height:31px;object-fit:contain}
+    .links {display:flex;align-items:center;gap:33px;white-space:nowrap}
+    .links a,.links button {cursor:pointer;border:0;background:transparent;color:#e3e4eb;padding:10px 0;font-size:12px;font-weight:400;transition:color .2s}
+    .links a:hover,.links button:hover {color:#91d5f1}
+    .nav-actions {display:flex;align-items:center;gap:9px;justify-content:flex-end}
+    .pill {display:inline-flex;justify-content:center;align-items:center;border-radius:99px;padding:11px 18px;font-weight:500;font-size:12px;white-space:nowrap;transition:transform .18s ease,background-color .18s ease}
+    .pill:hover {transform:translateY(-2px)}
+    .pill-muted {background:rgba(255,255,255,.06);color:#fff}
+    .pill-muted:hover {background:rgba(255,255,255,.15)}
+    .pill-primary {background:#fff;color:#171820}
+    .pill-primary:hover {background:#e6f5ff}
+    .mobile-menu {display:none;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.07);color:#fff;border-radius:11px;padding:8px;cursor:pointer}
+    .mobile-menu svg {display:block}
+    .headline {position:relative;z-index:5;text-align:center;padding:28px 18px 0}
+    .headline h1 {margin:4px auto 0;font-size:clamp(37px,3.7vw,49px);font-weight:600;line-height:1.08;letter-spacing:-.06em}
+    .accent {background:linear-gradient(95deg,#9ae1ff 0%,#839dff 47%,#b990ea 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .headline p {max-width:490px;margin:34px auto 0;color:var(--muted);font-size:12px;line-height:1.65}
+    .start {display:inline-flex;align-items:center;justify-content:center;min-width:132px;margin-top:33px;padding:12px 20px;background:white;color:#16181f;border-radius:99px;font-size:12px;font-weight:600;position:relative;z-index:6;box-shadow:0 9px 21px rgba(228,241,255,.08);transition:transform .2s,box-shadow .2s}
+    .start:hover {transform:translateY(-2px);box-shadow:0 9px 29px rgba(228,241,255,.18)}
+    .orb-light {position:absolute;width:min(790px,68%);aspect-ratio:1;top:49%;left:50%;transform:translateX(-50%);background:radial-gradient(circle at 50% 45%,transparent 49%,rgba(42,179,220,.2) 68%,transparent 90%);filter:blur(27px);border-radius:50%;z-index:0;pointer-events:none}
+    .orb {position:absolute;width:min(790px,68%);aspect-ratio:1;top:49%;left:50%;transform:translateX(-50%);overflow:hidden;border-radius:50%;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 60% 14%,rgba(163,246,255,.85),transparent 20%),radial-gradient(ellipse at 26% 44%,#2b9cb8,transparent 42%),radial-gradient(circle at 55% 55%,#030810 29%,#071c29 66%,#5db8c9 95%);box-shadow:inset -25px 5px 39px rgba(0,7,16,.72),inset 12px -16px 34px rgba(49,203,230,.26),0 -5px 16px rgba(94,201,237,.17)}
+    .orb canvas {display:block;width:100%;height:100%;opacity:0;transition:opacity .8s}
+    .orb.animated canvas {opacity:1}
+    .orb::after {content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 47% 3%,rgba(210,255,255,.15),transparent 18%),radial-gradient(circle at 5% 45%,rgba(60,222,230,.13),transparent 38%);box-shadow:inset 0 4px 7px rgba(97,235,249,.3),inset 14px -17px 35px rgba(1,9,19,.68)}
+    .float-card {position:absolute;z-index:4;width:184px;min-height:100px;padding:15px 16px 13px;border:1px solid rgba(185,211,235,.12);background:linear-gradient(126deg,rgba(51,67,84,.44),rgba(19,23,31,.75) 76%);backdrop-filter:blur(17px);-webkit-backdrop-filter:blur(17px);border-radius:16px;display:flex;flex-direction:column;justify-content:space-between;gap:7px;box-shadow:0 12px 30px rgba(0,0,0,.11)}
+    .card-left {left:19%;top:61%}
+    .card-right {right:19%;top:73%}
+    .card-head {display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+    .card-head span:first-child {font-size:10px;line-height:1.35}
+    .round-arrow {width:19px;height:19px;flex-shrink:0;display:grid;place-items:center;background:#fff;color:#10131b;border-radius:50%;font-size:12px;font-weight:700}
+    .card-text {font-size:12px;line-height:1.25;font-weight:500;letter-spacing:-.015em}
+    .card-sub {font-size:9px;color:#aab5c2}
+    .percent {font-size:25px;font-weight:600;line-height:1;letter-spacing:-.045em}
+    .mini-progress {height:3px;margin-top:7px;background:rgba(255,255,255,.12);border-radius:100px;overflow:hidden}
+    .mini-progress::before {content:"";display:block;width:100%;height:100%;background:#e5f9ff;border-radius:inherit}
+    .card-bottom {display:flex;align-items:end;justify-content:space-between;gap:8px}
+    .about-modal {width:min(450px,calc(100vw - 32px));max-height:calc(100svh - 30px);overflow:auto;border-radius:20px;border:1px solid rgba(193,210,251,.26);padding:30px;background:#181d2b;color:#f7f9ff;box-shadow:0 24px 65px rgba(0,0,0,.45);font-family:inherit}
+    .about-modal::backdrop {background:rgba(5,8,17,.7);backdrop-filter:blur(5px)}
+    .about-modal h2 {font-weight:600;letter-spacing:-.03em;font-size:22px;margin:0 0 17px}
+    .about-modal p,.about-modal li {color:#bec8d6;font-size:13px;line-height:1.75}
+    .about-modal ul {padding-left:19px}
+    .about-modal a {color:#99d8ff;text-decoration:underline}
+    .modal-close {position:absolute;right:12px;top:12px;background:rgba(255,255,255,.08);color:#fff;border:0;border-radius:50%;height:32px;width:32px;cursor:pointer;font-size:18px}
+    .connection-note {font-size:11px!important;color:#93a0b5!important}
+    .connection-dot {display:inline-block;width:7px;height:7px;border-radius:50%;background:#7c8291;margin-right:7px}
+    .connection-dot.online {background:#47ceac}
+    @media (max-width:990px) {
+      .topbar {padding:0 40px}
+      .links {gap:24px}
+      .card-left {left:10%}
+      .card-right {right:10%}
+      .orb,.orb-light {width:78%}
     }
+    @media (max-width:700px) {
+      .universe {padding:12px;align-items:flex-start}
+      .scene {height:min(770px,calc(100svh - 24px));min-height:660px;border-radius:22px}
+      .topbar {grid-template-columns:1fr auto auto;gap:10px;height:69px;padding:0 21px}
+      .brand {font-size:16px;gap:7px}
+      .brand img {height:26px;width:26px}
+      .nav-actions {gap:5px}
+      .pill {min-width:0;padding:10px 12px;font-size:11px}
+      .mobile-menu {display:grid;place-items:center}
+      .links {display:none;position:absolute;top:63px;left:18px;right:18px;flex-direction:column;align-items:stretch;gap:0;padding:8px 15px;border-radius:15px;border:1px solid rgba(255,255,255,.16);background:rgba(18,24,39,.97);box-shadow:0 15px 30px rgba(0,0,0,.3)}
+      .links.open {display:flex}
+      .links a,.links button {padding:12px 7px;font-size:13px;text-align:left}
+      .headline {padding:64px 14px 0}
+      .headline h1 {font-size:clamp(31px,8vw,43px)}
+      .headline p {margin-top:23px;font-size:12px;max-width:340px}
+      .start {margin-top:24px}
+      .orb,.orb-light {width:112%;top:59%}
+      .float-card {width:150px;min-height:85px;padding:12px;border-radius:13px}
+      .card-left {left:4%;top:70%}
+      .card-right {right:4%;top:82%}
+      .card-text {font-size:11px}
+      .percent {font-size:22px}
+    }
+    @media (max-width:420px) {
+      .scene {min-height:620px}
+      .topbar {gap:7px;padding:0 14px}
+      .brand {font-size:15px}
+      .brand img {width:23px;height:23px}
+      .pill {font-size:10px;padding:9px 9px}
+      .headline {padding-top:58px}
+      .headline h1 {font-size:clamp(29px,7.8vw,35px)}
+      .orb,.orb-light {top:61%;width:127%}
+      .card-left {left:3%;top:73%}
+      .card-right {right:3%;top:85%}
+      .float-card {width:133px;min-height:80px}
+      .card-text {font-size:10px}
+    }
+    @media (max-height:680px) and (min-width:701px) {
+      .scene {min-height:520px}
+      .topbar {height:65px}
+      .headline {padding-top:4px}
+      .headline p {margin-top:20px}
+      .start {margin-top:24px}
+      .orb,.orb-light {top:48%}
+    }
+    @media (prefers-reduced-motion:reduce) {
+      html {scroll-behavior:auto}
+      .pill,.start,.orb canvas {transition:none}
+    }
+  </style>
+</head>
+<body>
+  <main class="universe">
+    <section class="scene" aria-label="CrypSim cryptocurrency trading simulator">
+      <div class="scene-stars" aria-hidden="true"></div>
+      <header class="topbar">
+        <a class="brand" href="./index.html" aria-label="CrypSim home"><img src="./img/favicon.png" width="31" height="31" alt=""><span>CrypSim</span></a>
+        <nav class="links" id="navLinks" aria-label="Main navigation">
+          <button type="button" data-modal="about">About</button>
+          <button type="button" data-modal="features">Features <span aria-hidden="true">⌄</span></button>
+          <a href="https://github.com/karanw330/CrypSim#readme" rel="noopener noreferrer" target="_blank">Docs</a>
+          <button type="button" data-modal="faq">FAQ</button>
+        </nav>
+        <div class="nav-actions">
+          <a class="pill pill-muted" href="./login_page.html">Login</a>
+          <a class="pill pill-primary" href="./login_page.html">Sign up</a>
+        </div>
+        <button class="mobile-menu" type="button" id="menuButton" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </header>
+      <div class="headline">
+        <h1>Trade Crypto<br>Without <span class="accent">Risk.</span></h1>
+        <p>Use virtual funds, access live market prices,<br class="wide-only"> place simulated trades and track your portfolio — all in one place.</p>
+        <a class="start" href="./login_page.html">Start Trading</a>
+      </div>
+      <div class="orb-light" aria-hidden="true"></div>
+      <div class="orb" id="orb" aria-hidden="true"><canvas id="orbCanvas"></canvas></div>
+      <div class="float-card card-left">
+        <div class="card-head"><span>Market data</span><span class="round-arrow" aria-hidden="true">↗</span></div>
+        <div class="card-text">Real-time crypto<br>market prices</div>
+        <span class="card-sub">Six supported assets</span>
+      </div>
+      <div class="float-card card-right">
+        <div class="card-head"><span>Practice trading</span><span class="round-arrow" aria-hidden="true">↗</span></div>
+        <div class="card-bottom"><span class="percent">100%</span><span class="card-sub">Virtual funds</span></div>
+        <div class="mini-progress" aria-hidden="true"></div>
+      </div>
+    </section>
+  </main>
+  <dialog class="about-modal" id="aboutModal" aria-labelledby="dialogTitle">
+    <button class="modal-close" type="button" id="modalClose" aria-label="Close dialog">×</button>
+    <h2 id="dialogTitle"></h2>
+    <div id="dialogBody"></div>
+  </dialog>
+  <script>
+    (function () {
+      'use strict';
+      var menuButton = document.getElementById('menuButton');
+      var links = document.getElementById('navLinks');
+      var dialog = document.getElementById('aboutModal');
+      var dialogTitle = document.getElementById('dialogTitle');
+      var dialogBody = document.getElementById('dialogBody');
+      var sections = {
+        about: {
+          title: 'About CrypSim',
+          html: '<p>CrypSim is a risk-free cryptocurrency trading simulator. Follow live market data, place simulated orders and manage your portfolio using virtual money.</p><p>New accounts start with <strong>$100,000 in virtual funds</strong>. No actual cryptocurrency purchases are made.</p><p class="connection-note"><span class="connection-dot" id="connectionDot"></span><span id="connectionStatus">Checking backend connection…</span></p>'
+        },
+        features: {
+          title: 'Trading, without real capital',
+          html: '<ul><li>Live market prices for BTC, ETH, SOL, BNB, XRP and DOGE</li><li>Market, limit, stop-limit and stop-loss orders</li><li>Pending order management and trade history</li><li>Portfolio holdings, allocation and profit/loss tracking</li></ul>'
+        },
+        faq: {
+          title: 'Frequently asked questions',
+          html: '<p><strong>Is this real-money trading?</strong><br>No. All orders are simulated using virtual balances.</p><p><strong>How much do I start with?</strong><br>New accounts receive $100,000 in virtual funds.</p><p><strong>Where can I read the documentation?</strong><br><a href="https://github.com/karanw330/CrypSim#readme" target="_blank" rel="noopener noreferrer">Open the CrypSim README on GitHub ↗</a></p>'
+        }
+      };
+      menuButton.addEventListener('click', function () {
+        var opened = links.classList.toggle('open');
+        menuButton.setAttribute('aria-expanded', String(opened));
+      });
+      document.querySelectorAll('[data-modal]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          var topic = sections[button.getAttribute('data-modal')];
+          if (!topic) return;
+          dialogTitle.textContent = topic.title;
+          dialogBody.innerHTML = topic.html;
+          links.classList.remove('open');
+          menuButton.setAttribute('aria-expanded', 'false');
+          if (typeof dialog.showModal === 'function') dialog.showModal();
+        });
+      });
+      document.getElementById('modalClose').addEventListener('click', function () {dialog.close();});
+      dialog.addEventListener('click', function (event) {if (event.target === dialog) dialog.close();});
 
-    checkBackend();
+      // A gentle backend health check retains the original landing page's wake-up behaviour.
+      var api = window.APP_CONFIG && window.APP_CONFIG.API_BASE_URL;
+      if (api) {
+        var tries = 0;
+        var ping = async function () {
+          try {
+            var response = await fetch(api.replace(/\/$/, '') + '/ping', {cache:'no-store'});
+            if (response.ok) {
+              window.crypsimBackendOnline = true;
+              var dot = document.getElementById('connectionDot');
+              var text = document.getElementById('connectionStatus');
+              if (dot) dot.classList.add('online');
+              if (text) text.textContent = 'Backend connected';
+              return;
+            }
+          } catch (_) {}
+          tries += 1;
+          if (tries < 8) setTimeout(ping, 12000);
+          else {
+            var text = document.getElementById('connectionStatus');
+            if (text) text.textContent = 'Backend currently unavailable';
+          }
+        };
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ping);
+        else ping();
+      }
 
-</script>
-
+      // Lightweight, self-contained WebGL animation; gradients above remain as fallback.
+      var canvas = document.getElementById('orbCanvas');
+      var orb = document.getElementById('orb');
+      var gl;
+      try { gl = canvas.getContext('webgl', {alpha:true,antialias:false,depth:false,preserveDrawingBuffer:false}); } catch (_) {}
+      if (!gl) return;
+      var vertex = 'attribute vec2 position; void main(){gl_Position=vec4(position,0.0,1.0);}';
+      var fragment = [
+        'precision mediump float;',
+        'uniform vec2 resolution;',
+        'uniform float time;',
+        'float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
+        'float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),f.x),f.y);}',
+        'float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*noise(p);p=p*2.06+vec2(1.7,9.2);a*=.5;}return v;}',
+        'void main(){',
+        'vec2 uv=(gl_FragCoord.xy-.5*resolution.xy)/min(resolution.x,resolution.y)*2.;',
+        'float r=length(uv);if(r>1.0)discard;',
+        'float z=sqrt(max(0.,1.-r*r));',
+        'vec3 normal=normalize(vec3(uv,z));',
+        'vec2 p=uv*1.35;',
+        'float t=time*.095;',
+        'vec2 warp=vec2(fbm(p*1.9+vec2(t,-t*.7)),fbm(p*1.7-vec2(t*.65,t)));',
+        'vec2 flow=p+warp*1.12;',
+        'float n=fbm(flow*2.45+vec2(t*.5,-t*.8));',
+        'float ribbons=sin(flow.y*7.1+flow.x*3.0+n*8.0+time*.18);',
+        'float liquid=smoothstep(.23,.85,n*.95+(.5+.5*ribbons)*.45);',
+        'vec3 deep=vec3(.012,.031,.062);',
+        'vec3 teal=vec3(.045,.35,.44);',
+        'vec3 icy=vec3(.35,.88,.94);',
+        'vec3 color=mix(deep,teal,liquid*.83);',
+        'color=mix(color,icy,smoothstep(.55,.94,n+ribbons*.14)*.67);',
+        'float ink=smoothstep(.41,.70,fbm(flow*1.1+vec2(3.1,1.7)));',
+        'color=mix(color,deep,ink*.78);',
+        'float fresnel=pow(1.0-max(z,0.),3.0);',
+        'color+=vec3(.18,.71,.78)*fresnel*.71;',
+        'float shine=pow(max(0.,dot(normal,normalize(vec3(-.5,.79,.87)))),26.);',
+        'color+=vec3(.72,1.,1.)*shine*.57;',
+        'color+=vec3(.35,.85,.93)*smoothstep(.955,1.,r)*.6;',
+        'color*=.67+.35*max(0.,dot(normal,normalize(vec3(-.53,.6,.79))));',
+        'gl_FragColor=vec4(color,1.);',
+        '}'
+      ].join('\n');
+      function shader(type, source) {
+        var s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);
+        if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)) {gl.deleteShader(s);return null;}
+        return s;
+      }
+      var vs=shader(gl.VERTEX_SHADER,vertex),fs=shader(gl.FRAGMENT_SHADER,fragment);
+      if(!vs||!fs)return;
+      var program=gl.createProgram();
+      gl.attachShader(program,vs);gl.attachShader(program,fs);gl.linkProgram(program);
+      if(!gl.getProgramParameter(program,gl.LINK_STATUS))return;
+      gl.useProgram(program);
+      var buffer=gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
+      gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+      var position=gl.getAttribLocation(program,'position');
+      gl.enableVertexAttribArray(position);gl.vertexAttribPointer(position,2,gl.FLOAT,false,0,0);
+      var resolution=gl.getUniformLocation(program,'resolution'),clock=gl.getUniformLocation(program,'time');
+      var motion=window.matchMedia('(prefers-reduced-motion: reduce)');
+      var visible=true,frame=0,last=0;
+      function render(ms) {
+        if (!visible) return;
+        if(ms-last>42 || motion.matches) {
+          last=ms;
+          var size=Math.min(560,Math.max(256,Math.round(orb.clientWidth*.7)));
+          if(canvas.width!==size||canvas.height!==size){canvas.width=canvas.height=size;gl.viewport(0,0,size,size);}
+          gl.uniform2f(resolution,size,size);
+          gl.uniform1f(clock,motion.matches?0:ms*.001);
+          gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+          orb.classList.add('animated');
+        }
+        if(!motion.matches)frame=requestAnimationFrame(render);
+      }
+      if (document.visibilityState==='visible')frame=requestAnimationFrame(render);
+      document.addEventListener('visibilitychange',function(){
+        visible=document.visibilityState==='visible';
+        cancelAnimationFrame(frame);
+        if(visible)frame=requestAnimationFrame(render);
+      });
+    })();
+  </script>
+</body>
 </html>
