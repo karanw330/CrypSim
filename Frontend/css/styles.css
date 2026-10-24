@@ -2581,3 +2581,45 @@ body{height:auto;min-height:100vh;min-height:100dvh}
  .container{height:auto;min-height:0}
  .chart-container{min-height:290px}
 }
+
+
+/* Align Account Balance and the two order panels when the lists are empty.
+   Existing colors, typography and populated order-card styling are unchanged. */
+.bottom-section .orders-section > #last,
+.bottom-section .pending-section > #last_inactive_order {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+}
+.bottom-section .orders-empty-state {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+    min-height: 90px;
+    padding: 20px;
+    text-align: center;
+    color: #888;
+}
+.bottom-section #last > .trade-order-card,
+.bottom-section #last_inactive_order > .trade-order-card {
+    flex: 0 0 auto;
+}
+@media (min-width: 992px) {
+    .bottom-section {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr) minmax(0, 1.5fr);
+        align-items: stretch;
+        height: auto;
+        max-height: none;
+    }
+    .bottom-section > .panel-section {
+        width: 100%;
+        height: auto;
+        min-width: 0;
+        min-height: 0;
+        max-height: 400px;
+    }
+}

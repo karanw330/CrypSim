@@ -436,7 +436,7 @@ async function syncDashboard() {
                 inactive_span.innerHTML = '';
                 const pendingOrders = orders.filter(o => o.status === 'active' || o.status === 'inactive');
                 if (pendingOrders.length === 0) {
-                    inactive_span.innerHTML = '<div style="padding: 20px; text-align: center; color: #888;">No pending orders</div>';
+                    inactive_span.innerHTML = '<div class="orders-empty-state">No pending orders</div>';
                 } else {
                     pendingOrders.forEach(order => {
                         inactive_span.insertAdjacentHTML("afterbegin", createInactiveOrderCard(order));
@@ -453,7 +453,7 @@ async function syncDashboard() {
             if (last) {
                 last.innerHTML = '';
                 if (allTrades.length === 0) {
-                    last.innerHTML = '<div style="padding: 20px; text-align: center; color: #888;">No past trades</div>';
+                    last.innerHTML = '<div class="orders-empty-state">No past trades</div>';
                 } else {
                     allTrades.forEach(trade => {
                         last.insertAdjacentHTML("afterbegin", createActiveOrderCard(trade));
