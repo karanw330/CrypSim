@@ -235,6 +235,208 @@
       .headline {padding-top:16px}
       .orb,.orb-light {top:54%}
     }
+
+    /* CrypSim landing redesign — editorial rhythm, not a stack of cards. */
+    :root {--ink:#f7f9ff;--muted:#abb6c8;--teal:#83d8e7;--faint:rgba(212,230,255,.14)}
+    html {scroll-padding-top:30px}
+    .scene {background:radial-gradient(ellipse 60% 100% at 0% 0%,rgba(55,65,112,.55),transparent 76%),radial-gradient(ellipse 42% 50% at 100% 98%,rgba(36,40,75,.34),transparent 82%),#0d111a}
+    .scene-stars {opacity:.37}
+    .headline {padding-top:clamp(34px,5.5vh,68px)}
+    .headline h1 {font-size:clamp(43px,4.35vw,63px);line-height:1.12}
+    .headline p {font-size:13px;line-height:1.75;margin-top:23px}
+    .orb,.orb-light {width:min(690px,61vw);top:56%}
+    .orb {box-shadow:inset -20px 8px 45px rgba(0,6,18,.68),inset 14px -22px 24px rgba(13,118,144,.15),0 -7px 20px rgba(122,214,236,.20)}
+    .orb::before {content:"";position:absolute;z-index:2;left:20%;top:5%;width:60%;height:14%;border-radius:50%;transform:rotate(-13deg);background:linear-gradient(180deg,rgba(189,249,255,.22),rgba(176,239,255,0));filter:blur(12px);pointer-events:none}
+    .orb::after {box-shadow:inset 0 5px 8px rgba(168,250,255,.58),inset 12px -20px 38px rgba(1,10,24,.59);background:radial-gradient(ellipse at 62% 7%,rgba(213,255,255,.24),transparent 26%),radial-gradient(ellipse at 16% 55%,rgba(56,222,231,.08),transparent 55%)}
+    .orb-light {background:radial-gradient(circle at 50% 30%,transparent 35%,rgba(66,210,241,.18) 65%,transparent 88%);filter:blur(34px)}
+    .card-left {left:19%;top:66%}
+    .card-right {right:19%;top:74%}
+    .hero-scroll-hint {position:absolute;bottom:22px;left:clamp(26px,5.7vw,84px);display:flex;align-items:center;gap:12px;z-index:7;color:#95a5bd;font-size:9px;font-weight:600;letter-spacing:.15em}
+    .hint-line {width:38px;height:1px;background:linear-gradient(90deg,#83d8e7,rgba(131,216,231,.06))}
+    .story-section {position:relative;overflow:hidden;padding:clamp(90px,9vw,142px) clamp(22px,6.2vw,92px);scroll-margin-top:18px}
+    .story-container {max-width:1170px;margin:0 auto}
+    .story-section h2 {margin:23px 0 0;font-size:clamp(38px,5vw,68px);letter-spacing:-.067em;font-weight:600;line-height:1.105}
+    .story-section p {font-size:clamp(14px,1.15vw,16px);color:#aab6c7;line-height:1.87}
+    .soft-type {color:#8495ac}
+    .kicker {display:flex;align-items:center;gap:14px;margin:0!important;color:#90cadd!important;font-size:10px!important;letter-spacing:.18em;font-weight:700;line-height:1.3!important}
+    .kicker-line {display:inline-block;width:26px;height:1px;background:#79c9de}
+    .intro-section {background:linear-gradient(180deg,#10151e,#151b27);padding-top:155px;padding-bottom:150px}
+    .intro-grid {display:grid;grid-template-columns:1fr 1fr;gap:clamp(45px,9vw,155px);align-items:center}
+    .intro-right {padding-top:14px}
+    .intro-right > p {margin:0 0 40px}
+    .capital-highlight {padding:28px 0 0;border-top:1px solid var(--faint);display:flex;flex-direction:column;align-items:flex-start}
+    .capital-prefix {font-size:10px;font-weight:700;letter-spacing:.17em;color:#8a9eb7}
+    .capital-highlight strong {margin-top:15px;font-size:clamp(50px,6.6vw,93px);font-weight:600;letter-spacing:-.075em;line-height:1.15;font-variant-numeric:tabular-nums;color:#eafaff}
+    .capital-dot {color:#64c9e1}
+    .capital-caption {font-size:12px;color:#9cabc0;margin-top:7px}
+    .showcase-section {background:radial-gradient(ellipse at 57% 55%,rgba(25,83,111,.12),transparent 68%),#151b27;padding-top:80px;padding-bottom:110px}
+    .showcase-heading {display:flex;align-items:end;justify-content:space-between;gap:38px;margin-bottom:46px}
+    .showcase-heading h2 {font-size:clamp(36px,4.2vw,57px)}
+    .showcase-heading > p {max-width:285px;margin:0 0 4px;font-size:14px}
+    .terminal-outer {overflow:hidden;width:100%;border:1px solid rgba(178,207,230,.24);border-radius:17px;background:#0c1017;box-shadow:0 36px 105px rgba(0,0,0,.24),0 2px 50px rgba(36,133,176,.06)}
+    .terminal-bar {height:58px;display:flex;align-items:center;justify-content:space-between;gap:15px;padding:0 22px;border-bottom:1px solid rgba(255,255,255,.09);background:#151a23}
+    .terminal-brand {display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600}
+    .terminal-brand img {object-fit:contain;flex-shrink:0}
+    .terminal-muted {font-size:11px;color:#78869b;font-weight:400}
+    .terminal-divider {height:15px;width:1px;background:#35404d;margin:0 5px}
+    .terminal-window-actions {display:flex;gap:6px}
+    .terminal-window-actions i {display:block;width:7px;height:7px;border:1px solid #4c5a6a;border-radius:50%}
+    .terminal-ticker {height:52px;display:flex;align-items:center;gap:30px;padding:0 23px;border-bottom:1px solid rgba(255,255,255,.07);font-size:11px;color:#8796a9;white-space:nowrap;overflow:auto;scrollbar-width:none}
+    .terminal-ticker::-webkit-scrollbar {display:none}
+    .ticker-current {color:#f3f7ff;display:inline-flex;gap:9px;align-items:center;flex-shrink:0}
+    .ticker-current b {font-weight:700}
+    .ticker-chevron {color:#8a99ae;font-size:15px}
+    .ticker-note {margin-left:auto;font-size:10px;color:#66778e}
+    .terminal-content {display:grid;grid-template-columns:minmax(0,1.85fr) minmax(260px,.86fr);min-height:410px}
+    .terminal-chart-side {min-width:0;position:relative;border-right:1px solid rgba(255,255,255,.08);padding:28px 22px 18px}
+    .chart-topline {display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .chart-topline > div:first-child {display:flex;align-items:center;gap:13px;flex-wrap:wrap}
+    .chart-label {font-size:16px;font-weight:700}
+    .chart-minor {font-size:11px;color:#8493a8}
+    .chart-periods {display:flex;align-items:center;gap:5px;color:#8f9aae;font-size:10px}
+    .chart-periods span {padding:6px 9px;border-radius:5px}
+    .chart-periods .period-selected {color:#defaf5;background:rgba(75,176,161,.15)}
+    .chart-viewport {position:relative;margin-top:18px;height:302px;overflow:hidden}
+    .chart-watermark {position:absolute;left:50%;top:49%;transform:translate(-50%,-50%);font-size:clamp(92px,12vw,164px);color:rgba(203,229,238,.026);font-weight:700;letter-spacing:-.1em}
+    .chart-svg {position:relative;z-index:1;display:block;width:100%;height:calc(100% - 20px)}
+    .chart-time {position:absolute;bottom:1px;font-size:10px;color:#66778d}
+    .time-start {left:0}.time-mid {left:50%;transform:translateX(-50%)}.time-end {right:0}
+    .terminal-order-side {padding:26px 22px 22px;background:#111720;display:flex;flex-direction:column;gap:14px}
+    .order-heading {font-size:13px!important;color:#eef4fd!important;font-weight:600;margin:0 0 6px!important;display:flex;justify-content:space-between;align-items:center}
+    .order-dots {font-size:19px;color:#76849a;letter-spacing:2px}
+    .buy-sell-preview {display:grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:8px;background:#1b2430;color:#8793a6;text-align:center;font-size:12px}
+    .buy-sell-preview span {padding:10px;border-radius:6px}
+    .buy-sell-preview .buy-selected {background:#1e625b;color:#b9fae7}
+    .preview-field {display:flex;flex-direction:column;gap:8px}
+    .preview-field > span {font-size:10px;color:#8d9ab0}
+    .preview-field > div {height:39px;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 12px;border:1px solid #303b4a;border-radius:7px;font-size:12px;background:#18212c;color:#d2dce8}
+    .preview-field > div > span {color:#8190a3}
+    .preview-field .field-ghost {color:#68788d}
+    .demo-order-cta {display:block;padding:13px 10px;margin-top:auto;border-radius:7px;background:#247f75;text-align:center;color:#d2fff3;font-size:12px;font-weight:600}
+    .preview-disclaimer {font-size:10px;text-align:center;color:#7e8da0}
+    .terminal-footer {height:37px;display:flex;align-items:center;gap:8px;padding:0 22px;border-top:1px solid rgba(255,255,255,.08);font-size:9px;letter-spacing:.12em;color:#788a9c}
+    .terminal-status-dot {width:6px;height:6px;border-radius:50%;background:#49bdab}
+    .terminal-footer-right {margin-left:auto;text-transform:none;letter-spacing:0}
+    .showcase-footnote {text-align:right;margin:15px 0 0!important;font-size:11px!important;color:#75869e!important}
+    .features-section {background:#111722;padding-top:132px;padding-bottom:128px}
+    .features-header {margin-bottom:70px}
+    .feature-rows {border-top:1px solid var(--faint)}
+    .feature-row {display:grid;grid-template-columns:74px 1fr 28px;gap:16px;align-items:start;padding:34px 0 39px;border-bottom:1px solid var(--faint);transition:padding-left .25s,border-color .25s}
+    .feature-row:hover {padding-left:12px;border-color:rgba(104,206,232,.38)}
+    .feature-count {font-size:12px;color:#74b0c7;margin-top:7px}
+    .feature-row h3 {font-size:clamp(21px,2.4vw,30px);letter-spacing:-.04em;font-weight:600;margin:0}
+    .feature-row p {font-size:14px;max-width:530px;margin:12px 0 0}
+    .feature-arrow {font-size:21px;color:#8babc4}
+    .portfolio-section {background:linear-gradient(145deg,#171f2c,#111924);padding-top:125px;padding-bottom:132px}
+    .portfolio-grid {display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:center;gap:clamp(35px,8vw,125px)}
+    .portfolio-copy > p:not(.kicker) {margin:24px 0 26px}
+    .text-link {display:inline-flex;align-items:center;gap:10px;padding-bottom:7px;border-bottom:1px solid #74c4de;font-size:13px;color:#d8f6ff}
+    .text-link:hover {color:#87def1}
+    .portfolio-preview {min-width:0;border:1px solid rgba(184,206,230,.17);border-radius:16px;background:linear-gradient(145deg,#192535,#101721);box-shadow:0 26px 80px rgba(0,0,0,.21);overflow:hidden}
+    .portfolio-preview-top {height:63px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 24px;border-bottom:1px solid rgba(255,255,255,.08)}
+    .portfolio-preview-top > span:first-child {display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:600}
+    .portfolio-preview-top img {object-fit:contain}
+    .preview-pill {font-size:9px;letter-spacing:.12em;color:#97c9d6;border:1px solid rgba(139,202,223,.23);border-radius:20px;padding:7px 10px}
+    .portfolio-preview-content {display:grid;grid-template-columns:1fr .85fr;gap:20px;align-items:center;padding:45px 26px}
+    .portfolio-graphic {display:grid;place-items:center}
+    .ring-graphic {width:clamp(165px,18vw,225px);aspect-ratio:1;border-radius:50%;background:conic-gradient(from -65deg,#69bfce 0deg 115deg,#3b718f 115deg 195deg,#305170 195deg 270deg,#172839 270deg 360deg);position:relative;box-shadow:0 0 48px rgba(65,151,190,.07)}
+    .ring-graphic::after {content:"";position:absolute;inset:21%;border-radius:50%;background:#162332;box-shadow:inset 0 1px 13px rgba(0,0,0,.25)}
+    .ring-center {position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;z-index:2}
+    .ring-center span {font-size:9px;color:#8ba5b7;letter-spacing:.14em}
+    .ring-center strong {font-size:11px;font-weight:600;letter-spacing:.06em}
+    .portfolio-preview-metrics {display:flex;flex-direction:column;gap:23px}
+    .portfolio-metric {display:flex;flex-direction:column;gap:6px}
+    .portfolio-metric > span {font-size:10px;color:#8ea1b8}
+    .portfolio-metric strong {font-size:16px;font-weight:600;letter-spacing:-.02em}
+    .portfolio-metric i {display:block;width:70%;height:3px;border-radius:4px;background:linear-gradient(90deg,#65c8c6,#233c50)}
+    .portfolio-metric:nth-child(2) i {width:49%}
+    .portfolio-metric:nth-child(3) i {width:62%}
+    .portfolio-preview-bottom {display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid rgba(255,255,255,.08);padding:16px 24px;font-size:9px;color:#8096a8}
+    .faq-section {background:#111721;padding-top:114px;padding-bottom:110px}
+    .faq-layout {display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(45px,7vw,110px)}
+    .faq-layout h2 {font-size:clamp(36px,4.3vw,57px)}
+    .faq-list {border-top:1px solid var(--faint)}
+    .faq-list details {border-bottom:1px solid var(--faint)}
+    .faq-list summary {display:flex;justify-content:space-between;gap:14px;cursor:pointer;align-items:center;padding:25px 0;list-style:none;font-size:14px;font-weight:500}
+    .faq-list summary::-webkit-details-marker {display:none}
+    .faq-list summary > span {font-size:22px;color:#84cce1;font-weight:400;transition:transform .2s}
+    .faq-list details[open] summary > span {transform:rotate(45deg)}
+    .faq-list p {font-size:13px;margin:0 0 24px;padding-right:30px}
+    .faq-list a {color:#92d7ef;text-decoration:underline;text-underline-offset:3px}
+    .closing-section {background:#101620;text-align:center;padding:125px 22px 134px}
+    .closing-glow {pointer-events:none;position:absolute;left:50%;bottom:-300px;transform:translateX(-50%);width:min(850px,110vw);height:560px;border-radius:50%;background:radial-gradient(ellipse,rgba(47,111,151,.23),transparent 68%)}
+    .closing-content {position:relative;z-index:1}
+    .closing-content .kicker {justify-content:center}
+    .closing-content h2 {margin-top:23px}
+    .closing-content > p:not(.kicker) {margin:21px 0 0}
+    .closing-button {gap:14px;margin-top:30px}
+    .site-footer {border-top:1px solid var(--faint);background:#101620;padding:32px max(24px,calc((100% - 1170px)/2))}
+    .reveal {opacity:1;transform:none}
+    .js-reveal .reveal {opacity:0;transform:translateY(25px);transition:opacity .7s ease,transform .7s ease}
+    .js-reveal .reveal.in-view {opacity:1;transform:translateY(0)}
+    @media(max-width:990px) {
+      .intro-grid,.portfolio-grid {gap:45px}
+      .orb,.orb-light {width:74%;top:57%}
+      .card-left {left:10%}.card-right {right:10%}
+      .terminal-content {grid-template-columns:minmax(0,1.4fr) minmax(240px,.9fr)}
+      .portfolio-preview-content {padding:35px 17px;gap:10px}
+      .ring-graphic {width:180px}
+    }
+    @media(max-width:700px) {
+      .scene {min-height:680px}
+      .hero-scroll-hint {left:18px;bottom:18px}
+      .orb,.orb-light {width:112%;top:62%}
+      .card-left {left:5%;top:72%}.card-right {right:5%;top:84%}
+      .story-section {padding:79px 22px}
+      .story-section h2 {font-size:clamp(36px,8vw,49px)}
+      .intro-grid,.portfolio-grid,.faq-layout {grid-template-columns:1fr;gap:30px}
+      .intro-section {padding-top:99px;padding-bottom:92px}
+      .intro-right {padding-top:0}
+      .capital-highlight strong {font-size:clamp(56px,12vw,74px)}
+      .showcase-section {padding-top:78px}
+      .showcase-heading {display:block;margin-bottom:27px}
+      .showcase-heading > p {margin:19px 0 0;max-width:390px}
+      .terminal-content {grid-template-columns:1fr}
+      .terminal-chart-side {border-right:0;border-bottom:1px solid rgba(255,255,255,.08);padding:22px 17px 10px}
+      .chart-viewport {height:230px}
+      .terminal-order-side {padding:20px}
+      .terminal-ticker {gap:21px;padding:0 15px}
+      .terminal-footer-right {display:none}
+      .terminal-outer {border-radius:12px}
+      .features-header {margin-bottom:42px}
+      .feature-row {grid-template-columns:37px 1fr 17px;gap:10px;padding:25px 0 29px}
+      .feature-row:hover {padding-left:0}
+      .feature-row h3 {font-size:21px}
+      .feature-row p {font-size:13px}
+      .portfolio-preview {max-width:540px;width:100%;margin:0 auto}
+      .portfolio-preview-content {grid-template-columns:1fr 1fr;padding:27px 17px}
+      .ring-graphic {width:min(175px,34vw)}
+      .faq-section {padding-top:85px}
+      .closing-section {padding:90px 22px 107px}
+    }
+    @media(max-width:420px) {
+      .headline {padding-top:52px}
+      .orb,.orb-light {width:125%;top:63%}
+      .card-left {top:76%;left:3%}.card-right {top:86%;right:3%}
+      .hero-scroll-hint {display:none}
+      .terminal-brand {font-size:11px}
+      .terminal-muted {font-size:10px}
+      .terminal-bar {padding:0 13px}
+      .chart-topline {align-items:flex-start}
+      .chart-periods span {padding:5px 6px}
+      .chart-viewport {height:205px}
+      .portfolio-preview-content {display:flex;flex-direction:column;align-items:stretch;gap:28px}
+      .ring-graphic {width:170px}
+      .portfolio-preview-metrics {flex-direction:row;gap:9px;justify-content:space-between}
+      .portfolio-metric strong {font-size:12px}
+      .portfolio-metric > span {font-size:9px}
+      .portfolio-preview-bottom {flex-wrap:wrap}
+      .scene {min-height:660px}
+    }
+    @media(prefers-reduced-motion:reduce) {
+      .js-reveal .reveal {opacity:1;transform:none;transition:none}
+      .feature-row {transition:none}
+    }
   </style>
 </head>
 <body>
@@ -245,7 +447,7 @@
         <a class="brand" href="./index.html" aria-label="CrypSim home"><img src="./img/favicon.png" width="31" height="31" alt=""><span>CrypSim</span></a>
         <nav class="links" id="navLinks" aria-label="Main navigation">
           <a href="#about">About</a>
-          <a href="#features">Features <span aria-hidden="true">⌄</span></a>
+          <a href="#platform">Features <span aria-hidden="true">⌄</span></a>
           <a href="https://github.com/karanw330/CrypSim#readme" rel="noopener noreferrer" target="_blank">Docs</a>
           <a href="#faq">FAQ</a>
         </nav>
@@ -276,90 +478,136 @@
       </div>
 
     </section>
-    <section class="page-section about-section" id="about" aria-labelledby="about-heading">
-      <div class="page-container about-layout">
-        <div>
-          <span class="eyebrow">01 / ABOUT CRYPSIM</span>
-          <h2 id="about-heading">Learn the market.<br><span class="section-muted">Skip the risk.</span></h2>
+
+    <div class="hero-scroll-hint" aria-hidden="true"><span class="hint-line"></span>SCROLL TO EXPLORE</div>
+    <section class="story-section intro-section" id="about" aria-labelledby="about-title">
+      <div class="story-container intro-grid">
+        <div class="reveal">
+          <p class="kicker"><span class="kicker-line"></span> THE IDEA BEHIND CRYPSIM</p>
+          <h2 id="about-title">Real markets.<br><span class="soft-type">Zero real stakes.</span></h2>
         </div>
-        <div class="about-description">
-          <p>CrypSim gives you a place to experience cryptocurrency trading without putting real money on the line. Follow live prices, try different order types and understand how your decisions affect a portfolio.</p>
-          <div class="starting-balance"><strong>$100,000</strong><span>in virtual funds when you create an account</span></div>
-        </div>
-      </div>
-    </section>
-    <section class="page-section features-section" id="features" aria-labelledby="features-heading">
-      <div class="page-container">
-        <span class="eyebrow">02 / THE EXPERIENCE</span>
-        <div class="section-heading-row">
-          <h2 id="features-heading">Everything you need<br>to practice trading.</h2>
-          <p>The core tools of a trading platform, built for learning.</p>
-        </div>
-        <div class="feature-grid">
-          <article class="feature-item">
-            <span class="feature-number">01</span>
-            <h3>Live market data</h3>
-            <p>Follow prices and charts for BTC, ETH, SOL, BNB, XRP and DOGE.</p>
-          </article>
-          <article class="feature-item">
-            <span class="feature-number">02</span>
-            <h3>Advanced orders</h3>
-            <p>Practice market, limit, stop-limit and stop-loss orders.</p>
-          </article>
-          <article class="feature-item">
-            <span class="feature-number">03</span>
-            <h3>Portfolio tracking</h3>
-            <p>Monitor balances, holdings, profit and loss, and asset allocation.</p>
-          </article>
-          <article class="feature-item">
-            <span class="feature-number">04</span>
-            <h3>Order management</h3>
-            <p>Review trade history and manage your pending orders.</p>
-          </article>
+        <div class="intro-right reveal">
+          <p>Get a feel for the crypto market before putting your own money on the line. Explore market movements, practice order execution and see how each decision affects your portfolio.</p>
+          <div class="capital-highlight"><span class="capital-prefix">YOUR STARTING BALANCE</span><strong>$100,000<span class="capital-dot">.</span></strong><span class="capital-caption">Virtual funds. Real learning experience.</span></div>
         </div>
       </div>
     </section>
-    <section class="page-section faq-section" id="faq" aria-labelledby="faq-heading">
-      <div class="page-container faq-layout">
-        <div>
-          <span class="eyebrow">03 / COMMON QUESTIONS</span>
-          <h2 id="faq-heading">Good to know.</h2>
+
+    <section class="story-section showcase-section" id="platform" aria-labelledby="platform-title">
+      <div class="story-container">
+        <div class="showcase-heading reveal">
+          <div>
+            <p class="kicker"><span class="kicker-line"></span> THE PLATFORM</p>
+            <h2 id="platform-title">Get a closer look<br>at the trading desk.</h2>
+          </div>
+          <p>Charts, orders and your balance—together in one focused workspace.</p>
         </div>
-        <div class="faq-list">
-          <details>
-            <summary>Is CrypSim real-money trading?<span aria-hidden="true">+</span></summary>
-            <p>No. CrypSim simulates trades using virtual funds. You aren't buying real cryptocurrency.</p>
-          </details>
-          <details>
-            <summary>What balance do I start with?<span aria-hidden="true">+</span></summary>
-            <p>New accounts start with $100,000 in virtual funds to practice with.</p>
-          </details>
-          <details>
-            <summary>What can I trade?<span aria-hidden="true">+</span></summary>
-            <p>The simulator currently supports Bitcoin, Ethereum, Solana, BNB, XRP and Dogecoin.</p>
-          </details>
-          <details>
-            <summary>Where can I find documentation?<span aria-hidden="true">+</span></summary>
-            <p>Find the project details and setup instructions in the <a href="https://github.com/karanw330/CrypSim#readme" target="_blank" rel="noopener noreferrer">CrypSim GitHub README ↗</a>.</p>
-          </details>
+        <div class="terminal-outer reveal">
+          <div class="terminal-bar">
+            <div class="terminal-brand"><img src="./img/favicon.png" alt="" width="21" height="21"><span>CrypSim</span><span class="terminal-divider"></span><span class="terminal-muted">Trading terminal</span></div>
+            <div class="terminal-window-actions" aria-hidden="true"><i></i><i></i><i></i></div>
+          </div>
+          <div class="terminal-ticker" aria-hidden="true">
+            <span class="ticker-current"><b>BTC</b> Bitcoin <span class="ticker-chevron">⌄</span></span>
+            <span>ETH</span><span>SOL</span><span>BNB</span><span>XRP</span><span>DOGE</span>
+            <span class="ticker-note">6 supported cryptocurrencies</span>
+          </div>
+          <div class="terminal-content">
+            <div class="terminal-chart-side">
+              <div class="chart-topline">
+                <div><span class="chart-label">BTC / USD</span><span class="chart-minor">Market overview</span></div>
+                <div class="chart-periods" aria-hidden="true"><span>1H</span><span class="period-selected">1D</span><span>1W</span><span>1M</span></div>
+              </div>
+              <div class="chart-viewport">
+                <div class="chart-watermark" aria-hidden="true">BTC</div>
+                <svg class="chart-svg" viewBox="0 0 720 318" preserveAspectRatio="none" role="img" aria-label="Illustrative Bitcoin chart showing fluctuations in a simulated trading interface">
+                  <defs><linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#33c2b6" stop-opacity=".22"/><stop offset="100%" stop-color="#33c2b6" stop-opacity="0"/></linearGradient><linearGradient id="chartStroke" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#4d9dbd"/><stop offset="100%" stop-color="#78e2d3"/></linearGradient></defs>
+                  <g stroke="#ffffff" stroke-opacity=".07" stroke-width="1"><path d="M0 48H720M0 110H720M0 172H720M0 234H720M0 296H720"/><path d="M90 0V318M225 0V318M360 0V318M495 0V318M630 0V318"/></g>
+                  <path d="M0 227 C20 218 30 227 46 211 S78 175 96 191 S119 220 144 186 S179 170 197 191 S228 148 252 165 S285 198 310 158 S344 134 368 144 S398 123 422 138 S454 102 474 120 S502 144 525 107 S563 92 587 103 S618 66 638 84 S681 68 720 40 V318H0Z" fill="url(#chartFill)"/>
+                  <path d="M0 227 C20 218 30 227 46 211 S78 175 96 191 S119 220 144 186 S179 170 197 191 S228 148 252 165 S285 198 310 158 S344 134 368 144 S398 123 422 138 S454 102 474 120 S502 144 525 107 S563 92 587 103 S618 66 638 84 S681 68 720 40" fill="none" stroke="url(#chartStroke)" stroke-width="3.4" stroke-linecap="round"/>
+                  <circle cx="720" cy="40" r="6" fill="#78e2d3"/><circle cx="720" cy="40" r="13" fill="#78e2d3" fill-opacity=".13"/>
+                </svg>
+                <span class="chart-time time-start">09:00</span><span class="chart-time time-mid">12:00</span><span class="chart-time time-end">18:00</span>
+              </div>
+            </div>
+            <div class="terminal-order-side">
+              <p class="order-heading">Quick Order <span class="order-dots" aria-hidden="true">···</span></p>
+              <div class="buy-sell-preview"><span class="buy-selected">Buy</span><span>Sell</span></div>
+              <div class="preview-field"><span>Order type</span><div>Market <span>⌄</span></div></div>
+              <div class="preview-field"><span>Quantity</span><div class="field-ghost">Enter quantity <span>BTC</span></div></div>
+              <div class="preview-field"><span>Estimated total</span><div class="field-ghost">— <span>USD</span></div></div>
+              <span class="demo-order-cta">Place Buy Order</span>
+              <div class="preview-disclaimer">Preview only · No orders placed</div>
+            </div>
+          </div>
+          <div class="terminal-footer"><span class="terminal-status-dot"></span> SIMULATED TRADING ENVIRONMENT <span class="terminal-footer-right">Interface illustration · based on CrypSim</span></div>
+        </div>
+        <p class="showcase-footnote reveal">An illustrative preview of CrypSim's existing terminal controls—not a live account or live price feed.</p>
+      </div>
+    </section>
+
+    <section class="story-section features-section" id="features" aria-labelledby="features-title">
+      <div class="story-container">
+        <div class="features-header reveal">
+          <p class="kicker"><span class="kicker-line"></span> WHAT YOU CAN DO</p>
+          <h2 id="features-title">Tools to trade.<br><span class="soft-type">Space to learn.</span></h2>
+        </div>
+        <div class="feature-rows">
+          <div class="feature-row reveal"><span class="feature-count">01</span><div><h3>Real-time market data</h3><p>Keep up with Bitcoin, Ethereum, Solana, BNB, XRP and Dogecoin using live price information and trading charts.</p></div><span class="feature-arrow" aria-hidden="true">↗</span></div>
+          <div class="feature-row reveal"><span class="feature-count">02</span><div><h3>Four order types</h3><p>Practice market, limit, stop-limit and stop-loss orders. Manage pending orders and review your trades.</p></div><span class="feature-arrow" aria-hidden="true">↗</span></div>
+          <div class="feature-row reveal"><span class="feature-count">03</span><div><h3>A portfolio of your own</h3><p>Follow your holdings, cash balance, allocation and profit or loss as you make simulated decisions.</p></div><span class="feature-arrow" aria-hidden="true">↗</span></div>
         </div>
       </div>
     </section>
-    <section class="page-section closing-section" aria-labelledby="closing-heading">
-      <div class="page-container closing-content">
-        <span class="eyebrow">READY TO GET STARTED?</span>
-        <h2 id="closing-heading">Your next trade starts here.</h2>
-        <p>Explore the crypto market using virtual money.</p>
-        <a class="start closing-button" href="./login_page.html">Start Trading ↗</a>
+
+    <section class="story-section portfolio-section" aria-labelledby="portfolio-title">
+      <div class="story-container portfolio-grid">
+        <div class="portfolio-copy reveal">
+          <p class="kicker"><span class="kicker-line"></span> YOUR PORTFOLIO</p>
+          <h2 id="portfolio-title">Every trade<br>tells a story.</h2>
+          <p>Understand more than just the next price move. Track your positions, available balance and trade history, then use what you learn in your next simulated order.</p>
+          <a class="text-link" href="./login_page.html">Explore CrypSim <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="portfolio-preview reveal" aria-label="Illustration of CrypSim's portfolio information">
+          <div class="portfolio-preview-top"><span><img src="./img/favicon.png" alt="" width="23" height="23"> Portfolio overview</span><span class="preview-pill">SIMULATION</span></div>
+          <div class="portfolio-preview-content">
+            <div class="portfolio-graphic"><div class="ring-graphic" aria-hidden="true"><div class="ring-center"><span>YOUR</span><strong>PORTFOLIO</strong></div></div></div>
+            <div class="portfolio-preview-metrics">
+              <div class="portfolio-metric"><span>Cash balance</span><strong>Available</strong><i></i></div>
+              <div class="portfolio-metric"><span>Your holdings</span><strong>Tracked</strong><i></i></div>
+              <div class="portfolio-metric"><span>Trading history</span><strong>Recorded</strong><i></i></div>
+            </div>
+          </div>
+          <div class="portfolio-preview-bottom"><span>BTC · ETH · SOL · BNB · XRP · DOGE</span><span>Interface concept</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section faq-section" id="faq" aria-labelledby="faq-title">
+      <div class="story-container faq-layout">
+        <div class="reveal"><p class="kicker"><span class="kicker-line"></span> THE DETAILS</p><h2 id="faq-title">A few things<br>worth knowing.</h2></div>
+        <div class="faq-list reveal">
+          <details><summary>Am I trading real cryptocurrency?<span aria-hidden="true">+</span></summary><p>No. CrypSim simulates orders with virtual money. You won't be making real cryptocurrency purchases.</p></details>
+          <details><summary>How much virtual money do I get?<span aria-hidden="true">+</span></summary><p>New CrypSim accounts start with $100,000 in virtual funds.</p></details>
+          <details><summary>Which assets can I trade?<span aria-hidden="true">+</span></summary><p>The trading interface supports BTC, ETH, SOL, BNB, XRP and DOGE.</p></details>
+          <details><summary>Where are the docs?<span aria-hidden="true">+</span></summary><p>Read the <a href="https://github.com/karanw330/CrypSim#readme" target="_blank" rel="noopener noreferrer">CrypSim project documentation on GitHub ↗</a>.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section closing-section" aria-labelledby="closing-title">
+      <div class="closing-glow" aria-hidden="true"></div>
+      <div class="story-container closing-content reveal">
+        <p class="kicker">TRADE THE MARKET. NOT YOUR SAVINGS.</p>
+        <h2 id="closing-title">Ready to make<br>your first move?</h2>
+        <p>Start with virtual funds. Take the learning with you.</p>
+        <a class="start closing-button" href="./login_page.html">Start Trading <span aria-hidden="true">↗</span></a>
       </div>
     </section>
     <footer class="site-footer">
       <a class="brand" href="#top" aria-label="CrypSim home"><img src="./img/favicon.png" alt="" width="25" height="25"><span>CrypSim</span></a>
-      <span class="footer-copy">A cryptocurrency trading simulator.</span>
-      <div class="footer-links">
-        <a href="https://github.com/karanw330/CrypSim#readme" target="_blank" rel="noopener noreferrer">Docs ↗</a>
-        <span class="connection-note"><span class="connection-dot" id="connectionDot"></span><span id="connectionStatus">Checking backend…</span></span>
-      </div>
+      <span class="footer-copy">Cryptocurrency trading, simulated.</span>
+      <div class="footer-links"><a href="https://github.com/karanw330/CrypSim#readme" target="_blank" rel="noopener noreferrer">Docs ↗</a><span class="connection-note"><span class="connection-dot" id="connectionDot"></span><span id="connectionStatus">Checking backend…</span></span></div>
     </footer>
   </main>
   <script>
@@ -384,6 +632,21 @@
           menuButton.setAttribute('aria-expanded', 'false');
         }
       });
+
+
+      // Reveal elements on scroll without hiding content when IntersectionObserver is unavailable.
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('js-reveal');
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {threshold:.10, rootMargin:'0px 0px -35px 0px'});
+        document.querySelectorAll('.reveal').forEach(function (el) {observer.observe(el);});
+      }
 
       // A gentle backend health check retains the original landing page's wake-up behaviour.
       var api = window.APP_CONFIG && window.APP_CONFIG.API_BASE_URL;
@@ -424,33 +687,36 @@
         'uniform vec2 resolution;',
         'uniform float time;',
         'float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
-        'float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),f.x),f.y);}',
-        'float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*noise(p);p=p*2.06+vec2(1.7,9.2);a*=.5;}return v;}',
+        'float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),f.x),f.y);}',
+        'float fbm(vec2 p){float f=0.,a=.5;for(int i=0;i<4;i++){f+=a*noise(p);p=p*2.02+vec2(7.2,3.1);a*=.5;}return f;}',
         'void main(){',
-        'vec2 uv=(gl_FragCoord.xy-.5*resolution.xy)/min(resolution.x,resolution.y)*2.;',
-        'float r=length(uv);if(r>1.0)discard;',
+        'vec2 p=(gl_FragCoord.xy-.5*resolution)/min(resolution.x,resolution.y)*2.;',
+        'float r=length(p);if(r>1.)discard;',
         'float z=sqrt(max(0.,1.-r*r));',
-        'vec3 normal=normalize(vec3(uv,z));',
-        'vec2 p=uv*1.35;',
-        'float t=time*.095;',
-        'vec2 warp=vec2(fbm(p*1.9+vec2(t,-t*.7)),fbm(p*1.7-vec2(t*.65,t)));',
-        'vec2 flow=p+warp*1.12;',
-        'float n=fbm(flow*2.45+vec2(t*.5,-t*.8));',
-        'float ribbons=sin(flow.y*7.1+flow.x*3.0+n*8.0+time*.18);',
-        'float liquid=smoothstep(.23,.85,n*.95+(.5+.5*ribbons)*.45);',
-        'vec3 deep=vec3(.012,.031,.062);',
-        'vec3 teal=vec3(.045,.35,.44);',
-        'vec3 icy=vec3(.35,.88,.94);',
-        'vec3 color=mix(deep,teal,liquid*.83);',
-        'color=mix(color,icy,smoothstep(.55,.94,n+ribbons*.14)*.67);',
-        'float ink=smoothstep(.41,.70,fbm(flow*1.1+vec2(3.1,1.7)));',
-        'color=mix(color,deep,ink*.78);',
-        'float fresnel=pow(1.0-max(z,0.),3.0);',
-        'color+=vec3(.18,.71,.78)*fresnel*.71;',
-        'float shine=pow(max(0.,dot(normal,normalize(vec3(-.5,.79,.87)))),26.);',
-        'color+=vec3(.72,1.,1.)*shine*.57;',
-        'color+=vec3(.35,.85,.93)*smoothstep(.955,1.,r)*.6;',
-        'color*=.67+.35*max(0.,dot(normal,normalize(vec3(-.53,.6,.79))));',
+        'float t=time*.23;',
+        'vec2 q=p*1.27;',
+        'float swirl=fbm(q*1.26+vec2(t*.25,-t*.17));',
+        'vec2 bend=q+vec2(.35*sin(q.y*2.9+t*.5),.33*cos(q.x*2.65-t*.38));',
+        'float wave=sin(bend.y*8.1+bend.x*3.5+2.9*sin(bend.x*2.7+t*.52)+swirl*5.4+t);',
+        'float band=smoothstep(.05,.75,wave);',
+        'float fine=smoothstep(.5,.95,sin(bend.y*14.+bend.x*5.2+swirl*4.5-t*.4));',
+        'vec3 navy=vec3(.008,.027,.051);',
+        'vec3 ink=vec3(.018,.09,.145);',
+        'vec3 teal=vec3(.025,.37,.48);',
+        'vec3 silver=vec3(.33,.83,.88);',
+        'vec3 color=mix(navy,ink,.35+.65*swirl);',
+        'color=mix(color,teal,band*.72);',
+        'color=mix(color,silver,fine*band*.46);',
+        'float darkPool=smoothstep(.38,.70,fbm(bend*1.05+vec2(5.,-2.)));',
+        'color=mix(color,navy,darkPool*.55);',
+        'vec3 n=normalize(vec3(p,z));',
+        'float light=clamp(dot(n,normalize(vec3(-.47,.75,.80))),0.,1.);',
+        'color*=.54+.5*light;',
+        'float rim=pow(1.-z,4.);',
+        'color+=vec3(.18,.61,.71)*rim*.68;',
+        'color+=vec3(.42,.88,.95)*smoothstep(.973,1.,r)*.8;',
+        'float spec=pow(max(dot(reflect(normalize(vec3(.35,-.8,-.9)),n),normalize(vec3(-.22,.47,1.))),0.),35.);',
+        'color+=vec3(.7,.96,1.)*spec*.42;',
         'gl_FragColor=vec4(color,1.);',
         '}'
       ].join('\n');
