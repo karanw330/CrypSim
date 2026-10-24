@@ -537,111 +537,79 @@
       .star-drift.distant {opacity:.23}
     }
 
-    /* The liquid orb is an independent animated SVG now — no canvas or JS rendering. */
-    .orb {
-      background:none;
-      box-shadow:none;
-      overflow:visible;
-      border-radius:0;
-    }
-    .orb::before,.orb::after {content:none}
-    .orb img {display:block;width:100%;height:100%;object-fit:contain}
 
-    /* Scroll-driven cinematic orb journey: the hero remains pinned while
-       the original About content enters over the expanding liquid SVG.
-       Without JS or with reduced motion, the regular page layout is unchanged. */
-    .hero-journey {position:relative;height:auto}
-    .js-orb-journey .hero-journey {height:245svh;min-height:1050px}
-    .js-orb-journey .hero-journey > .scene {
-      position:sticky;
-      top:0;
-      width:100%;
-      height:100svh;
-      min-height:0;
-      max-height:none;
-      overflow:hidden;
-      isolation:isolate;
+    /* Three.js orb journey: preserve the original page as the fallback. */
+    #crypsim-3d {position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .45s ease}
+    #crypsim-3d canvas {display:block;width:100%;height:100%}
+    .js-3d #crypsim-3d {opacity:1}
+    .js-3d .global-starfield {opacity:0}
+    .js-3d .universe {position:relative;z-index:2;background:transparent}
+    .js-3d .hero-journey {height:370svh;min-height:0}
+    .js-3d .hero-journey>.scene {
+      position:sticky;top:0;height:100svh;min-height:0;max-height:none;
+      overflow:hidden;isolation:isolate;
+      background:radial-gradient(ellipse at 0 0,rgba(34,48,91,.2),transparent 68%),rgba(3,7,14,.12)
     }
-    .js-orb-journey .hero-journey .scene::before {
-      content:"";
-      position:absolute;
-      z-index:6;
-      inset:0;
-      background:#151b27;
-      opacity:var(--orb-veil,0);
-      pointer-events:none;
+    .js-3d .scene .topbar {position:relative;z-index:16}
+    .js-3d .scene .headline,.js-3d .scene .float-card {will-change:opacity,transform}
+    .js-3d .scene .hero-scroll-hint {position:absolute;bottom:24px;left:clamp(25px,5.7vw,84px);z-index:12}
+    .js-3d .scene .journey-info {
+      position:absolute;inset:0;z-index:11;display:block;width:100%;
+      height:100%;padding:0;margin:0;overflow:visible;background:transparent;
+      opacity:1;visibility:visible;pointer-events:none
     }
-    .js-orb-journey .hero-journey .orb,
-    .js-orb-journey .hero-journey .orb-light {
-      transform:translateX(-50%) scale(var(--orb-zoom,1));
-      transform-origin:center center;
-      opacity:var(--orb-opacity,1);
-      will-change:transform,opacity;
+    .js-3d .journey-info .intro-grid {position:relative;display:block;max-width:none;width:100%;height:100%;padding:0;margin:0}
+    .js-3d .journey-info .tagline-panel,.js-3d .journey-info .balance-panel {
+      position:absolute;inset:0;width:100%;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;text-align:center;
+      padding:105px 25px 55px;opacity:0;visibility:hidden;will-change:opacity,transform
     }
-    .js-orb-journey .hero-journey .orb-light {opacity:calc(var(--orb-opacity,1) * .8)}
-    .js-orb-journey .hero-journey .headline,
-    .js-orb-journey .hero-journey .float-card,
-    .js-orb-journey .hero-journey .hero-scroll-hint {
-      opacity:var(--hero-content-opacity,1);
-      transform:translateY(var(--hero-content-shift,0px));
-      pointer-events:auto;
+    .js-3d .journey-info .kicker {justify-content:center}
+    .js-3d .journey-info .tagline-panel h2 {
+      font-size:clamp(45px,7vw,105px);line-height:1.02;letter-spacing:-.07em;
+      max-width:1000px;margin-top:25px;text-shadow:0 5px 36px rgba(0,0,0,.38)
     }
-    .js-orb-journey .hero-journey .float-card,
-    .js-orb-journey .hero-journey .headline,
-    .js-orb-journey .hero-journey .hero-scroll-hint {will-change:opacity,transform}
-    .js-orb-journey .hero-journey .hero-scroll-hint {
-      position:absolute;
-      z-index:7;
-      bottom:22px;
-      left:clamp(26px,5.7vw,84px);
+    .js-3d .journey-info .tagline-panel .soft-type {color:#bacde3}
+    .js-3d .journey-info .balance-panel>p {display:none}
+    .js-3d .journey-info .balance-panel .capital-highlight {
+      display:flex;align-items:center;flex-direction:column;text-align:center;
+      padding:0;margin:0;border:0
     }
-    .js-orb-journey .hero-journey .journey-info {
-      position:absolute;
-      z-index:8;
-      top:50%;
-      left:50%;
-      width:min(1180px,calc(100% - 11vw));
-      min-height:0;
-      height:auto;
-      margin:0;
-      padding:0;
-      display:block;
-      background:none;
-      opacity:var(--about-content-opacity,0);
-      transform:translate(-50%,calc(-50% + var(--about-content-shift,28px)));
-      pointer-events:none;
-      visibility:visible;
-      will-change:transform,opacity;
+    .js-3d .journey-info .balance-panel .capital-prefix {
+      font-size:clamp(11px,1vw,15px);font-weight:700;
+      letter-spacing:.24em;color:#c4d5e8
     }
-    .js-orb-journey .journey-info .story-container {max-width:100%}
-    .js-orb-journey .journey-info h2 {font-size:clamp(39px,4.8vw,67px);text-shadow:0 2px 30px rgba(0,0,0,.35)}
-    .js-orb-journey .journey-info .intro-right > p {font-size:clamp(13px,1.12vw,16px);color:#d1dbea}
-    .js-orb-journey .journey-info .capital-highlight strong {font-size:clamp(49px,6vw,86px)}
-    .js-orb-journey .journey-info .capital-caption {color:#c2cede}
-    .js-orb-journey .journey-info .soft-type {color:#a7b9d0}
-    .js-orb-journey .scene .topbar {position:relative;z-index:11}
-    @media(max-width:700px){
-      .js-orb-journey .hero-journey {height:230svh;min-height:0}
-      .js-orb-journey .hero-journey .journey-info {width:calc(100% - 44px);top:54%}
-      .js-orb-journey .journey-info .intro-grid {gap:22px}
-      .js-orb-journey .journey-info h2 {font-size:clamp(35px,8.6vw,47px)}
-      .js-orb-journey .journey-info .intro-right {padding-top:0}
-      .js-orb-journey .journey-info .intro-right > p {font-size:13px;line-height:1.62;margin-bottom:22px}
-      .js-orb-journey .journey-info .capital-highlight {padding-top:17px}
-      .js-orb-journey .journey-info .capital-highlight strong {font-size:clamp(46px,12vw,64px)}
+    .js-3d .journey-info .balance-panel .capital-highlight strong {
+      font-size:clamp(64px,11vw,162px);line-height:1.06;letter-spacing:-.075em;
+      margin:17px 0 6px;font-variant-numeric:tabular-nums;
+      background:linear-gradient(105deg,#8de9ff 0%,#45a8ff 45%,#9299ff 100%);
+      -webkit-background-clip:text;background-clip:text;
+      color:transparent;-webkit-text-fill-color:transparent;
+      filter:drop-shadow(0 5px 30px rgba(55,142,255,.22))
     }
-    @media(max-width:400px) {
-      .js-orb-journey .hero-journey .journey-info {top:52%;width:calc(100% - 35px)}
-      .js-orb-journey .journey-info h2 {font-size:34px}
-      .js-orb-journey .journey-info .intro-grid {gap:15px}
-      .js-orb-journey .journey-info .intro-right > p {font-size:12px}
+    .js-3d .journey-info .balance-panel .capital-dot {color:inherit}
+    .js-3d .journey-info .balance-panel .capital-caption {
+      margin-top:10px;font-size:clamp(14px,1.5vw,19px);color:#c1d2e8
     }
-    @media(prefers-reduced-motion:reduce){
-      .hero-journey {height:auto!important;min-height:0!important}
-      .hero-journey .scene {position:relative!important}
-      .orb,.orb-light {will-change:auto!important}
+    /* The independently animated stars shine through the rest of the page. */
+    .js-3d .showcase-section {background:radial-gradient(ellipse at 57% 55%,rgba(25,83,111,.13),transparent 68%),rgba(10,16,28,.76)}
+    .js-3d .features-section {background:rgba(12,18,30,.78)}
+    .js-3d .portfolio-section {background:linear-gradient(145deg,rgba(21,31,46,.80),rgba(12,19,32,.75))}
+    .js-3d .faq-section {background:rgba(12,18,30,.80)}
+    .js-3d .closing-section {background:rgba(11,17,30,.76)}
+    .js-3d .site-footer {background:rgba(11,17,29,.83)}
+    @media(max-width:700px) {
+      .js-3d .hero-journey {height:335svh}
+      .js-3d .journey-info .tagline-panel,.js-3d .journey-info .balance-panel {padding:82px 21px 40px}
+      .js-3d .journey-info .tagline-panel h2 {font-size:clamp(40px,9.5vw,64px)}
+      .js-3d .journey-info .balance-panel .capital-highlight strong {font-size:clamp(56px,12vw,94px)}
+    }
+    @media(prefers-reduced-motion:reduce) {
+      #crypsim-3d {display:none}.hero-journey {height:auto!important}
     }
   </style>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
 </head>
 <body>
   <div class="global-starfield" aria-hidden="true">
@@ -649,6 +617,7 @@
     <div class="star-drift medium"></div>
     <div class="star-drift distant"></div>
   </div>
+  <div id="crypsim-3d" aria-hidden="true"></div>
   <main class="universe" id="top">
     <div class="hero-journey" id="heroJourney">
     <section class="scene" aria-label="CrypSim cryptocurrency trading simulator">
@@ -674,8 +643,8 @@
         <p>Use virtual funds, access live market prices,<br class="wide-only"> place simulated trades and track your portfolio — all in one place.</p>
         <a class="start" href="./login_page.html">Start Trading</a>
       </div>
-      <div class="orb-light" aria-hidden="true"></div>
-      <div class="orb" id="orb" aria-hidden="true"><img src="./img/liquid-orb.svg" width="900" height="900" alt="" decoding="async"></div>
+
+      <!-- WebGL particle orb renders in the fixed Three.js canvas. -->
       <div class="float-card card-left">
         <div class="card-head"><span>Market data</span><span class="round-arrow" aria-hidden="true">↗</span></div>
         <div class="card-text">Real-time crypto<br>market prices</div>
@@ -821,6 +790,247 @@
       <div class="footer-links"><a href="https://github.com/karanw330/CrypSim#readme" target="_blank" rel="noopener noreferrer">Docs ↗</a><span class="connection-note"><span class="connection-dot" id="connectionDot"></span><span id="connectionStatus">Checking backend…</span></span></div>
     </footer>
   </main>
+
+  <script type="module">
+    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js';
+    // Progressive enhancement only; the About content stays in normal flow
+    // when the browser cannot load WebGL/GSAP or requests reduced motion.
+    const container=document.getElementById('crypsim-3d');
+    const journey=document.getElementById('heroJourney');
+    const hero=journey?.querySelector('.scene');
+    const about=document.getElementById('about');
+    const hint=document.querySelector('.hero-scroll-hint');
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches &&
+       container && hero && about && hint && window.gsap && window.ScrollTrigger){
+      let renderer;
+      try {
+        const scene=new THREE.Scene();
+        scene.background=new THREE.Color(0x000000);
+        const camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,.1,100);
+        const startZ=()=>Math.max(3.45,3.05/camera.aspect);
+        camera.position.set(0,innerWidth<700?.48:.40,startZ());
+        renderer=new THREE.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});
+        renderer.setPixelRatio(Math.min(devicePixelRatio||1,innerWidth<700?1.5:2));
+        renderer.setSize(innerWidth,innerHeight);
+        container.appendChild(renderer.domElement);
+        // Exact approved staggered point distribution; no SVG involved.
+        const small=matchMedia('(max-width:680px)').matches;
+        const lats=small?185:320, lons=small?360:620, count=lats*lons;
+        const position=new Float32Array(count*3),dest=new Float32Array(count*3),seed=new Float32Array(count*3);
+        let k=0;
+        for(let i=0;i<lats;i++){
+          const phi=Math.PI*(i+.5)/lats,offset=(i%2)*.5;
+          for(let j=0;j<lons;j++){
+            const theta=2*Math.PI*(j+offset)/lons;
+            position[k++]=Math.sin(phi)*Math.cos(theta);
+            position[k++]=Math.cos(phi);
+            position[k++]=Math.sin(phi)*Math.sin(theta);
+            const a=3*(i*lons+j);
+            dest[a]=(Math.random()*2-1)*1.14;
+            dest[a+1]=(Math.random()*2-1)*1.14;
+            dest[a+2]=1.5+Math.pow(Math.random(),.65)*13.5;
+            seed[a]=Math.random();seed[a+1]=Math.random();seed[a+2]=Math.random();
+          }
+        }
+        const geo=new THREE.BufferGeometry();
+        geo.setAttribute('position',new THREE.BufferAttribute(position,3));
+        geo.setAttribute('aStarTarget',new THREE.BufferAttribute(dest,3));
+        geo.setAttribute('aSeed',new THREE.BufferAttribute(seed,3));
+        geo.boundingSphere=new THREE.Sphere(new THREE.Vector3(),1.5);
+        // Identical wave amplitudes and frequencies to the approved orb.
+        const wave=[
+          'uniform float uTime;',
+          'float wave(vec3 p,float t){',
+          'float a=sin(p.x*15.0+2.8*sin(p.y*8.0+t*0.24)+t*0.35);',
+          'float b=sin(p.y*22.0+2.0*sin(p.z*10.0-t*0.18)-t*0.28);',
+          'float c=sin(p.z*19.0+2.5*sin(p.x*13.0+t*0.22));',
+          'float d=sin((p.x+p.y-p.z)*30.0+t*0.34);',
+          'float e=sin(p.x*6.0-p.y*9.0+p.z*5.0+t*0.16);',
+          'return 0.036*a+0.031*b+0.027*c+0.012*d+0.025*e;',
+          '}','vec3 deform(vec3 p){return p*(1.0+wave(p,uTime));}'
+        ].join('\n');
+        const uniforms={
+          uTime:{value:0},uPixelRatio:{value:renderer.getPixelRatio()},
+          uDotSize:{value:small?2.2:1.95},uScatter:{value:0},uAspect:{value:camera.aspect}
+        };
+        const vs=wave+[
+          'uniform float uPixelRatio,uDotSize,uScatter,uAspect;',
+          'attribute vec3 aStarTarget,aSeed;',
+          'varying float vRim,vFront,vHighlight,vSurvival,vStarMix,vSeed,vTime;',
+          'void main(){',
+          'vec3 p=deform(position);',
+          'float survive=step(0.989,aSeed.x);',
+          'float expand=smoothstep(0.03,0.98,uScatter);',
+          'float depth=aStarTarget.z,halfHeight=depth*0.383864;',
+          'vec3 target=vec3(aStarTarget.x*halfHeight*uAspect,aStarTarget.y*halfHeight,0.12-depth);',
+          'target.x+=sin(uTime*(0.14+aSeed.y*0.14)+aSeed.y*41.0)*depth*0.009;',
+          'target.y+=cos(uTime*(0.11+aSeed.z*0.14)+aSeed.z*36.0)*depth*0.009;',
+          'p=mix(p,target,expand*survive);',
+          'vec4 viewPos=modelViewMatrix*vec4(p,1.0);',
+          'vec3 normalVS=normalize(normalMatrix*normalize(position));',
+          'vec3 toEye=normalize(-viewPos.xyz);',
+          'float facing=max(dot(normalVS,toEye),0.0);',
+          'vFront=facing;vRim=pow(1.0-facing,2.6);',
+          'vHighlight=0.5+0.5*sin(position.y*39.0+position.x*17.0+uTime*0.6);',
+          'vSurvival=mix(1.0,survive,smoothstep(0.04,0.86,uScatter));',
+          'vStarMix=expand*survive;vSeed=aSeed.y;vTime=uTime;',
+          'gl_Position=projectionMatrix*viewPos;',
+          'float orbSize=uDotSize*uPixelRatio*(3.45/max(-viewPos.z,0.25));',
+          'float starSize=(0.9+1.55*aSeed.z)*uPixelRatio;',
+          'gl_PointSize=mix(orbSize,starSize,expand*survive);',
+          '}'
+        ].join('\n');
+        const fs=[
+          'varying float vRim,vFront,vHighlight,vSurvival,vStarMix,vSeed,vTime;',
+          'void main(){',
+          'if(vSurvival<0.005)discard;',
+          'float r=length(gl_PointCoord-vec2(0.5));',
+          'if(r>0.49)discard;',
+          'float circle=1.0-smoothstep(0.27,0.49,r);',
+          'vec3 deepBlue=vec3(0.006,0.21,0.72),icyCyan=vec3(0.17,0.92,1.0);',
+          'float rim=smoothstep(0.13,0.98,vRim);',
+          'vec3 color=mix(deepBlue,icyCyan,rim);',
+          'color*=0.58+0.34*rim+0.06*vHighlight;',
+          'float alpha=circle*(0.70+0.20*rim+0.03*vFront);',
+          'float twinkle=0.73+0.27*sin(vTime*(0.65+vSeed*2.3)+vSeed*55.0);',
+          'vec3 starColor=mix(vec3(0.18,0.43,1.0),vec3(0.74,0.94,1.0),vSeed);',
+          'float starAlpha=(0.50+0.45*twinkle)*circle;',
+          'color=mix(color,starColor,vStarMix);',
+          'alpha=mix(alpha,starAlpha,vStarMix)*vSurvival;',
+          'gl_FragColor=vec4(color,alpha);',
+          '}'
+        ].join('\n');
+        const material=new THREE.ShaderMaterial({
+          uniforms,vertexShader:vs,fragmentShader:fs,transparent:true,
+          depthTest:true,depthWrite:false,blending:THREE.AdditiveBlending
+        });
+        const orb=new THREE.Group();
+        orb.add(new THREE.Points(geo,material));
+        const shell=new THREE.ShaderMaterial({
+          uniforms,
+          vertexShader:wave+[
+            'varying vec3 vNormal,vView;',
+            'void main(){vec3 p=deform(position);',
+            'vec4 viewPos=modelViewMatrix*vec4(p,1.0);',
+            'vNormal=normalize(normalMatrix*normalize(position));',
+            'vView=normalize(-viewPos.xyz);',
+            'gl_Position=projectionMatrix*viewPos;}'
+          ].join('\n'),
+          fragmentShader:[
+            'uniform float uScatter;','varying vec3 vNormal,vView;',
+            'void main(){',
+            'float rim=pow(1.0-abs(dot(normalize(vNormal),normalize(vView))),6.0);',
+            'gl_FragColor=vec4(0.08,0.56,1.0,rim*0.11*(1.0-uScatter));',
+            '}'
+          ].join('\n'),
+          transparent:true,depthWrite:false,depthTest:false,
+          blending:THREE.AdditiveBlending,side:THREE.DoubleSide
+        });
+        orb.add(new THREE.Mesh(new THREE.SphereGeometry(1.003,200,140),shell));
+        scene.add(orb);
+
+        // Reuse the exact existing "Real markets / Starting balance" copy,
+        // but show the panels successively during the pinned scroll journey.
+        const panels=about.querySelectorAll('.intro-grid>.reveal');
+        if(panels.length!==2)throw Error('About section layout changed');
+        panels[0].classList.remove('reveal');
+        panels[1].classList.remove('reveal','intro-right');
+        panels[0].classList.add('tagline-panel');
+        panels[1].classList.add('balance-panel');
+        const detail=panels[1].querySelector('p');
+        if(detail)detail.style.display='none';
+        const caption=panels[1].querySelector('.capital-caption');
+        if(caption)caption.textContent='Virtual funds';
+        hero.appendChild(hint);
+        hero.appendChild(about);
+        about.classList.add('journey-info');
+
+        const gsap=window.gsap,ScrollTrigger=window.ScrollTrigger;
+        gsap.registerPlugin(ScrollTrigger);
+        const flight={amount:0},starState={amount:0};
+        let starsLaunched=false;
+        function releaseStars(){
+          if(starsLaunched)return;
+          starsLaunched=true;
+          gsap.to(starState,{amount:1,duration:3,ease:'power2.inOut',overwrite:true});
+        }
+        function restoreOrb(){
+          if(!starsLaunched)return;
+          starsLaunched=false;
+          gsap.to(starState,{amount:0,duration:1.6,ease:'power2.inOut',overwrite:true});
+        }
+        const mouse={x:0,y:0};
+        window.addEventListener('pointermove',e=>{
+          mouse.x=(e.clientX/innerWidth-.5)*2;
+          mouse.y=(e.clientY/innerHeight-.5)*2;
+        },{passive:true});
+        let paused=document.hidden;
+        document.addEventListener('visibilitychange',()=>{paused=document.hidden});
+        const clock=new THREE.Clock();
+        function draw(){
+          requestAnimationFrame(draw);
+          if(paused)return;
+          const t=clock.getElapsedTime();
+          uniforms.uTime.value=t;
+          uniforms.uScatter.value=starState.amount;
+          camera.position.z=THREE.MathUtils.lerp(startZ(),.12,flight.amount);
+          camera.position.y=THREE.MathUtils.lerp(innerWidth<700?.48:.40,0,flight.amount);
+          const calm=1-starState.amount;
+          orb.rotation.y+=((mouse.x*.12+Math.sin(t*.15)*.09)*calm-orb.rotation.y)*.018;
+          orb.rotation.x+=((-mouse.y*.10+Math.sin(t*.1)*.05)*calm-orb.rotation.x)*.018;
+          renderer.render(scene,camera);
+        }
+        const timeline=gsap.timeline({
+          defaults:{ease:'none'},
+          scrollTrigger:{
+            trigger:journey,start:'top top',end:'bottom bottom',scrub:1.1,
+            invalidateOnRefresh:true,
+            onUpdate:self=>{
+              if(self.progress>=.79)releaseStars();
+              else if(self.progress<.60)restoreOrb();
+              panels[0].setAttribute('aria-hidden',self.progress<.56||self.progress>.81?'true':'false');
+              panels[1].setAttribute('aria-hidden',self.progress<.78?'true':'false');
+            }
+          }
+        });
+        timeline.to([hero.querySelector('.headline'),...hero.querySelectorAll('.float-card'),hint],
+                    {autoAlpha:0,y:-28,duration:.16},.06)
+          .to(flight,{amount:.45,duration:.26},.10)
+          .to(flight,{amount:.80,duration:.27},.38)
+          .to(flight,{amount:1,duration:.19},.64)
+          .fromTo(panels[0],{autoAlpha:0,y:30},{autoAlpha:1,y:0,duration:.13},.57)
+          .to(panels[0],{autoAlpha:0,y:-23,duration:.13},.77)
+          .fromTo(panels[1],{autoAlpha:0,y:32},{autoAlpha:1,y:0,duration:.14},.82)
+          .to({},{duration:.04},.97);
+        const aboutLink=document.querySelector('.links a[href="#about"]');
+        if(aboutLink)aboutLink.addEventListener('click',e=>{
+          e.preventDefault();
+          const st=ScrollTrigger.getAll().find(t=>t.trigger===journey);
+          if(st)window.scrollTo({top:st.start+(st.end-st.start)*.64,behavior:'smooth'});
+          history.replaceState(null,'','#about');
+        });
+        document.documentElement.classList.add('js-3d');
+        draw();
+        addEventListener('resize',()=>{
+          camera.aspect=innerWidth/innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setPixelRatio(Math.min(devicePixelRatio||1,innerWidth<700?1.5:2));
+          renderer.setSize(innerWidth,innerHeight);
+          uniforms.uPixelRatio.value=renderer.getPixelRatio();
+          uniforms.uAspect.value=camera.aspect;
+        },{passive:true});
+        ScrollTrigger.refresh();
+        if(location.hash==='#about')requestAnimationFrame(()=>{
+          const st=ScrollTrigger.getAll().find(t=>t.trigger===journey);
+          if(st)window.scrollTo(0,st.start+(st.end-st.start)*.64);
+        });
+      }catch(error){
+        console.error('CrypSim Three.js enhancement unavailable:',error);
+        renderer?.dispose();
+        container.replaceChildren();
+      }
+    }
+  </script>
   <script>
     (function () {
       'use strict';
@@ -845,82 +1055,6 @@
       });
 
 
-
-      // Progressive enhancement: expand the SVG orb into a seamless visual
-      // bridge to About. The original About section stays in normal flow if
-      // reduced motion is requested or JavaScript is unavailable.
-      (function () {
-        var reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
-        if (reducedMotion.matches) return;
-        var journey=document.getElementById('heroJourney');
-        var scene=journey && journey.querySelector('.scene');
-        var about=document.querySelector('.intro-section');
-        var orb=scene && scene.querySelector('.orb');
-        var hint=document.querySelector('.hero-scroll-hint');
-        if (!journey || !scene || !about || !orb || !hint) return;
-        scene.appendChild(hint);
-        scene.appendChild(about);
-        about.classList.add('journey-info');
-        about.querySelectorAll('.reveal').forEach(function (el) {
-          el.classList.remove('reveal');
-        });
-        document.documentElement.classList.add('js-orb-journey');
-        var frame=0;
-        var scrolledToAbout=false;
-        var clamp=function (n) {return Math.max(0,Math.min(1,n));};
-        var smooth=function (a,b,p) {
-          var t=clamp((p-a)/(b-a));
-          return t*t*(3-2*t);
-        };
-        var update=function () {
-          frame=0;
-          var distance=Math.max(1,journey.offsetHeight-window.innerHeight);
-          var p=clamp((window.scrollY+0-journey.getBoundingClientRect().top-window.scrollY)/distance);
-          // getBoundingClientRect().top is viewport-relative. Negating gives
-          // the amount of this journey already scrolled past.
-          p=clamp(-journey.getBoundingClientRect().top/distance);
-          var w=orb.offsetWidth||600;
-          var cy=orb.offsetTop+orb.offsetHeight*.5;
-          var viewport=window.innerHeight;
-          var maxScale=Math.max(2.8,(cy+viewport*.34)/(w*.5),window.innerWidth*1.58/w);
-          var zoom=smooth(.12,.72,p);
-          var heroFade=smooth(.10,.36,p);
-          var reveal=smooth(.53,.78,p);
-          var veil=smooth(.37,.75,p)*.74+smooth(.85,1,p)*.21;
-          var orbFade=smooth(.81,1,p);
-          scene.style.setProperty('--orb-zoom',(1+(maxScale-1)*zoom).toFixed(3));
-          scene.style.setProperty('--orb-opacity',(1-orbFade*.84).toFixed(3));
-          scene.style.setProperty('--orb-veil',veil.toFixed(3));
-          scene.style.setProperty('--hero-content-opacity',(1-heroFade).toFixed(3));
-          scene.style.setProperty('--hero-content-shift',(-18*heroFade).toFixed(1)+'px');
-          scene.style.setProperty('--about-content-opacity',reveal.toFixed(3));
-          scene.style.setProperty('--about-content-shift',((1-reveal)*28).toFixed(1)+'px');
-        };
-        var request=function () {
-          if (!frame) frame=window.requestAnimationFrame(update);
-        };
-        window.addEventListener('scroll',request,{passive:true});
-        window.addEventListener('resize',request,{passive:true});
-        document.addEventListener('visibilitychange',function () {
-          if (!document.hidden) request();
-        });
-        var aboutLink=document.querySelector('.links a[href="#about"]');
-        if (aboutLink) {
-          aboutLink.addEventListener('click',function (e) {
-            e.preventDefault();
-            var target=journey.offsetTop+(journey.offsetHeight-window.innerHeight)*.78;
-            window.scrollTo({top:target,behavior:'smooth'});
-            history.replaceState(null,'','#about');
-          });
-        }
-        request();
-        if (window.location.hash==='#about' && !scrolledToAbout) {
-          scrolledToAbout=true;
-          window.requestAnimationFrame(function () {
-            window.scrollTo({top:journey.offsetTop+(journey.offsetHeight-window.innerHeight)*.78});
-          });
-        }
-      })();
 
       // Reveal elements on scroll without hiding content when IntersectionObserver is unavailable.
       if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
