@@ -548,15 +548,16 @@
     .js-3d .hero-journey>.scene {
       position:sticky;top:0;height:100svh;min-height:0;max-height:none;
       overflow:hidden;isolation:isolate;
-      background:radial-gradient(ellipse at 0 0,rgba(34,48,91,.2),transparent 68%),rgba(3,7,14,.12)
+      background:transparent; /* See the pure-black WebGL scene without a blue overlay. */
     }
     .js-3d .scene .topbar {position:relative;z-index:16}
-    .js-3d .scene .headline,.js-3d .scene .float-card {will-change:opacity,transform}
+    .js-3d .scene .float-card {will-change:opacity,transform}
+    .js-3d .scene-stars {display:none}
     .js-3d .scene .hero-scroll-hint {position:absolute;bottom:42px;left:auto;right:clamp(25px,5.7vw,84px);z-index:12}
     /* Quiet editorial note, opposite the scroll cue. */
     .hero-corner-note {
-      position:absolute;z-index:12;left:clamp(25px,5.7vw,84px);bottom:36px;
-      display:flex;flex-direction:column;gap:10px;max-width:300px;
+      position:absolute;z-index:12;left:clamp(25px,5.7vw,84px);bottom:40px;
+      display:flex;flex-direction:column;gap:10px;width:min(355px,32vw);
       pointer-events:none;will-change:opacity,transform
     }
     .hero-corner-note .corner-eyebrow {
@@ -566,9 +567,14 @@
     .hero-corner-note .corner-eyebrow::before {
       content:"";display:block;width:27px;height:1px;background:#85c9ed
     }
+    .hero-corner-note h1 {
+      margin:3px 0 0;font-size:clamp(25px,2.65vw,39px);
+      font-weight:600;line-height:1.09;letter-spacing:-.055em;
+      color:#f7f9ff;
+    }
     .hero-corner-note p {
-      margin:0;font-size:clamp(12px,1.05vw,14px);
-      line-height:1.55;letter-spacing:-.01em;color:#b3c6db
+      margin:1px 0 0;font-size:clamp(11px,.95vw,13px);
+      line-height:1.65;letter-spacing:-.005em;color:#aeb7c5
     }
     .js-3d .scene .journey-info {
       position:absolute;inset:0;z-index:11;display:block;width:100%;
@@ -608,25 +614,38 @@
     .js-3d .journey-info .balance-panel .capital-caption {
       margin-top:10px;font-size:clamp(14px,1.5vw,19px);color:#c1d2e8
     }
-    /* The independently animated stars shine through the rest of the page. */
-    .js-3d .showcase-section {background:radial-gradient(ellipse at 57% 55%,rgba(25,83,111,.13),transparent 68%),rgba(10,16,28,.76)}
-    .js-3d .features-section {background:rgba(12,18,30,.78)}
-    .js-3d .portfolio-section {background:linear-gradient(145deg,rgba(21,31,46,.80),rgba(12,19,32,.75))}
-    .js-3d .faq-section {background:rgba(12,18,30,.80)}
-    .js-3d .closing-section {background:rgba(11,17,30,.76)}
-    .js-3d .site-footer {background:rgba(11,17,29,.83)}
+    /* Neutral black behind WebGL and the independently animated stars. */
+    body {background:#000}
+    .global-starfield {background:transparent}
+    .scene {background:#000}
+    .js-3d .showcase-section {background:rgba(0,0,0,.78)}
+    .js-3d .features-section {background:rgba(0,0,0,.78)}
+    .js-3d .portfolio-section {background:rgba(0,0,0,.76)}
+    .js-3d .faq-section {background:rgba(0,0,0,.80)}
+    .js-3d .closing-section {background:rgba(0,0,0,.78)}
+    .js-3d .site-footer {background:rgba(0,0,0,.83)}
     @media(max-width:700px) {
       .js-3d .hero-journey {height:335svh}
       .js-3d .journey-info .tagline-panel,.js-3d .journey-info .balance-panel {padding:82px 21px 40px}
       .js-3d .journey-info .tagline-panel h2 {font-size:clamp(40px,9.5vw,64px)}
       .js-3d .journey-info .balance-panel .capital-highlight strong {font-size:clamp(56px,12vw,94px)}
     }
+    @media(max-width:1100px) and (min-width:701px) {
+      .hero-corner-note {width:29vw}
+      .hero-corner-note h1 {font-size:clamp(23px,2.65vw,32px)}
+      .hero-corner-note p {font-size:11px}
+    }
     @media(max-width:700px) {
-      .hero-corner-note {left:20px;bottom:37px;gap:5px;max-width:190px}
-      .hero-corner-note p {font-size:11px;line-height:1.45}
+      .hero-corner-note {left:20px;bottom:25px;gap:7px;width:min(335px,calc(100% - 40px));max-width:none}
+      .hero-corner-note h1 {font-size:clamp(26px,7vw,34px);line-height:1.07}
+      .hero-corner-note p {font-size:11px;line-height:1.5;max-width:315px}
       .hero-corner-note .corner-eyebrow {font-size:9px}
-      .js-3d .scene .hero-scroll-hint {right:19px;left:auto;bottom:18px;font-size:8px}
-      .js-3d .scene .hero-scroll-hint .hint-line {width:20px}
+      .js-3d .scene .hero-scroll-hint {display:none}
+    }
+    @media(max-width:380px) {
+      .hero-corner-note {bottom:18px}
+      .hero-corner-note h1 {font-size:26px}
+      .hero-corner-note p {font-size:10.5px;line-height:1.4}
     }
     @media(prefers-reduced-motion:reduce) {
       #crypsim-3d {display:none}.hero-journey {height:auto!important}
@@ -662,21 +681,17 @@
           <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
         </button>
       </header>
-      <div class="headline">
-        <h1>Trade Crypto<br>Without <span class="accent">Risk.</span></h1>
-        <p>Use virtual funds, access live market prices,<br class="wide-only"> place simulated trades and track your portfolio — all in one place.</p>
-        <a class="start" href="./login_page.html">Start Trading</a>
-      </div>
-
-      <!-- WebGL particle orb renders in the fixed Three.js canvas. -->
+      <!-- WebGL particle orb renders in the fixed Three.js canvas.
+           Hero messaging has been moved below the orb, not layered across it. -->
       <div class="float-card card-left">
         <div class="card-head"><span>Market data</span><span class="round-arrow" aria-hidden="true">↗</span></div>
         <div class="card-text">Real-time crypto<br>market prices</div>
         <span class="card-sub">Six supported assets</span>
       </div>
-      <div class="hero-corner-note" aria-label="About the simulation">
+      <div class="hero-corner-note">
         <span class="corner-eyebrow">LEARN BY DOING</span>
-        <p>Live market data.<br>Virtual trades. Real experience.</p>
+        <h1>Trade Crypto<br>Without <span class="accent">Risk.</span></h1>
+        <p>Use virtual funds, access live market prices, place simulated trades and track your portfolio — all in one place.</p>
       </div>
       <div class="float-card card-right">
         <div class="card-head"><span>Practice trading</span><span class="round-arrow" aria-hidden="true">↗</span></div>
@@ -836,7 +851,9 @@
         scene.background=new THREE.Color(0x000000);
         const camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,.1,100);
         const startZ=()=>Math.max(4.2,3.05/camera.aspect); // Keep the approved orb; frame it fully within CrypSim's headline layout.
-        camera.position.set(0,innerWidth<700?.26:.17,startZ());
+        const cameraStartY=innerWidth<700?-.20:.17;
+        const orbStartX=innerWidth<700?0:(innerWidth<1100?.29:.18);
+        camera.position.set(0,cameraStartY,startZ());
         renderer=new THREE.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});
         renderer.setPixelRatio(Math.min(devicePixelRatio||1,innerWidth<700?1.5:2));
         renderer.setSize(innerWidth,innerHeight);
@@ -933,6 +950,7 @@
           depthTest:true,depthWrite:false,blending:THREE.AdditiveBlending
         });
         const orb=new THREE.Group();
+        orb.position.x=orbStartX; // Keeps the initial orb clear of the lower-left copy.
         orb.add(new THREE.Points(geo,material));
         const shell=new THREE.ShaderMaterial({
           uniforms,
@@ -1002,7 +1020,8 @@
           uniforms.uTime.value=t;
           uniforms.uScatter.value=starState.amount;
           camera.position.z=THREE.MathUtils.lerp(startZ(),.12,flight.amount);
-          camera.position.y=THREE.MathUtils.lerp(innerWidth<700?.26:.17,0,flight.amount);
+          camera.position.y=THREE.MathUtils.lerp(cameraStartY,0,flight.amount);
+          orb.position.x=THREE.MathUtils.lerp(orbStartX,0,flight.amount);
           const calm=1-starState.amount;
           orb.rotation.y+=((mouse.x*.12+Math.sin(t*.15)*.09)*calm-orb.rotation.y)*.018;
           orb.rotation.x+=((-mouse.y*.10+Math.sin(t*.1)*.05)*calm-orb.rotation.x)*.018;
@@ -1021,7 +1040,7 @@
             }
           }
         });
-        timeline.to([hero.querySelector('.headline'),...hero.querySelectorAll('.float-card'),hero.querySelector('.hero-corner-note'),hint],
+        timeline.to([...hero.querySelectorAll('.float-card'),hero.querySelector('.hero-corner-note'),hint],
                     {autoAlpha:0,y:-28,duration:.16},.06)
           .to(flight,{amount:.45,duration:.26},.10)
           .to(flight,{amount:.80,duration:.27},.38)
