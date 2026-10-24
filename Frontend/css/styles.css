@@ -2492,3 +2492,92 @@ body {
 .hide_modal {
     display: none;
 }
+
+/* Responsive layout corrections; keep existing visual styles intact. */
+body{height:auto;min-height:100vh;min-height:100dvh}
+.container{height:auto;min-height:calc(100vh - 110px);min-height:calc(100dvh - 110px)}
+@media (max-width:1199px){
+ .stock-header__nav-center{min-width:0;margin-right:0}
+ .stock-header__search-container{min-width:0}
+ .selector-container{min-width:0;max-width:100%}
+ .stock-header__logo{white-space:nowrap}
+ .stock-info{height:auto;min-height:125px;padding-block:12px}
+ .bottom-section{max-height:none}
+ .panel-section.orders-section,.panel-section.pending-section{min-width:0}
+}
+@media (max-width:991px){
+ .container{min-height:0}
+ .main-content{flex-direction:column;min-width:0}
+ .chart-container{width:100%;min-width:0;flex:none}
+ .trading-panel{width:100%;height:auto;max-width:none;flex-direction:column;min-width:0}
+ .panel-section{height:auto;min-width:0}
+ .bottom-section{height:auto;max-height:none}
+ .bottom-section .panel-section{flex:1 1 auto;min-width:0;width:100%}
+ .stock-info{overflow:visible}
+ .trade-order-card{height:auto;min-height:200px;min-width:0;max-width:100%}
+}
+@media (max-width:767px){
+ .container{width:100%;max-width:100%;height:auto;padding:12px;gap:12px}
+ .stock-info{height:auto;padding:14px}
+ .stock-header-second{gap:10px;flex-wrap:wrap}
+ .stock-symbol{min-width:0}
+ #logo{width:30px!important;height:30px!important;object-fit:contain;margin-top:0!important;flex-shrink:0}
+ #symbol{width:auto!important;max-width:100%;min-width:0;overflow-wrap:anywhere}
+ .price-change{gap:8px;min-width:0}
+ .current-price{overflow-wrap:anywhere}
+ .stock-metrics{gap:8px}
+ .stock-metrics .metric{height:auto;min-width:calc(50% - 4px);min-height:62px;flex:1 1 calc(50% - 4px);padding:10px 8px}
+ .metric-label{margin-top:0;margin-bottom:5px;font-size:11px}
+ .metric-value{font-size:clamp(12px,3vw,15px);overflow-wrap:anywhere}
+ .chart-container{min-height:clamp(290px,46vh,480px);padding:0}
+ .trading-panel{padding:14px;gap:12px}
+ .panel-section{padding:15px;height:auto}
+ .panel-section.orders-section,.panel-section.pending-section{max-height:none;overflow-x:hidden}
+ .form-input,.form-select,#order_type{height:auto;min-height:44px;padding:10px 12px;font-size:16px}
+ .order-tab,.order-button{min-height:44px}
+ .order-button{height:auto}
+ .balance-item{flex-direction:row;flex-wrap:wrap;gap:10px}
+ .bottom-section{display:flex;flex-direction:column;max-height:none;gap:12px}
+ .trade-order-card{width:100%;height:auto;min-height:200px;padding:14px}
+ .order-card-body,.order-body-row{min-width:0}
+ .order-info-group{min-width:0;overflow-wrap:anywhere}
+ .order-card-actions{margin-bottom:10px}
+ .trade-modal-overlay{padding:12px;overflow-y:auto}
+ .order-confirm-modal,.trx-alteration-wrapper{width:100%;max-height:calc(100dvh - 24px);overflow-y:auto;overscroll-behavior:contain;margin:0}
+ .trx-alteration-topbar,.trx-alteration-content{padding:18px}
+ .trx-param-container,.trx-aggregate-container{gap:10px;min-width:0}
+ .trx-amount-adjuster{width:120px;max-width:52%;min-width:0}
+ .trx-control-cluster{flex-wrap:wrap}
+ .trx-interactive-control{min-width:120px}
+ .ts__notification__container__x92k{left:12px;right:12px;top:12px}
+ .ts__notification__card__j48s{min-width:0;max-width:100%;width:100%}
+}
+@media (max-width:600px){
+ .stock-header__container{padding:0 12px}
+ .stock-header__main{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;height:auto;gap:10px;padding:10px 0}
+ .stock-header__logo{grid-column:1;grid-row:1;right:0!important;top:0!important;display:inline-flex;align-items:center;min-width:0;gap:4px;font-size:18px}
+ .stock-header__logo img{width:28px!important;height:28px!important;right:0!important;top:0!important;object-fit:contain}
+ .stock-header__nav-right{grid-column:2;grid-row:1;gap:8px}
+ .stock-header__nav-center{grid-column:1/-1;grid-row:2;margin:0;width:100%;min-width:0}
+ .stock-header__search-container{width:100%;max-width:none;min-width:0}
+ .selector-container{width:100%;max-width:none;min-width:0}
+ .selector-button{width:100%;padding:11px 13px;font-size:14px}
+ .user-dropdown{left:auto;right:0}
+ .stock-ticker{max-width:100%;overflow:hidden}
+ .stock-header-second{align-items:flex-start}
+ .price-change{flex-direction:row;flex-wrap:wrap;justify-content:flex-start;align-self:auto}
+ .form-input,.form-select,#order_type{min-height:44px;height:auto}
+}
+@media (max-width:360px){
+ .container{padding:8px}
+ .stock-header__container{padding:0 8px}
+ .stock-info,.trading-panel,.panel-section{padding:10px}
+ .trade-order-card{min-width:0;padding:10px}
+ .order-body-row{flex-wrap:wrap}
+ .order-card-actions{flex-wrap:wrap}
+ .order-action-btn{min-width:0}
+}
+@media (max-width:767px) and (orientation:landscape){
+ .container{height:auto;min-height:0}
+ .chart-container{min-height:290px}
+}
