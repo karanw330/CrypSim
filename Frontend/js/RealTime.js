@@ -867,15 +867,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 5000);
     }
 
-    let resizeTimer;
-    window.addEventListener('resize', function () {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function () {
-            document.body.style.display = 'none';
-            document.body.offsetHeight; // trigger reflow
-            document.body.style.display = '';
-        }, 250);
-    });
 });
 
 const order_quantity = document.getElementById('order_quantity');
