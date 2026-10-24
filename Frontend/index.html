@@ -1044,18 +1044,9 @@
 
         const gsap=window.gsap,ScrollTrigger=window.ScrollTrigger;
         gsap.registerPlugin(ScrollTrigger);
+        // Scroll controls both zoom and particle dispersal. Once dispersed,
+        // particle drift and twinkle still use uTime rather than scroll.
         const flight={amount:0},starState={amount:0};
-        let starsLaunched=false;
-        function releaseStars(){
-          if(starsLaunched)return;
-          starsLaunched=true;
-          gsap.to(starState,{amount:1,duration:3,ease:'power2.inOut',overwrite:true});
-        }
-        function restoreOrb(){
-          if(!starsLaunched)return;
-          starsLaunched=false;
-          gsap.to(starState,{amount:0,duration:1.6,ease:'power2.inOut',overwrite:true});
-        }
         const mouse={x:0,y:0};
         window.addEventListener('pointermove',e=>{
           mouse.x=(e.clientX/innerWidth-.5)*2;
@@ -1081,11 +1072,10 @@
         const timeline=gsap.timeline({
           defaults:{ease:'none'},
           scrollTrigger:{
-            trigger:journey,start:'top top',end:'bottom bottom',scrub:1.1,
+            trigger:journey,start:'top top',end:'bottom bottom',
+            scrub:true, // Exact scroll progress: no catch-up delay on fast swipes.
             invalidateOnRefresh:true,
             onUpdate:self=>{
-              if(self.progress>=.79)releaseStars();
-              else if(self.progress<.60)restoreOrb();
               panels[0].setAttribute('aria-hidden',self.progress<.56||self.progress>.81?'true':'false');
               panels[1].setAttribute('aria-hidden',self.progress<.78?'true':'false');
             }
@@ -1099,6 +1089,9 @@
           .fromTo(panels[0],{autoAlpha:0,y:30},{autoAlpha:1,y:0,duration:.13},.57)
           .to(panels[0],{autoAlpha:0,y:-23,duration:.13},.77)
           .fromTo(panels[1],{autoAlpha:0,y:32},{autoAlpha:1,y:0,duration:.14},.82)
+          // Dispersal stays fully in sync with the camera and both captions,
+          // including fast scrolling, reversing, and jumps to page anchors.
+          .to(starState,{amount:1,duration:.19,ease:'power2.inOut'},.79)
           .to({},{duration:.04},.97);
         const aboutLink=document.querySelector('.links a[href="#about"]');
         if(aboutLink)aboutLink.addEventListener('click',e=>{
