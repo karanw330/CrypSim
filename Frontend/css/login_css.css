@@ -137,3 +137,55 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(-
 @media(prefers-reduced-motion:reduce){
  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
 }
+
+
+/* Compact desktop viewport: keep the two-panel experience in view without page scrolling.
+   Taller sign-up and recovery forms can scroll within their own panel as needed. */
+.password-wrapper .form-input{padding-right:74px}
+.password-toggle{right:10px;width:auto;min-width:53px;height:30px;padding:0 12px;border:1px solid #e5dbf2;border-radius:999px;background:rgba(244,238,253,.94);color:#8053ca;font-size:11px;font-weight:800;letter-spacing:.015em;transition:background .2s,border-color .2s}
+.password-toggle:hover{background:#eee3fb;border-color:#d8c6f0}
+.password-toggle[aria-pressed="true"]{background:#eadcfb;color:#7044bc}
+.form-options{justify-content:flex-end;margin:0 0 20px}
+@media(min-width:801px){
+ body{height:100vh;height:100dvh;min-height:0;padding:clamp(8px,1.3vh,15px);overflow:hidden}
+ .login-container{height:min(800px,calc(100dvh - 24px));min-height:0;max-height:100%;align-items:stretch}
+ .login-left{min-height:0;padding:clamp(16px,2.8vh,28px) clamp(21px,2.8vw,39px)}
+ .hero-copy{margin-top:clamp(14px,2.8vh,30px)}
+ .hero-copy h1{font-size:clamp(32px,3.6vw,52px);line-height:1.08;margin:14px 0 10px}
+ .hero-copy p{line-height:1.55}
+ .visual-stage{min-height:0;flex:1 1 130px;margin:2px -12px 0}
+ .slideshow-container{height:52px;flex:none;margin-bottom:0}
+ .slide-indicators{flex:none;margin:2px 0 13px}
+ .feature-points{flex:none}
+ .login-right{min-height:0;overflow-y:auto;justify-content:flex-start;align-items:stretch;padding:clamp(17px,3.2vh,42px) clamp(22px,4vw,64px);scrollbar-width:thin}
+ .form-container{flex:none;margin:auto;max-width:450px}
+ .auth-brand{margin-bottom:clamp(17px,3vh,29px)}
+ .form-subtitle{margin:9px 0 23px}
+ .form-group{margin-bottom:15px}
+ .form-input{height:50px}
+ .login-btn{min-height:50px}
+ .divider{margin:19px 0 15px}
+ .social-login{gap:10px;margin-bottom:18px}
+}
+@media (min-width:801px) and (max-height:760px){
+ .hero-copy{margin-top:12px}
+ .hero-copy h1{font-size:clamp(30px,3.2vw,45px);margin:11px 0 8px}
+ .hero-eyebrow{padding:6px 10px}
+ .visual-stage{flex-basis:95px}
+ .slideshow-container{height:45px}
+ .slide-indicators{margin:1px 0 7px}
+ .feature-points span{gap:5px;font-size:10px}
+ .feature-points b{width:29px;height:29px}
+ .auth-brand{margin-bottom:14px}
+ .form-subtitle{margin:7px 0 17px}
+ .form-group{margin-bottom:12px}
+ .form-input{height:46px}
+ .login-btn{min-height:46px}
+ .divider{margin:14px 0 12px}
+ .social-login{margin-bottom:13px;gap:8px}
+ .form-options{margin-bottom:14px}
+}
+@media (min-width:801px) and (max-height:600px){
+ .visual-stage,.slideshow-container,.slide-indicators,.feature-points{display:none}
+ .login-left{justify-content:center}
+}

@@ -217,7 +217,9 @@ document.addEventListener('click', function (e) {
         if (passwordInput) {
             const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
             passwordInput.setAttribute('type', type);
-            e.target.textContent = type === 'password' ? '👁️' : '🙈';
+            e.target.textContent = type === 'password' ? 'Show' : 'Hide';
+            e.target.setAttribute('aria-pressed', String(type === 'text'));
+            e.target.setAttribute('aria-label', type === 'password' ? 'Show password' : 'Hide password');
         }
     }
 });
